@@ -1,11 +1,14 @@
 import { NextRequest } from 'next/server';
 import { updateSession } from './app/lib/session';
 
+export const config = {
+  matcher: [
+  '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  '/((?!api|_next/static|_next/image|favicon.ico)/.*)',
+  ],
+};
+
 export async function middleware(request: NextRequest) {
-    const { pathname } = new URL(request.url);
-
-    // Skip public paths
-    if (pathname.startsWith('/_next/') || pathname.startsWith('/api/')) return;
-
-    return await updateSession(request);
+  console.log('Middleware triggered:', request.method, request.url);
+  return await updateSession(request);
 }
