@@ -1,14 +1,9 @@
-import { NextRequest } from 'next/server';
-import { updateSession } from './app/lib/session';
+import { auth } from '@/auth';
 
-export const config = {
-  matcher: [
-  '/((?!api|_next/static|_next/image|favicon.ico).*)',
-  '/((?!api|_next/static|_next/image|favicon.ico)/.*)',
-  ],
-};
+export const config = { matcher: ['/dashboard/:path*'] };
 
-export async function middleware(request: NextRequest) {
-  console.log('Middleware triggered:', request.method, request.url);
-  return await updateSession(request);
-}
+export default auth((req) => {
+  if (!req.auth) {
+    return Response.redirect(new URL('/', req.nextUrl));
+  }
+});
