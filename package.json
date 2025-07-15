@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "clean": "rm -rf node_modules .next pnpm-lock.yaml && pnpm install"
   },
   "dependencies": {
     "googleapis": "^150.0.1",
-    "jose": "^6.0.11",
+    "lucide-react": "^0.524.0",
     "next": "15.3.4",
     "next-auth": "5.0.0-beta.29",
     "react": "^19.0.0",

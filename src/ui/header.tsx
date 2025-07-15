@@ -1,26 +1,9 @@
-import { login, logout } from '@/app/actions/auth';
-import { auth } from '@/auth';
+import { CalendarDaysIcon } from 'lucide-react';
 
-export default async function Header() {
-  const session = await auth();
-  const user = session?.user;
-
+export default function Header() {
   return (
-    <header>
-      <h1>Calendar</h1>
-
-      {user ? (
-        <div>
-          <p>Welcome, {user.name}!</p>
-          <form action={logout}>
-            <button type="submit">Sign out</button>
-          </form>
-        </div>
-      ) : (
-        <form action={login}>
-          <button type="submit">Signin with Google</button>
-        </form>
-      )}
+    <header className="flex justify-between items-center bg-zinc-950/50 p-4 fixed top-0 left-0 right-0 z-20 backdrop-blur-md">
+      <CalendarDaysIcon size={24} />
     </header>
   );
 }

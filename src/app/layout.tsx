@@ -1,6 +1,6 @@
-import Header from '@/ui/header';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
 import './globals.css';
 
 const geistSans = Geist({
@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Next.js Calendar App',
-  description: 'A simple calendar application built with Next.js',
+  title: 'Track your chaos',
+  description:
+    'Visualize your year calendar with a timeline that tells your story',
 };
 
 export default function RootLayout({
@@ -28,7 +29,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
         {children}
       </body>
     </html>
