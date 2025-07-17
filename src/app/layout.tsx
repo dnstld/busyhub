@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Track your chaos',
+  title: 'BusyHub',
   description:
     'Visualize your year calendar with a timeline that tells your story',
 };

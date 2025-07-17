@@ -1,14 +1,14 @@
 'use client';
 
-import { useCalendar } from '@/app/context/events-provider-client';
 import { useHistory } from '@/hooks/useHistory';
+import { useCalendar } from '@/providers/events-provider';
 import { Calendar } from 'lucide-react';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { FilterType, HistoryFilter } from './history-filter';
 import { HistoryItem } from './history-item';
 
 const History = () => {
-  const events = use(useCalendar());
+  const events = useCalendar();
   const [filter, setFilter] = useState<FilterType>('past');
   const { sortedMonths, monthlyEvents } = useHistory(events, filter);
 

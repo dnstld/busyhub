@@ -1,14 +1,13 @@
 'use client';
 
-import { useCalendar } from '@/app/context/events-provider-client';
 import { useAchievements } from '@/hooks/useAchievements';
 import { useDate } from '@/hooks/useDate';
 import { useEvents } from '@/hooks/useEvents';
+import { useCalendar } from '@/providers/events-provider';
 import Image from 'next/image';
-import { use } from 'react';
 
 const Achievements = () => {
-  const events = use(useCalendar());
+  const events = useCalendar();
   const { dailyEvents, totalEvents } = useEvents(events);
   const { totalWeekdays } = useDate();
 

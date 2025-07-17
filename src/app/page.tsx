@@ -1,11 +1,11 @@
 import { CalendarCheckIcon, LayoutGridIcon, LogInIcon } from 'lucide-react';
 import Image from 'next/image';
-import { login } from './actions/auth';
 
 import EventsPanel from '@/ui/events-panel';
 import fakeData from '../fake-data.json';
+import { login } from './actions/login';
 
-export default async function HomePage() {
+export default async function RootPage() {
   return (
     <>
       <div className="fixed inset-0 bg-gradient-to-br from-lime-800/7 to-transparent top-0 bottom-0 left-0 right-0"></div>

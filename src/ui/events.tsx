@@ -1,12 +1,11 @@
 'use client';
 
-import { useCalendar } from '@/app/context/events-provider-client';
 import { useEvents } from '@/hooks/useEvents';
-import { use } from 'react';
+import { useCalendar } from '@/providers/events-provider';
 import EventsPanel from './events-panel';
 
 const Events = ({ year = new Date().getFullYear() }: { year?: number }) => {
-  const events = use(useCalendar());
+  const events = useCalendar();
   const { totalEvents, dailyEvents } = useEvents(events);
 
   return (

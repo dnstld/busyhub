@@ -1,4 +1,4 @@
-import { logout } from '@/app/actions/auth';
+import { logout } from '@/app/actions/logout';
 import { auth } from '@/lib/auth';
 import { LogOutIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -13,7 +13,7 @@ export default async function Profile() {
         <Image
           className="w-20 sm:w-32 h-20 sm:h-32 rounded-full"
           src={user?.image || ''}
-          alt={`${user?.name ?? user?.name} avatar`}
+          alt={`${user?.name ?? 'User'} avatar`}
           width={100}
           height={100}
           priority
