@@ -10,12 +10,16 @@ export default async function RootPage() {
     <>
       <div className="fixed inset-0 bg-gradient-to-br from-lime-800/7 to-transparent top-0 bottom-0 left-0 right-0"></div>
 
-      <main className="relative z-10 px-4 py-16 space-y-16 lg:space-y-24">
+      <main className="relative z-10 px-4 py-16 space-y-16 lg:space-y-24 text-center">
         <header className="max-w-7xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900/50 border border-zinc-800 rounded-full text-sm text-zinc-400">
-            <div className="w-2 h-2 bg-lime-300 rounded-full animate-pulse"></div>
-            <p>Made for busy people</p>
-          </div>
+          <Image
+            src="./images/logo-horizontal.svg"
+            alt="BusyHub Logo"
+            width={100}
+            height={73}
+            className="mx-auto opacity-50"
+            priority
+          />
 
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
             <span>Make time</span>
@@ -44,13 +48,18 @@ export default async function RootPage() {
             </button>
           </form>
 
-          <h1 className="text-xl md:text-2xl lg:text-4xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+          <h1 className="text-xl md:text-2xl lg:text-4xl max-w-2xl mx-auto leading-relaxed">
             Because your calendar isn’t just a tool — it’s your story,
             visualized
           </h1>
         </header>
 
-        <section className="text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900/50 border border-zinc-800 rounded-full text-sm">
+          <div className="w-2 h-2 bg-lime-300 rounded-full animate-pulse"></div>
+          <p>Developed for busy people</p>
+        </div>
+
+        <section>
           <h2 className="text-4xl font-bold tracking-tight mb-8">
             How it works
           </h2>
@@ -88,7 +97,7 @@ export default async function RootPage() {
               </li>
 
               <li
-                className="group text-center space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30"
+                className="group space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30"
                 aria-hidden="true"
               >
                 <div className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center group-hover:bg-lime-400/20 transition-colors">
@@ -112,15 +121,13 @@ export default async function RootPage() {
             layout="fill"
             objectFit="cover"
             alt="A screenshot of the app showing the heatmap panel and calendar events of the app creator, Denis Toledo"
-            placeholder="blur"
-            blurDataURL="/images/app-blur.jpg"
           />
         </section>
 
         <section className="max-w-4xl mx-auto">
-          <div className="max-w-2xl mx-auto text-center space-y-6">
+          <div className="max-w-2xl mx-auto space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">
-              Ready to share your chaos?
+              What does your year look like?
             </h2>
             <p className="text-zinc-400 text-lg">
               Join thousands of busy professionals who visualize their timeline
@@ -142,7 +149,7 @@ export default async function RootPage() {
           </div>
         </section>
 
-        <footer className="max-w-4xl mx-auto text-center text-zinc-500 text-sm space-y-2">
+        <footer className="max-w-4xl mx-auto text-zinc-500 text-sm space-y-2">
           <p>
             Built by{' '}
             <a
