@@ -1,6 +1,8 @@
 {
-  "name": "BusyHub",
+  "name": "BusyHub App",
   "short_name": "BusyHub",
+  "description": "Visualize your year calendar with a timeline that tells your story",
+  "start_url": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
