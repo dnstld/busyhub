@@ -5,6 +5,34 @@ import { useDate } from '@/hooks/useDate';
 import { useEvents } from '@/hooks/useEvents';
 import { useCalendar } from '@/providers/events-provider';
 import Image from 'next/image';
+import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
+
+const badgeData = [
+  {
+    id: 'welcome',
+    src: '/images/achievement-welcome.png',
+    title: 'Welcome badge',
+    description: 'You joined the timeline club. Welcome aboard!',
+  },
+  {
+    id: 'beginner',
+    src: '/images/achievement-beginner.png',
+    title: 'Beginner badge',
+    description: '50+ days with at least 2 events — nice!',
+  },
+  {
+    id: 'onFire',
+    src: '/images/achievement-on-fire.png',
+    title: 'On Fire badge',
+    description: 'You’re on a roll! 10-day streak and 100 active days!',
+  },
+  {
+    id: 'king',
+    src: '/images/achievement-king.png',
+    title: 'The King badge',
+    description: '200+ busy days and 50 days with 4+ events? You rule!',
+  },
+] as const;
 
 const Achievements = () => {
   const events = useCalendar();
@@ -19,41 +47,25 @@ const Achievements = () => {
 
   return (
     <div className="flex gap-2">
-      <Image
-        src="/images/achievement-welcome.png"
-        alt="Welcome badge"
-        className={`w-12 h-12 ${!achievements.welcome ? 'opacity-15' : ''}`}
-        width={48}
-        height={48}
-        title="Welcome badge"
-      />
-
-      <Image
-        src="/images/achievement-beginner.png"
-        alt="Beginner badge"
-        className={`w-12 h-12 ${!achievements.beginner ? 'opacity-15' : ''}`}
-        width={48}
-        height={48}
-        title="Beginner badge"
-      />
-
-      <Image
-        src="/images/achievement-on-fire.png"
-        alt="On fire badge"
-        className={`w-12 h-12 ${!achievements.onFire ? 'opacity-15' : ''}`}
-        width={48}
-        height={48}
-        title="On fire badge"
-      />
-
-      <Image
-        src="/images/achievement-king.png"
-        alt="The king badge"
-        className={`w-12 h-12 ${!achievements.king ? 'opacity-15' : ''}`}
-        width={48}
-        height={48}
-        title="The king badge"
-      />
+      {badgeData.map(({ id, src, title, description }) => (
+        <Tooltip key={id}>
+          <TooltipTrigger asChild>
+            <Image
+              key={id}
+              src={src}
+              alt={title}
+              width={48}
+              height={48}
+              className={`w-12 h-12 ${
+                !achievements[id as keyof typeof achievements]
+                  ? 'opacity-15'
+                  : ''
+              }`}
+            />
+          </TooltipTrigger>
+          <TooltipContent>{description}</TooltipContent>
+        </Tooltip>
+      ))}
     </div>
   );
 };

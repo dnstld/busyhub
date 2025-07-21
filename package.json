@@ -11,6 +11,7 @@
     "clean": "rm -rf node_modules .next pnpm-lock.yaml && pnpm install"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.13",
     "googleapis": "^150.0.1",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.524.0",

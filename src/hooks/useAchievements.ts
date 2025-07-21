@@ -6,29 +6,46 @@ interface UseAchievementsProps {
   totalWeekdays: number;
 }
 
-export const useAchievements = ({ dailyEvents, totalEvents, totalWeekdays }: UseAchievementsProps) => {
+export const useAchievements = ({
+  dailyEvents,
+  totalEvents,
+  totalWeekdays,
+}: UseAchievementsProps) => {
   return useMemo(() => {
-    const countDaysWithMinEvents = (minEvents: number) => {
+    const countDaysWithMinEvents = (min: number) => {
       let count = 0;
-      for (const dayEvents of dailyEvents.values()) {
-        if (dayEvents.length >= minEvents) count++;
+      for (const events of dailyEvents.values()) {
+        if (events.length >= min) count++;
       }
       return count;
     };
 
-    const quarter = Math.floor(totalWeekdays * 0.25);
-    const half = Math.floor(totalWeekdays * 0.5);
+    const hasStreak = (minEvents: number, streakLength: number) => {
+      const sorted = Array.from(dailyEvents.entries()).sort(([a], [b]) =>
+        a.localeCompare(b)
+      );
+      let streak = 0;
+
+      for (const [, events] of sorted) {
+        if (events.length >= minEvents) {
+          streak++;
+          if (streak >= streakLength) return true;
+        } else {
+          streak = 0;
+        }
+      }
+
+      return false;
+    };
+
+    const daysWith2Plus = countDaysWithMinEvents(2);
+    const daysWith4Plus = countDaysWithMinEvents(4);
 
     return {
       welcome: true,
-      beginner: totalEvents < quarter,
-      onFire: 
-        totalEvents >= quarter && 
-        totalEvents < half && 
-        countDaysWithMinEvents(2) >= quarter,
-      king: 
-        totalEvents >= half && 
-        countDaysWithMinEvents(3) >= half,
+      beginner: daysWith2Plus >= 50,
+      onFire: hasStreak(3, 10) && daysWith2Plus >= 100,
+      king: daysWith2Plus >= 200 && daysWith4Plus >= 50,
     };
   }, [dailyEvents, totalEvents, totalWeekdays]);
 };

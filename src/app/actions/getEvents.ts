@@ -18,6 +18,7 @@ export async function getEvents(
   url.searchParams.set('orderBy', 'startTime');
   url.searchParams.set('timeMin', timeMin);
   url.searchParams.set('timeMax', timeMax);
+  url.searchParams.set('maxResults', '2500');
 
   const res = await fetch(url.toString(), {
     headers: {

@@ -4,7 +4,7 @@ import { CalendarEvent } from '@/app/actions/getEvents';
 import { SanitizedEvent, useEvents } from '@/hooks/useEvents';
 import { useEventsGrid } from '@/hooks/useEventsGrid';
 import { intensityColors, useIntensityScale } from '@/hooks/useIntensityScale';
-import { usePanelTooltip } from '@/hooks/usePanelTooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
 
 const EventsPanel = ({
   events,
@@ -17,14 +17,26 @@ const EventsPanel = ({
 }) => {
   const { dailyEvents } = useEvents(events);
   const eventsGrid = useEventsGrid(dailyEvents, year);
-
   const getIntensityClass = useIntensityScale();
-  const {
-    hoveredDay,
-    handleMouseEnter,
-    handleMouseLeave,
-    formatTooltipContent,
-  } = usePanelTooltip();
+
+  const formatTooltipContent = (date: Date, events: SanitizedEvent[]) => {
+    const dateStr = date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+
+    if (events.length === 0) {
+      return `${dateStr} - No events`;
+    }
+
+    if (events.length === 1) {
+      return `${dateStr} - 1 event`;
+    }
+
+    return `${dateStr} - ${events.length} events`;
+  };
 
   const months = [
     'Jan',
@@ -46,7 +58,6 @@ const EventsPanel = ({
     <div className="rounded-lg border border-zinc-800 p-4" {...rest}>
       <div aria-hidden={true}>
         <div className="flex overflow-x-auto">
-          {/* day labels */}
           <div className="flex flex-col justify-between mr-4 mt-7 py-3 text-xs">
             {dayLabels.map((d) => (
               <span key={d} className="h-3 mb-1 flex items-center">
@@ -55,7 +66,6 @@ const EventsPanel = ({
             ))}
           </div>
 
-          {/* grid + month labels */}
           <div>
             <div className="flex justify-between mb-2">
               {months.map((month) => (
@@ -74,27 +84,28 @@ const EventsPanel = ({
                   }`}
                 >
                   {week.map((day, di) => (
-                    <div
-                      key={`${day.dateKey}-${di}`}
-                      className={`
-                        w-[10px] xl:w-3 h-[10px] xl:h-3 rounded-xs cursor-pointer transition-all
-                        hover:ring hover:ring-white hover:ring-opacity-50
-                        ${di === week.length - 1 ? 'mb-0' : 'mb-1'}
-                        ${
-                          day.isCurrentYear
-                            ? getIntensityClass(day.eventCount)
-                            : 'bg-zinc-800 opacity-50'
-                        }
-                      `}
-                      onMouseEnter={(e) =>
-                        handleMouseEnter(
-                          e,
+                    <Tooltip key={`${day.dateKey}-${di}`} placement="top">
+                      <TooltipTrigger asChild>
+                        <div
+                          className={`
+                            w-[10px] xl:w-3 h-[10px] xl:h-3 rounded-xs cursor-pointer transition-all
+                            hover:ring hover:ring-white hover:ring-opacity-50
+                            ${di === week.length - 1 ? 'mb-0' : 'mb-1'}
+                            ${
+                              day.isCurrentYear
+                                ? getIntensityClass(day.eventCount)
+                                : 'bg-zinc-800 opacity-50'
+                            }
+                          `}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        {formatTooltipContent(
                           day.date,
                           day.events as SanitizedEvent[]
-                        )
-                      }
-                      onMouseLeave={handleMouseLeave}
-                    />
+                        )}
+                      </TooltipContent>
+                    </Tooltip>
                   ))}
                 </div>
               ))}
@@ -113,19 +124,6 @@ const EventsPanel = ({
             <span className="ml-2">More</span>
           </div>
         </div>
-
-        {hoveredDay && (
-          <div
-            className="fixed z-50 bg-zinc-100 text-zinc-800 text-xs px-2 py-1 rounded shadow-lg pointer-events-none"
-            style={{
-              left: hoveredDay.position.x,
-              top: hoveredDay.position.y,
-              transform: 'translate(-50%, -100%)',
-            }}
-          >
-            {formatTooltipContent(hoveredDay.date, hoveredDay.events)}
-          </div>
-        )}
       </div>
     </div>
   );

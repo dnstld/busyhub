@@ -33,7 +33,7 @@ export const useEvents = (
     }));
 
     const byDate = new Map<string, SanitizedEvent[]>();
-
+    
     sanitized.forEach((ev) => {
       if (ev.status !== 'confirmed') return;
       if (!ev.start.dateTime) return;
