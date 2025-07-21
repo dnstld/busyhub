@@ -17,7 +17,7 @@ export default async function RootPage() {
             alt="BusyHub Logo"
             width={100}
             height={73}
-            className="mx-auto opacity-50"
+            className="mx-auto opacity-25"
             priority
           />
 
@@ -50,7 +50,7 @@ export default async function RootPage() {
 
           <h1 className="text-xl md:text-2xl lg:text-4xl max-w-2xl mx-auto leading-relaxed">
             Because your calendar isn’t just a tool — it’s your story,
-            visualized
+            visualized.
           </h1>
         </header>
 
@@ -77,7 +77,7 @@ export default async function RootPage() {
                   Sign in with Google
                 </h3>
                 <p className="text-zinc-400 leading-relaxed">
-                  Just one click. Fast, safe, and secure
+                  Just one click. Fast, safe, and secure.
                 </p>
               </li>
 
@@ -92,7 +92,7 @@ export default async function RootPage() {
                   Sync your calendar
                 </h3>
                 <p className="text-zinc-400 leading-relaxed">
-                  We load your events for the year
+                  We load your events for the year.
                 </p>
               </li>
 
@@ -107,7 +107,7 @@ export default async function RootPage() {
                   See your timeline
                 </h3>
                 <p className="text-zinc-400 leading-relaxed">
-                  A year of effort, finally worth showing off
+                  A year of effort, finally worth showing off.
                 </p>
               </li>
             </ul>
@@ -159,7 +159,6 @@ export default async function RootPage() {
             >
               Denis Toledo
             </a>
-            {'. '}Shared by you.
           </p>
         </footer>
       </main>
