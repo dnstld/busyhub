@@ -1,7 +1,7 @@
 import { CalendarCheckIcon, LayoutGridIcon, LogInIcon } from 'lucide-react';
-import Image from 'next.js';
 
 import EventsPanel from '@/ui/heatmap';
+import Image from 'next/image';
 import fakeData from '../fake-data.json';
 import { login } from './actions/login';
 
