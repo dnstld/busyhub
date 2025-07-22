@@ -95,13 +95,14 @@ export const TooltipTrigger = React.forwardRef<
 >(function TooltipTrigger({ children, asChild = false, ...props }, propRef) {
   const context = useTooltipContext();
 
-  if (asChild && React.isValidElement(children)) {
-    const ref = useMergeRefs([
-      context.refs.setReference,
-      propRef,
-      (children as any).ref,
-    ]);
+  const childRef =
+    React.isValidElement(children) && 'ref' in children
+      ? (children as React.ReactElement & { ref?: React.Ref<unknown> }).ref
+      : null;
 
+  const ref = useMergeRefs([context.refs.setReference, propRef, childRef]);
+
+  if (asChild && React.isValidElement(children)) {
     const propsWithDataState = {
       ref,
       ...props,
@@ -115,6 +116,8 @@ export const TooltipTrigger = React.forwardRef<
       context.getReferenceProps(propsWithDataState)
     );
   }
+
+  return null;
 });
 
 export const TooltipContent = React.forwardRef<

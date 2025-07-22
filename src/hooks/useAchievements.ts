@@ -1,15 +1,14 @@
 import { useMemo } from 'react';
+import { SanitizedEvent } from './useEvents';
 
 interface UseAchievementsProps {
-  dailyEvents: Map<string, any[]>;
+  dailyEvents: Map<string, SanitizedEvent[]>;
   totalEvents: number;
   totalWeekdays: number;
 }
 
 export const useAchievements = ({
   dailyEvents,
-  totalEvents,
-  totalWeekdays,
 }: UseAchievementsProps) => {
   return useMemo(() => {
     const countDaysWithMinEvents = (min: number) => {
@@ -47,5 +46,5 @@ export const useAchievements = ({
       onFire: hasStreak(3, 10) && daysWith2Plus >= 100,
       king: daysWith2Plus >= 200 && daysWith4Plus >= 50,
     };
-  }, [dailyEvents, totalEvents, totalWeekdays]);
+  }, [dailyEvents]);
 };

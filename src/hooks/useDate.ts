@@ -19,5 +19,5 @@ export const useDate = () => {
 
   return {
     totalWeekdays: getCurrentYearWeekdays(),
-  }
-}
+  };
+};

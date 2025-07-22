@@ -6,7 +6,9 @@ export function HistoryDetails({
 }: {
   event: CalendarEvent;
 }): JSX.Element {
-  const formatDate = (dateInput: any) => {
+  const formatDate = (
+    dateInput: string | { dateTime: string } | null | undefined
+  ) => {
     if (!dateInput) return 'No date';
 
     const date = new Date(

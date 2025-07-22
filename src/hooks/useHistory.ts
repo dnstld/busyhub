@@ -1,6 +1,6 @@
-import { CalendarEvent } from "@/app/actions/getEvents";
-import { FilterType } from "@/ui/history-filter";
-import { useMemo } from "react";
+import { CalendarEvent } from '@/app/actions/getEvents';
+import { FilterType } from '@/ui/history-filter';
+import { useMemo } from 'react';
 
 export interface MonthData {
   events: CalendarEvent[];
@@ -28,8 +28,8 @@ export const useHistory = (events: CalendarEvent[], filter: FilterType) => {
   return {
     monthlyEvents,
     sortedMonths,
-  }
-}
+  };
+};
 
 const parseEventDate = (event: CalendarEvent): Date | null => {
     const dateStr = event.start?.dateTime;

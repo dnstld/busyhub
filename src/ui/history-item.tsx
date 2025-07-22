@@ -51,8 +51,7 @@ export function HistoryItem({
         </header>
         {isExpanded && (
           <ul className="space-y-4">
-            {monthData.events.map((event, i) => (
-              // TODO: Lazy load
+            {monthData.events.map((event) => (
               <HistoryDetails key={event.id} event={event} />
             ))}
           </ul>

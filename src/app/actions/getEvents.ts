@@ -1,4 +1,4 @@
-"use server";
+'use server';
 
 import type { calendar_v3 } from 'googleapis';
 

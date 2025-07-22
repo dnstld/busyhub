@@ -1,5 +1,5 @@
 import { CalendarCheckIcon, LayoutGridIcon, LogInIcon } from 'lucide-react';
-import Image from 'next/image';
+import Image from 'next.js';
 
 import EventsPanel from '@/ui/heatmap';
 import fakeData from '../fake-data.json';
@@ -49,7 +49,7 @@ export default async function RootPage() {
           </form>
 
           <h1 className="text-xl md:text-2xl lg:text-4xl max-w-2xl mx-auto leading-relaxed">
-            Because your calendar isn’t just a tool — it’s your story,
+            Because your calendar isn&apos;t just a tool — it&apos;s your story,
             visualized.
           </h1>
         </header>
@@ -131,7 +131,7 @@ export default async function RootPage() {
             </h2>
             <p className="text-zinc-400 text-lg">
               Join thousands of busy professionals who visualize their timeline
-              with us. It's free, secure, and takes seconds to get started.
+              with us. It&apos;s free, secure, and takes seconds to get started.
             </p>
             <form action={login}>
               <button
@@ -143,7 +143,9 @@ export default async function RootPage() {
                   className="group-hover:translate-x-1 transition-transform"
                   aria-hidden="true"
                 />
-                <span className="text-lg">Let’s go — log in with Google</span>
+                <span className="text-lg">
+                  Let&apos;s go — log in with Google
+                </span>
               </button>
             </form>
           </div>
