@@ -1,4 +1,5 @@
 import Achievements from './achievements';
+import DailyEventsChart from './daily-events-chart';
 import Header from './header';
 import History from './history';
 import Profile from './profile';
@@ -27,6 +28,13 @@ export default function EventsContent() {
             Events timeline
           </h2>
           <Timeline />
+        </section>
+
+        <section className="flex flex-col gap-2" aria-labelledby="events-chart">
+          <h2 id="events-chart" className="sr-only">
+            Events activity chart
+          </h2>
+          <DailyEventsChart />
         </section>
 
         <section
