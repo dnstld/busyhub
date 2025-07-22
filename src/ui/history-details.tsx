@@ -7,13 +7,21 @@ export function HistoryDetails({
   event: CalendarEvent;
 }): JSX.Element {
   const formatDate = (
-    dateInput: string | { dateTime: string } | null | undefined
+    dateInput: string | { dateTime?: string | null } | null | undefined
   ) => {
     if (!dateInput) return 'No date';
 
-    const date = new Date(
-      typeof dateInput === 'string' ? dateInput : dateInput.dateTime
-    );
+    let dateString: string | undefined;
+
+    if (typeof dateInput === 'string') {
+      dateString = dateInput;
+    } else if (dateInput.dateTime) {
+      dateString = dateInput.dateTime;
+    }
+
+    if (!dateString) return 'No date';
+
+    const date = new Date(dateString);
 
     return date.toLocaleDateString(undefined, {
       month: 'short',
