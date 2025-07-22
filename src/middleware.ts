@@ -9,14 +9,14 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth;
   const { pathname } = req.nextUrl;
 
-  const isDashboard = pathname.startsWith('/dashboard');
+  const isEvents = pathname.startsWith('/events');
   const isHome = pathname === '/';
 
   if (isHome && isLoggedIn) {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
+    return NextResponse.redirect(new URL('/events', req.url));
   }
 
-  if (isDashboard && !isLoggedIn) {
+  if (isEvents && !isLoggedIn) {
     return NextResponse.redirect(new URL('/', req.url));
   }
 

@@ -1,26 +1,44 @@
-'use client';
+import Achievements from './achievements';
+import Header from './header';
+import History from './history';
+import Profile from './profile';
+import Timeline from './timeline';
 
-import { useEvents } from '@/hooks/useEvents';
-import { useCalendar } from '@/providers/events-provider';
-import EventsPanel from './events-panel';
-
-const Events = ({ year = new Date().getFullYear() }: { year?: number }) => {
-  const events = useCalendar();
-  const { totalEvents, dailyEvents } = useEvents(events);
-
+export default function EventsContent() {
   return (
-    <div className="flex flex-col gap-2">
-      <p>
-        {totalEvents} events in <b>{year}</b>
-      </p>
+    <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 gap-4 z-10 relative pt-24">
+      <Header />
 
-      <EventsPanel
-        events={events}
-        year={year}
-        aria-label={`Your heatmap timeline indicates that you have confirmed ${totalEvents} events over ${dailyEvents.size} days in ${year}.`}
-      />
-    </div>
+      <div className="flex flex-col gap-8 lg:col-span-3">
+        <Profile />
+
+        <section>
+          <h2 className="mb-4">Achievements</h2>
+          <Achievements />
+        </section>
+      </div>
+
+      <div className="flex flex-col gap-8 lg:min-w-max">
+        <section
+          className="flex flex-col gap-2"
+          aria-labelledby="events-section"
+        >
+          <h2 id="events-section" className="sr-only">
+            Events timeline
+          </h2>
+          <Timeline />
+        </section>
+
+        <section
+          className="flex flex-col gap-4 w-full"
+          aria-labelledby="events-history"
+        >
+          <h2 id="events-history" className="sr-only">
+            Events history
+          </h2>
+          <History />
+        </section>
+      </div>
+    </main>
   );
-};
-
-export default Events;
+}

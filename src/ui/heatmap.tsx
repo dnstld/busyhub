@@ -6,7 +6,7 @@ import { useEventsGrid } from '@/hooks/useEventsGrid';
 import { intensityColors, useIntensityScale } from '@/hooks/useIntensityScale';
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
 
-const EventsPanel = ({
+const Heatmap = ({
   events,
   year = new Date().getFullYear(),
   ...rest
@@ -129,4 +129,4 @@ const EventsPanel = ({
   );
 };
 
-export default EventsPanel;
+export default Heatmap;

@@ -2,11 +2,11 @@ import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
-  title: 'Dashboard',
-  description: 'Your personal dashboard with calendar events',
+  title: 'Your events',
+  description: 'Your personal calendar with events',
 };
 
-export default async function DashboardLayout({
+export default async function EventsLayout({
   children,
 }: {
   children: React.ReactNode;

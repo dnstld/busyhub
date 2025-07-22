@@ -122,25 +122,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: '/',
   },
 
-  debug: process.env.NODE_ENV === 'development',
-
-  events: {
-    async signIn(message) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('User signed in:', { email: message.user.email });
-      }
-    },
-    async signOut(message) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('User signed out:', { email: 'token' in message ? message.token?.email : undefined });
-      }
-    },
-    async createUser(message) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('New user created:', { email: message.user.email });
-      }
-    },
-  },
+  debug: process.env.NODE_ENV === 'development'
 });
 
 function isTokenExpired(tokenExpiresAt?: number): boolean {
