@@ -1,6 +1,7 @@
 import { CalendarCheckIcon, LayoutGridIcon, LogInIcon } from 'lucide-react';
 
 import EventsPanel from '@/ui/heatmap';
+import LastUpdate from '@/ui/last-update';
 import Image from 'next/image';
 import fakeData from '../fake-data.json';
 import { login } from './actions/login';
@@ -151,9 +152,9 @@ export default async function RootPage() {
           </div>
         </section>
 
-        <footer className="max-w-4xl mx-auto text-zinc-500 text-sm space-y-2">
-          <p>
-            Built by{' '}
+        <footer className="max-w-4xl mx-auto space-y-2 text-zinc-400">
+          <p className="text-sm">
+            Developed by{' '}
             <a
               href="https://www.linkedin.com/in/denistoledo/"
               target="_blank"
@@ -162,6 +163,16 @@ export default async function RootPage() {
               Denis Toledo
             </a>
           </p>
+          <p className="text-xs">
+            <a href="/privacy-policy" className="hover:underline">
+              Privacy Policy
+            </a>{' '}
+            |{' '}
+            <a href="/terms-and-conditions" className="hover:underline">
+              Terms and conditions
+            </a>
+          </p>
+          <LastUpdate />
         </footer>
       </main>
 
