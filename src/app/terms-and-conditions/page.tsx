@@ -74,7 +74,7 @@ export default function TermsAndConditions() {
       <h2 className="text-xl font-semibold mt-8 mb-2">8. Changes to Terms</h2>
       <p className="mb-4">
         We may update these Terms and Conditions from time to time. Changes will
-        be posted here with an updated “Last Updated” date.
+        be posted here with an updated “Last Update” date.
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-2">9. Governing Law</h2>

@@ -68,7 +68,7 @@ export default function PrivacyPolicy() {
       <ul className="list-disc list-inside mb-4">
         <li>Revoke access at any time via your Google Account settings</li>
         <li>
-          Request data deletion by contacting us (though we don`t store any)
+          Request data deletion by contacting us (though we don't store any)
         </li>
       </ul>
 
@@ -83,7 +83,7 @@ export default function PrivacyPolicy() {
       </h2>
       <p className="mb-4">
         We may occasionally update this Privacy Policy. Changes will be
-        reflected by the "Last Updated" date.
+        reflected by the "Last Update" date.
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-2">9. Contact</h2>
