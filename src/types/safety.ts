@@ -46,14 +46,14 @@ export interface SafeEvent {
 /**
  * Type predicate for safe event
  */
-export const isSafeEvent = (event: any): event is SafeEvent => {
+export const isSafeEvent = (event: unknown): event is SafeEvent => {
   return (
     typeof event === 'object' &&
     event !== null &&
-    typeof event.id === 'string' &&
-    typeof event.status === 'string' &&
-    typeof event.start?.dateTime === 'string' &&
-    typeof event.end?.dateTime === 'string'
+    typeof (event as Record<string, unknown>).id === 'string' &&
+    typeof (event as Record<string, unknown>).status === 'string' &&
+    typeof (event as { start?: { dateTime?: unknown } }).start?.dateTime === 'string' &&
+    typeof (event as { end?: { dateTime?: unknown } }).end?.dateTime === 'string'
   );
 };
 

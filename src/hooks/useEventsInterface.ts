@@ -2,6 +2,7 @@
  * Organized interface types for useEvents hook
  */
 
+import { CalendarEvent } from '@/app/actions/getEvents';
 import { DailyEventStats } from './useEventsAggregation';
 import { FilterType, GroupedEvents } from './useEventsFiltering';
 import { SanitizedEvent } from './useEventsSanitization';
@@ -46,9 +47,9 @@ export interface EventsQuery {
   /** Get events for a specific date */
   getEventsForDate: (date: string) => SanitizedEvent[];
   /** Filter events by timeframe */
-  filterEventsByTimeframe: (events: any[], filter: FilterType) => any[];
+  filterEventsByTimeframe: (events: CalendarEvent[], filter: FilterType) => CalendarEvent[];
   /** Parse event date safely */
-  parseEventDate: (event: any) => Date | null;
+  parseEventDate: (event: CalendarEvent) => Date | null;
 }
 
 /**
@@ -85,6 +86,6 @@ export interface UseEventsLegacyResult {
   };
   getEventsByDateRange: (startDate: string, endDate: string) => SanitizedEvent[];
   getEventsForDate: (date: string) => SanitizedEvent[];
-  filterEventsByTimeframe: (events: any[], filter: FilterType) => any[];
-  parseEventDate: (event: any) => Date | null;
+  filterEventsByTimeframe: (events: CalendarEvent[], filter: FilterType) => CalendarEvent[];
+  parseEventDate: (event: CalendarEvent) => Date | null;
 }

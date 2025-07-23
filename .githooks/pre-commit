@@ -1,0 +1,28 @@
+#!/bin/sh
+# Pre-commit hook for TypeScript and ESLint checks
+
+echo "🔍 Running pre-commit checks..."
+
+# Check if we're in a pnpm workspace
+if [ ! -f "package.json" ]; then
+  echo "❌ No package.json found"
+  exit 1
+fi
+
+# Run TypeScript type check
+echo "📝 Checking TypeScript..."
+if ! pnpm run type-check; then
+  echo "❌ TypeScript check failed. Please fix the errors before committing."
+  exit 1
+fi
+
+# Run ESLint
+echo "🔧 Running ESLint..."
+if ! pnpm run lint; then
+  echo "❌ ESLint check failed. Please fix the linting errors before committing."
+  echo "💡 Tip: Run 'pnpm run lint:fix' to auto-fix some issues"
+  exit 1
+fi
+
+echo "✅ All checks passed! Proceeding with commit..."
+exit 0

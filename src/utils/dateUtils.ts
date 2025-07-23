@@ -52,7 +52,7 @@ export const parseEventDate = (event: CalendarEvent): Date | null => {
   try {
     const dateStr = event.start?.dateTime;
     return dateStr ? new Date(dateStr) : null;
-  } catch (error) {
+  } catch {
     console.warn('Invalid date format:', event.start?.dateTime);
     return null;
   }

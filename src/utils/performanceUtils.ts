@@ -7,7 +7,7 @@ import { useCallback, useRef } from 'react';
 /**
  * Debounce hook for expensive operations
  */
-export const useDebounce = <T extends (...args: any[]) => any>(
+export const useDebounce = <T extends (...args: unknown[]) => unknown>(
   callback: T,
   delay: number
 ): T => {
@@ -27,7 +27,7 @@ export const useDebounce = <T extends (...args: any[]) => any>(
 /**
  * Throttle hook for limiting function calls
  */
-export const useThrottle = <T extends (...args: any[]) => any>(
+export const useThrottle = <T extends (...args: unknown[]) => unknown>(
   callback: T,
   delay: number
 ): T => {
@@ -111,7 +111,7 @@ export const processBatch = <T, R>(
 /**
  * Shallow comparison for dependency arrays
  */
-export const shallowEqual = (a: any[], b: any[]): boolean => {
+export const shallowEqual = (a: unknown[], b: unknown[]): boolean => {
   if (a.length !== b.length) return false;
   
   for (let i = 0; i < a.length; i++) {
@@ -142,7 +142,7 @@ export const perfUtils = {
    */
   logMemory: (label: string) => {
     if (typeof window !== 'undefined' && 'memory' in performance) {
-      const memory = (performance as any).memory;
+      const memory = (performance as { memory: { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number } }).memory;
       console.log(`${label} Memory:`, {
         used: `${(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)}MB`,
         total: `${(memory.totalJSHeapSize / 1024 / 1024).toFixed(2)}MB`,

@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "setup-hooks": "bash setup-hooks.sh",
     "clean": "rm -rf node_modules .next pnpm-lock.yaml && pnpm install"
   },
   "dependencies": {
