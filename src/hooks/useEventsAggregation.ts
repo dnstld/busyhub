@@ -1,4 +1,4 @@
-import { compareDateStrings, getDateKey, getMonthKey, getWeekKey } from '@/utils';
+import { compareDateStrings, getDateKey, getMonthKey, getWeekKey, getOrSetMapValue, isNonEmptyString, createSafeDate, isValidDate } from '@/utils';
 import { useMemo } from 'react';
 import { SanitizedEvent } from './useEventsSanitization';
 
@@ -19,9 +19,11 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
     return confirmedEvents
       .map((event) => {
         const dateTime = event.start.dateTime;
-        if (!dateTime) return null;
+        if (!isNonEmptyString(dateTime)) return null;
         
-        const date = new Date(dateTime);
+        const date = createSafeDate(dateTime);
+        if (!isValidDate(date)) return null;
+        
         return {
           event,
           date,
@@ -37,8 +39,8 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
     const byDate = new Map<string, SanitizedEvent[]>();
     
     eventsWithDates.forEach(({ event, dateKey }) => {
-      if (!byDate.has(dateKey)) byDate.set(dateKey, []);
-      byDate.get(dateKey)!.push(event);
+      const eventsForDate = getOrSetMapValue(byDate, dateKey, []);
+      eventsForDate.push(event);
     });
 
     return Array.from(byDate.entries())
@@ -54,13 +56,9 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
     const weeklyMap = new Map<string, AggregationData>();
     
     eventsWithDates.forEach(({ event, weekKey }) => {
-      if (!weeklyMap.has(weekKey)) {
-        weeklyMap.set(weekKey, { count: 0, events: [] });
-      }
-      
-      const week = weeklyMap.get(weekKey)!;
-      week.count++;
-      week.events.push(event);
+      const weekData = getOrSetMapValue(weeklyMap, weekKey, { count: 0, events: [] });
+      weekData.count++;
+      weekData.events.push(event);
     });
 
     return Array.from(weeklyMap.entries())
@@ -76,13 +74,9 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
     const monthlyMap = new Map<string, AggregationData>();
     
     eventsWithDates.forEach(({ event, monthKey }) => {
-      if (!monthlyMap.has(monthKey)) {
-        monthlyMap.set(monthKey, { count: 0, events: [] });
-      }
-      
-      const month = monthlyMap.get(monthKey)!;
-      month.count++;
-      month.events.push(event);
+      const monthData = getOrSetMapValue(monthlyMap, monthKey, { count: 0, events: [] });
+      monthData.count++;
+      monthData.events.push(event);
     });
 
     return Array.from(monthlyMap.entries())

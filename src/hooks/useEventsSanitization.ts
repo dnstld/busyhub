@@ -1,5 +1,5 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
-import { getDateKey, isValidConfirmedEvent } from '@/utils';
+import { getDateKey, isValidConfirmedEvent, getOrSetMapValue, isNonEmptyString, createSafeDate } from '@/utils';
 import { calendar_v3 } from 'googleapis';
 import { useMemo } from 'react';
 
@@ -44,13 +44,14 @@ export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
     
     confirmedEvents.forEach((ev) => {
       const dateTime = ev.start.dateTime;
-      if (!dateTime) return;
+      if (!isNonEmptyString(dateTime)) return;
       
-      const dateObj = new Date(dateTime);
+      const dateObj = createSafeDate(dateTime);
+      if (!dateObj) return; // Skip invalid dates
+      
       const dateKey = getDateKey(dateObj);
-      
-      if (!byDate.has(dateKey)) byDate.set(dateKey, []);
-      byDate.get(dateKey)!.push(ev);
+      const eventsForDate = getOrSetMapValue(byDate, dateKey, []);
+      eventsForDate.push(ev);
     });
     
     return byDate;

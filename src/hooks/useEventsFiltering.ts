@@ -1,5 +1,5 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
-import { compareDatesAscending, compareDatesDescending, filterEventsByTimeframe, FilterType, getDayKey, getMonthDisplayKey, MemoCache, parseEventDate } from '@/utils';
+import { compareDatesAscending, compareDatesDescending, filterEventsByTimeframe, FilterType, getDayKey, getMonthDisplayKey, parseEventDate, MemoCache, isValidDate, hasProperty } from '@/utils';
 import { useMemo } from 'react';
 
 export interface MonthData {
@@ -14,25 +14,26 @@ export interface GroupedEvents {
 // Re-export FilterType for backward compatibility
 export type { FilterType };
 
-// Group events by month
+// Group events by month with type safety
 const groupEventsByMonth = (events: CalendarEvent[], filter: FilterType): GroupedEvents => {
   const grouped: GroupedEvents = {};
   const filteredEvents = filterEventsByTimeframe(events, filter);
 
   filteredEvents.forEach((event) => {
     const eventDate = parseEventDate(event);
-    if (!eventDate) return;
+    if (!isValidDate(eventDate)) return;
 
     const monthKey = getMonthDisplayKey(eventDate);
 
-    if (!grouped[monthKey]) {
+    // Type-safe object property initialization
+    if (!(monthKey in grouped)) {
       grouped[monthKey] = { events: [], days: {} };
     }
 
     grouped[monthKey].events.push(event);
 
     const dayKey = getDayKey(eventDate);
-    if (!grouped[monthKey].days[dayKey]) {
+    if (!(dayKey in grouped[monthKey].days)) {
       grouped[monthKey].days[dayKey] = [];
     }
     grouped[monthKey].days[dayKey].push(event);

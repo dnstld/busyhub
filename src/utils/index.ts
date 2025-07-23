@@ -9,3 +9,6 @@ export * from './eventConstants';
 
 // Performance utilities
 export * from './performanceUtils';
+
+// Type safety utilities
+export * from './typeGuards';

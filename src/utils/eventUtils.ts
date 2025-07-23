@@ -2,6 +2,7 @@ import { CalendarEvent } from '@/app/actions/getEvents';
 import { SanitizedEvent } from '@/hooks/useEventsSanitization';
 import { parseEventDate } from './dateUtils';
 import { EVENT_STATUS, FILTER_TYPES } from './eventConstants';
+import { isNonEmptyString, isValidDate } from './typeGuards';
 
 export type FilterType = typeof FILTER_TYPES[keyof typeof FILTER_TYPES];
 
@@ -9,7 +10,7 @@ export type FilterType = typeof FILTER_TYPES[keyof typeof FILTER_TYPES];
  * Check if an event has a valid date
  */
 export const hasValidDate = (event: CalendarEvent | SanitizedEvent): boolean => {
-  return !!(event.start?.dateTime);
+  return isNonEmptyString(event.start?.dateTime);
 };
 
 /**
@@ -27,7 +28,7 @@ export const isValidConfirmedEvent = (event: CalendarEvent | SanitizedEvent): bo
 };
 
 /**
- * Filter events by timeframe
+ * Filter events by timeframe with type safety
  */
 export const filterEventsByTimeframe = (
   events: CalendarEvent[], 
@@ -37,7 +38,7 @@ export const filterEventsByTimeframe = (
   
   return events.filter((event) => {
     const eventDate = parseEventDate(event);
-    if (!eventDate) return false;
+    if (!isValidDate(eventDate)) return false;
 
     switch (filter) {
       case FILTER_TYPES.PAST:
@@ -53,7 +54,7 @@ export const filterEventsByTimeframe = (
 };
 
 /**
- * Filter events by date range
+ * Filter events by date range with type safety
  */
 export const filterEventsByDateRange = (
   events: SanitizedEvent[],
@@ -62,7 +63,7 @@ export const filterEventsByDateRange = (
 ): SanitizedEvent[] => {
   return events.filter((event) => {
     const dateTime = event.start.dateTime;
-    if (!dateTime) return false;
+    if (!isNonEmptyString(dateTime)) return false;
     
     const eventDate = dateTime.slice(0, 10);
     return eventDate >= startDate && eventDate <= endDate;
@@ -70,42 +71,44 @@ export const filterEventsByDateRange = (
 };
 
 /**
- * Get events for a specific date
+ * Get events for a specific date (type-safe Map access)
  */
 export const getEventsForDate = (
   eventsMap: Map<string, SanitizedEvent[]>,
   date: string
 ): SanitizedEvent[] => {
-  return eventsMap.get(date) || [];
+  return eventsMap.get(date) ?? [];
 };
 
 /**
- * Sort events by date ascending
+ * Sort events by date ascending with type safety
  */
 export const sortEventsByDateAsc = (events: CalendarEvent[]): CalendarEvent[] => {
   return [...events].sort((a, b) => {
     const dateA = parseEventDate(a);
     const dateB = parseEventDate(b);
     
-    if (!dateA && !dateB) return 0;
-    if (!dateA) return 1;
-    if (!dateB) return -1;
+    // Handle invalid dates gracefully
+    if (!isValidDate(dateA) && !isValidDate(dateB)) return 0;
+    if (!isValidDate(dateA)) return 1;
+    if (!isValidDate(dateB)) return -1;
     
     return dateA.getTime() - dateB.getTime();
   });
 };
 
 /**
- * Sort events by date descending
+ * Sort events by date descending with type safety
  */
 export const sortEventsByDateDesc = (events: CalendarEvent[]): CalendarEvent[] => {
   return [...events].sort((a, b) => {
     const dateA = parseEventDate(a);
     const dateB = parseEventDate(b);
     
-    if (!dateA && !dateB) return 0;
-    if (!dateA) return 1;
-    if (!dateB) return -1;
+    // Handle invalid dates gracefully
+    if (!isValidDate(dateA) && !isValidDate(dateB)) return 0;
+    if (!isValidDate(dateA)) return 1;
+    if (!isValidDate(dateB)) return -1;
     
     return dateB.getTime() - dateA.getTime();
   });
