@@ -14,18 +14,31 @@ interface AggregationData {
 }
 
 export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
+  // Pre-process events with dates to avoid repeated parsing
+  const eventsWithDates = useMemo(() => {
+    return confirmedEvents
+      .map((event) => {
+        const dateTime = event.start.dateTime;
+        if (!dateTime) return null;
+        
+        const date = new Date(dateTime);
+        return {
+          event,
+          date,
+          dateKey: getDateKey(date),
+          weekKey: getWeekKey(date),
+          monthKey: getMonthKey(date),
+        };
+      })
+      .filter((item): item is NonNullable<typeof item> => item !== null);
+  }, [confirmedEvents]);
+
   const dailyStats = useMemo(() => {
     const byDate = new Map<string, SanitizedEvent[]>();
     
-    confirmedEvents.forEach((ev) => {
-      const dateTime = ev.start.dateTime;
-      if (!dateTime) return;
-      
-      const dateObj = new Date(dateTime);
-      const dateKey = getDateKey(dateObj);
-      
+    eventsWithDates.forEach(({ event, dateKey }) => {
       if (!byDate.has(dateKey)) byDate.set(dateKey, []);
-      byDate.get(dateKey)!.push(ev);
+      byDate.get(dateKey)!.push(event);
     });
 
     return Array.from(byDate.entries())
@@ -35,18 +48,12 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
         events,
       }))
       .sort((a, b) => compareDateStrings(a.date, b.date));
-  }, [confirmedEvents]);
+  }, [eventsWithDates]);
 
   const weeklyStats = useMemo(() => {
     const weeklyMap = new Map<string, AggregationData>();
     
-    confirmedEvents.forEach((event) => {
-      const dateTime = event.start.dateTime;
-      if (!dateTime) return;
-      
-      const date = new Date(dateTime);
-      const weekKey = getWeekKey(date);
-      
+    eventsWithDates.forEach(({ event, weekKey }) => {
       if (!weeklyMap.has(weekKey)) {
         weeklyMap.set(weekKey, { count: 0, events: [] });
       }
@@ -63,18 +70,12 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
         events: data.events,
       }))
       .sort((a, b) => compareDateStrings(a.date, b.date));
-  }, [confirmedEvents]);
+  }, [eventsWithDates]);
 
   const monthlyStats = useMemo(() => {
     const monthlyMap = new Map<string, AggregationData>();
     
-    confirmedEvents.forEach((event) => {
-      const dateTime = event.start.dateTime;
-      if (!dateTime) return;
-      
-      const date = new Date(dateTime);
-      const monthKey = getMonthKey(date);
-      
+    eventsWithDates.forEach(({ event, monthKey }) => {
       if (!monthlyMap.has(monthKey)) {
         monthlyMap.set(monthKey, { count: 0, events: [] });
       }
@@ -91,7 +92,7 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
         events: data.events,
       }))
       .sort((a, b) => compareDateStrings(a.date, b.date));
-  }, [confirmedEvents]);
+  }, [eventsWithDates]);
 
   return {
     dailyStats,

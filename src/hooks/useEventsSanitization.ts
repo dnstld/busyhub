@@ -15,8 +15,9 @@ export interface SanitizedEvent {
 }
 
 export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
-  return useMemo(() => {
-    const sanitized: SanitizedEvent[] = (rawEvents ?? []).map((e) => ({
+  // Step 1: Sanitize the raw events
+  const sanitized = useMemo(() => {
+    return (rawEvents ?? []).map((e) => ({
       id: e.id,
       status: e.status,
       start: {
@@ -30,12 +31,17 @@ export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
       attendees: e.attendees ?? [],
       eventType: e.eventType,
     }));
+  }, [rawEvents]);
 
-    // Filter confirmed events with valid dates
-    const confirmedEvents = sanitized.filter(isValidConfirmedEvent);
+  // Step 2: Filter confirmed events with valid dates (depends on sanitized)
+  const confirmedEvents = useMemo(() => {
+    return sanitized.filter(isValidConfirmedEvent);
+  }, [sanitized]);
 
-    // Group by date for heatmap/timeline usage
+  // Step 3: Group by date for heatmap/timeline usage (depends on confirmedEvents)
+  const dailyEvents = useMemo(() => {
     const byDate = new Map<string, SanitizedEvent[]>();
+    
     confirmedEvents.forEach((ev) => {
       const dateTime = ev.start.dateTime;
       if (!dateTime) return;
@@ -46,12 +52,15 @@ export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
       if (!byDate.has(dateKey)) byDate.set(dateKey, []);
       byDate.get(dateKey)!.push(ev);
     });
+    
+    return byDate;
+  }, [confirmedEvents]);
 
-    return {
-      sanitized,
-      confirmedEvents,
-      dailyEvents: byDate,
-      totalEvents: confirmedEvents.length,
-    };
-  }, [rawEvents]);
+  // Return computed values
+  return {
+    sanitized,
+    confirmedEvents,
+    dailyEvents,
+    totalEvents: confirmedEvents.length, // Simple property, no memoization needed
+  };
 };

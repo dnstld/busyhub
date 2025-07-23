@@ -1,5 +1,5 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
-import { compareDatesAscending, compareDatesDescending, filterEventsByTimeframe, FilterType, getDayKey, getMonthDisplayKey, parseEventDate } from '@/utils';
+import { compareDatesAscending, compareDatesDescending, filterEventsByTimeframe, FilterType, getDayKey, getMonthDisplayKey, MemoCache, parseEventDate } from '@/utils';
 import { useMemo } from 'react';
 
 export interface MonthData {
@@ -42,21 +42,29 @@ const groupEventsByMonth = (events: CalendarEvent[], filter: FilterType): Groupe
 };
 
 export const useEventsFiltering = (rawEvents: CalendarEvent[]) => {
+  // Create a memoization cache for expensive grouping operations
+  const cache = useMemo(() => new MemoCache<{ events: CalendarEvent[], filter: FilterType }, { monthlyEvents: GroupedEvents; sortedMonths: string[] }>(), []);
+  
+  // Memoize the getHistoryData function to avoid recreating it on every render
   const getHistoryData = useMemo(() => {
     return (filter: FilterType) => {
-      const monthlyEvents = groupEventsByMonth(rawEvents, filter);
-      const months = Object.keys(monthlyEvents);
-      
-      const sortedMonths = filter === 'past'
-        ? months.sort(compareDatesDescending)
-        : months.sort(compareDatesAscending);
-      
-      return { monthlyEvents, sortedMonths };
+      // Use the memoization cache to avoid recomputing the same filter result
+      return cache.get({ events: rawEvents, filter }, () => {
+        const monthlyEvents = groupEventsByMonth(rawEvents, filter);
+        const months = Object.keys(monthlyEvents);
+        
+        const sortedMonths = filter === 'past'
+          ? months.sort(compareDatesDescending)
+          : months.sort(compareDatesAscending);
+        
+        return { monthlyEvents, sortedMonths };
+      });
     };
-  }, [rawEvents]);
+  }, [rawEvents, cache]);
 
   return {
     getHistoryData,
+    // Export utility functions for external use
     filterEventsByTimeframe,
     parseEventDate,
   };

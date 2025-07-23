@@ -6,3 +6,6 @@ export * from './eventUtils';
 
 // Constants
 export * from './eventConstants';
+
+// Performance utilities
+export * from './performanceUtils';
