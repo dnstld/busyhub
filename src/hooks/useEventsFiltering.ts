@@ -1,5 +1,5 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
-import { compareDatesAscending, compareDatesDescending, filterEventsByTimeframe, FilterType, getDayKey, getMonthDisplayKey, parseEventDate, MemoCache, isValidDate, hasProperty } from '@/utils';
+import { compareDatesAscending, compareDatesDescending, filterEventsByTimeframe, FilterType, getDayKey, getMonthDisplayKey, isValidDate, MemoCache, parseEventDate } from '@/utils';
 import { useMemo } from 'react';
 
 export interface MonthData {

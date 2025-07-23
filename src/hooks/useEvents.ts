@@ -1,13 +1,12 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
 import { DailyEventStats, useEventsAggregation } from './useEventsAggregation';
 import { FilterType, GroupedEvents, MonthData, useEventsFiltering } from './useEventsFiltering';
+import { EventsData, EventsQuery, EventsStats, UseEventsLegacyResult, UseEventsResult } from './useEventsInterface';
 import { SanitizedEvent, useEventsSanitization } from './useEventsSanitization';
 import { useEventsUtils } from './useEventsUtils';
-import { UseEventsResult, UseEventsLegacyResult, EventsData, EventsStats, EventsQuery } from './useEventsInterface';
 
 // Re-export types for backward compatibility
-export type { DailyEventStats, FilterType, GroupedEvents, MonthData, SanitizedEvent };
-export type { UseEventsResult, EventsData, EventsStats, EventsQuery, UseEventsLegacyResult };
+export type { DailyEventStats, EventsData, EventsQuery, EventsStats, FilterType, GroupedEvents, MonthData, SanitizedEvent, UseEventsLegacyResult, UseEventsResult };
 
 /**
  * Main events hook that maintains backward compatibility with the flat interface.

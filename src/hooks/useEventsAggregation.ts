@@ -1,4 +1,4 @@
-import { compareDateStrings, getDateKey, getMonthKey, getWeekKey, getOrSetMapValue, isNonEmptyString, createSafeDate, isValidDate } from '@/utils';
+import { compareDateStrings, createSafeDate, getDateKey, getMonthKey, getOrSetMapValue, getWeekKey, isNonEmptyString, isValidDate } from '@/utils';
 import { useMemo } from 'react';
 import { SanitizedEvent } from './useEventsSanitization';
 
