@@ -1,4 +1,4 @@
-import { MonthData } from '@/hooks/useHistory';
+import { MonthData } from '@/hooks/useEvents';
 import { CalendarDays, ChevronDown, ChevronRight } from 'lucide-react';
 import { JSX, useState } from 'react';
 import { HistoryDetails } from './history-details';

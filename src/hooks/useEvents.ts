@@ -118,9 +118,17 @@ export const useEvents = (rawEvents: CalendarEvent[]) => {
     // Helper function to get filtered data for history component
     const getHistoryData = (filter: FilterType) => {
       const monthlyEvents = groupEventsByMonth(rawEvents, filter);
-      const sortedMonths = Object.keys(monthlyEvents).sort(
-        (a, b) => new Date(b).getTime() - new Date(a).getTime()
-      );
+      const sortedMonths = () => {
+        const months = Object.keys(monthlyEvents);
+        if (filter === 'past') {
+          return months.sort(
+            (a, b) => new Date(b).getTime() - new Date(a).getTime()
+          );
+        }
+        return months.sort(
+          (a, b) => new Date(a).getTime() - new Date(b).getTime()
+        );
+      };
       return { monthlyEvents, sortedMonths };
     };
 
