@@ -1,5 +1,6 @@
 'use client';
 
+import { CalendarEvent } from '@/app/actions/getEvents';
 import { useEvents } from '@/hooks/useEvents';
 import { useCalendar } from '@/providers/events-provider';
 import { BarChart3, Calendar, TrendingUp } from 'lucide-react';
@@ -27,12 +28,11 @@ interface TooltipProps {
     payload: {
       date: string;
       count: number;
-      events?: any[];
+      events?: CalendarEvent[];
       startDate?: string;
       endDate?: string;
     };
   }>;
-  label?: string;
 }
 
 interface CustomTooltipComponentProps extends TooltipProps {
@@ -42,7 +42,6 @@ interface CustomTooltipComponentProps extends TooltipProps {
 const CustomTooltip = ({
   active,
   payload,
-  label,
   chartType,
 }: CustomTooltipComponentProps) => {
   if (active && payload && payload.length) {
