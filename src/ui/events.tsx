@@ -1,15 +1,14 @@
+import { TerminalIcon } from 'lucide-react';
+import Image from 'next/image';
 import Achievements from './achievements';
 import DailyEventsChart from './daily-events-chart';
-import Header from './header';
 import History from './history';
 import Profile from './profile';
 import Timeline from './timeline';
 
 export default function EventsContent() {
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 gap-4 z-10 relative pt-24">
-      <Header />
-
+    <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-4">
       <div className="flex flex-col gap-8 lg:col-span-3">
         <Profile />
 
@@ -20,6 +19,13 @@ export default function EventsContent() {
       </div>
 
       <div className="flex flex-col gap-8 lg:min-w-max">
+        <Image
+          src="./images/logo-vertical.svg"
+          alt="BusyHub Logo"
+          width={125}
+          height={32}
+        />
+
         <section
           className="flex flex-col gap-2"
           aria-labelledby="events-section"
@@ -30,12 +36,7 @@ export default function EventsContent() {
           <Timeline />
         </section>
 
-        <section className="flex flex-col gap-2" aria-labelledby="events-chart">
-          <h2 id="events-chart" className="sr-only">
-            Events activity chart
-          </h2>
-          <DailyEventsChart />
-        </section>
+        <DailyEventsChart />
 
         <section
           className="flex flex-col gap-4 w-full"
@@ -46,6 +47,20 @@ export default function EventsContent() {
           </h2>
           <History />
         </section>
+
+        <footer>
+          <p className="text-sm">
+            <TerminalIcon className="inline-block mr-1" aria-hidden="true" />
+            Developed by{' '}
+            <a
+              href="https://www.linkedin.com/in/denistoledo/"
+              target="_blank"
+              className="text-lime-400 hover:underline"
+            >
+              Denis Toledo
+            </a>
+          </p>
+        </footer>
       </div>
     </main>
   );

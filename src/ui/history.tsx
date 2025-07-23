@@ -15,15 +15,15 @@ const History = () => {
   const { sortedMonths, monthlyEvents } = getHistoryData(filter);
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden">
+    <section className="border border-zinc-800 rounded-xl">
       {/* Header */}
       <div className="p-6 pb-0">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <HistoryIcon className="text-lime-400" size={20} />
-            <h3 className="text-lg font-semibold text-zinc-100">
+            <h2 className="text-xl font-semibold text-zinc-100">
               Event History
-            </h3>
+            </h2>
           </div>
         </div>
 
@@ -52,9 +52,9 @@ const History = () => {
             <div className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center">
               <Calendar className="text-lime-400" size={24} />
             </div>
-            <h3 className="text-xl font-semibold text-zinc-100">
+            <h2 className="text-xl font-semibold text-zinc-100">
               No Events Found
-            </h3>
+            </h2>
             <p className="text-zinc-400">
               {filter === 'past' && 'No past events to display'}
               {filter === 'upcoming' && 'No upcoming events scheduled'}
@@ -74,7 +74,7 @@ const History = () => {
           </ul>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

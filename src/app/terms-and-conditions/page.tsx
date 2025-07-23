@@ -1,10 +1,16 @@
-import Header from '@/ui/header';
 import LastUpdate from '@/ui/last-update';
+import Image from 'next/image';
 
 export default function TermsAndConditions() {
   return (
-    <main className="w-full max-w-7xl lg:mx-auto p-4 gap-4 z-10 relative pt-24">
-      <Header />
+    <main className="w-full max-w-7xl lg:mx-auto p-4 gap-4">
+      <Image
+        src="./images/logo-vertical.svg"
+        alt="BusyHub Logo"
+        width={125}
+        height={32}
+        className="mb-8"
+      />
 
       <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
 

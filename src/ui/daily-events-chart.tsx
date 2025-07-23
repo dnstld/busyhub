@@ -93,10 +93,10 @@ const CustomTooltip = ({
     };
 
     return (
-      <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-3 shadow-xl">
+      <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-4 shadow-xl">
         <p className="text-zinc-300 text-sm">{formatDateRange()}</p>
         <p className="text-lime-400 font-semibold">
-          {data.count} event{data.count !== 1 ? 's' : ''}
+          {data.count} event{data.count !== 1 ? 's' : ''}hauhauhauha
         </p>
       </div>
     );
@@ -156,14 +156,17 @@ const DailyEventsChart = () => {
 
   if (totalEvents === 0) {
     return (
-      <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6">
+      <div className="border border-zinc-800 rounded-xl p-4">
         <div className="text-center space-y-4">
-          <div className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center">
+          <div
+            className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center"
+            aria-hidden="true"
+          >
             <Calendar className="text-lime-400" size={24} />
           </div>
-          <h3 className="text-xl font-semibold text-zinc-100">
+          <h2 className="text-xl font-semibold text-zinc-100">
             No Events Data
-          </h3>
+          </h2>
           <p className="text-zinc-400">
             Add some events to see your activity chart
           </p>
@@ -175,51 +178,57 @@ const DailyEventsChart = () => {
   const ChartComponent = chartView === 'line' ? LineChart : BarChart;
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden">
+    <section className="border border-zinc-800 rounded-xl overflow-hidden">
       {/* Header */}
-      <div className="p-6 pb-0">
+      <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <TrendingUp className="text-lime-400" size={20} />
-            <h3 className="text-lg font-semibold text-zinc-100">
+            <TrendingUp
+              className="text-lime-400"
+              size={20}
+              aria-hidden="true"
+            />
+            <h2 className="text-xl font-semibold text-zinc-100">
               Event Activity
-            </h3>
+            </h2>
           </div>
 
           <div className="flex items-center gap-2">
             {/* Chart View Toggle */}
-            <div className="flex bg-zinc-800 rounded-lg p-1">
+            <div className="flex bg-zinc-800 rounded-lg p-2">
               <button
                 onClick={() => setChartView('bar')}
-                className={`p-1.5 rounded ${
+                className={`p-1.5 rounded cursor-pointer ${
                   chartView === 'bar'
                     ? 'bg-lime-400 text-zinc-900'
                     : 'text-zinc-400 hover:text-zinc-300'
                 }`}
+                aria-label="Bar Chart View"
               >
-                <BarChart3 size={16} />
+                <BarChart3 size={16} aria-hidden="true" />
               </button>
               <button
                 onClick={() => setChartView('line')}
-                className={`p-1.5 rounded ${
+                className={`p-1.5 rounded cursor-pointer ${
                   chartView === 'line'
                     ? 'bg-lime-400 text-zinc-900'
                     : 'text-zinc-400 hover:text-zinc-300'
                 }`}
+                aria-label="Line Chart View"
               >
-                <TrendingUp size={16} />
+                <TrendingUp size={16} aria-hidden="true" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Chart Type Selector */}
-        <div className="flex gap-1 bg-zinc-800 rounded-lg p-1 w-fit">
+        <div className="flex gap-1 bg-zinc-800 rounded-lg p-2 w-fit">
           {(['daily', 'weekly', 'monthly'] as const).map((type) => (
             <button
               key={type}
               onClick={() => setChartType(type)}
-              className={`px-3 py-1.5 rounded text-sm capitalize transition-colors ${
+              className={`px-3 p-1.5 rounded text-sm capitalize transition-colors cursor-pointer ${
                 chartType === type
                   ? 'bg-lime-400 text-zinc-900 font-medium'
                   : 'text-zinc-400 hover:text-zinc-300'
@@ -232,7 +241,7 @@ const DailyEventsChart = () => {
       </div>
 
       {/* Chart */}
-      <div className="p-6 pt-4">
+      <div className="p-4">
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <ChartComponent
@@ -338,7 +347,7 @@ const DailyEventsChart = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

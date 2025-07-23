@@ -1,7 +1,11 @@
-import { CalendarCheckIcon, LayoutGridIcon, LogInIcon } from 'lucide-react';
+import {
+  CalendarCheckIcon,
+  LayoutGridIcon,
+  LogInIcon,
+  TerminalIcon,
+} from 'lucide-react';
 
 import EventsPanel from '@/ui/heatmap';
-import LastUpdate from '@/ui/last-update';
 import Image from 'next/image';
 import fakeData from '../fake-data.json';
 import { login } from './actions/login';
@@ -18,9 +22,14 @@ export default async function RootPage() {
             alt="BusyHub Logo"
             width={100}
             height={73}
-            className="mx-auto opacity-25"
+            className="mx-auto"
             priority
           />
+
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900/50 border border-zinc-800 rounded-full text-sm">
+            <div className="w-2 h-2 bg-lime-300 rounded-full animate-pulse"></div>
+            <p>Developed for busy people</p>
+          </div>
 
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
             <span>Make time</span>
@@ -54,11 +63,6 @@ export default async function RootPage() {
             visualized.
           </h1>
         </header>
-
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900/50 border border-zinc-800 rounded-full text-sm">
-          <div className="w-2 h-2 bg-lime-300 rounded-full animate-pulse"></div>
-          <p>Developed for busy people</p>
-        </div>
 
         <section>
           <h2 className="text-4xl font-bold tracking-tight mb-8">
@@ -119,8 +123,9 @@ export default async function RootPage() {
           <h2 className="sr-only">App Screenshot</h2>
           <Image
             src="/images/app.jpg"
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="(max-width: 480px) 320px, (max-width: 768px) 448px, (max-width: 1024px) 512px, 672px"
+            className="object-cover"
             alt="A screenshot of the app showing the heatmap panel and calendar events of the app creator, Denis Toledo"
           />
         </section>
@@ -152,6 +157,7 @@ export default async function RootPage() {
 
         <footer className="max-w-4xl mx-auto space-y-2 text-zinc-400">
           <p className="text-sm">
+            <TerminalIcon className="inline-block mr-1" aria-hidden="true" />
             Developed by{' '}
             <a
               href="https://www.linkedin.com/in/denistoledo/"
@@ -170,7 +176,6 @@ export default async function RootPage() {
               Terms and conditions
             </a>
           </p>
-          <LastUpdate />
         </footer>
       </main>
 

@@ -9,7 +9,7 @@ const Timeline = ({ year = new Date().getFullYear() }: { year?: number }) => {
   const { totalEvents, dailyEvents } = useEvents(events);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <p>
         {totalEvents} events in <b>{year}</b>
       </p>
