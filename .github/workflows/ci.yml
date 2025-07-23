@@ -38,9 +38,8 @@ jobs:
       - name: Lint code
         run: pnpm run lint
 
+      - name: Run tests
+        run: pnpm run test:run
+
       - name: Build project
         run: pnpm run build
-
-      - name: Run tests (if available)
-        run: pnpm run test --if-present
-        continue-on-error: true

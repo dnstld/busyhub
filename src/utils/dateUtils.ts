@@ -49,6 +49,8 @@ export const getDayKey = (date: Date): string => {
  * Parse event date with error handling
  */
 export const parseEventDate = (event: CalendarEvent): Date | null => {
+  if (!event) return null;
+  
   try {
     const dateStr = event.start?.dateTime;
     return dateStr ? new Date(dateStr) : null;
