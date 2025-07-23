@@ -2,46 +2,46 @@ name: Code Quality
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 jobs:
   quality:
     name: Code Quality Checks
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'pnpm'
-        
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
-        
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
-      
-    - name: ESLint check
-      run: pnpm run lint
-      
-    - name: TypeScript type check
-      run: pnpm run type-check
-      
-    - name: Build verification
-      run: pnpm run build
-      
-    - name: Report results
-      if: always()
-      run: |
-        echo "## Code Quality Report" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ ESLint check completed" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ TypeScript type check completed" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Build verification completed" >> $GITHUB_STEP_SUMMARY
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: ESLint check
+        run: pnpm run lint
+
+      - name: TypeScript type check
+        run: pnpm run type-check
+
+      - name: Build verification
+        run: pnpm run build
+
+      - name: Report results
+        if: always()
+        run: |
+          echo "## Code Quality Report" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ ESLint check completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ TypeScript type check completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Build verification completed" >> $GITHUB_STEP_SUMMARY

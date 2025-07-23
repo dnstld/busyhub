@@ -2,41 +2,41 @@ name: TypeScript Check
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 jobs:
   typescript:
     name: TypeScript Type Check
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'pnpm'
-        
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
-        
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
-      
-    - name: TypeScript compilation check
-      run: pnpm run type-check
-      
-    - name: Generate type check report
-      if: failure()
-      run: |
-        echo "## TypeScript Errors Found" >> $GITHUB_STEP_SUMMARY
-        echo "The following TypeScript errors need to be fixed before merging:" >> $GITHUB_STEP_SUMMARY
-        echo '```' >> $GITHUB_STEP_SUMMARY
-        pnpm run type-check 2>&1 || echo "Check the logs above for detailed error information" >> $GITHUB_STEP_SUMMARY
-        echo '```' >> $GITHUB_STEP_SUMMARY
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: TypeScript compilation check
+        run: pnpm run type-check
+
+      - name: Generate type check report
+        if: failure()
+        run: |
+          echo "## TypeScript Errors Found" >> $GITHUB_STEP_SUMMARY
+          echo "The following TypeScript errors need to be fixed before merging:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          pnpm run type-check 2>&1 || echo "Check the logs above for detailed error information" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
