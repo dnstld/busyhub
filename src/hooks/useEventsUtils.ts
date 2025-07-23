@@ -1,3 +1,4 @@
+import { filterEventsByDateRange, getEventsForDate } from '@/utils';
 import { useMemo } from 'react';
 import { SanitizedEvent } from './useEventsSanitization';
 
@@ -7,24 +8,18 @@ export const useEventsUtils = (
 ) => {
   const getEventsByDateRange = useMemo(() => {
     return (startDate: string, endDate: string) => {
-      return confirmedEvents.filter((event) => {
-        const dateTime = event.start.dateTime;
-        if (!dateTime) return false;
-        
-        const eventDate = dateTime.slice(0, 10);
-        return eventDate >= startDate && eventDate <= endDate;
-      });
+      return filterEventsByDateRange(confirmedEvents, startDate, endDate);
     };
   }, [confirmedEvents]);
 
-  const getEventsForDate = useMemo(() => {
+  const getEventsForDateFn = useMemo(() => {
     return (date: string) => {
-      return dailyEvents.get(date) || [];
+      return getEventsForDate(dailyEvents, date);
     };
   }, [dailyEvents]);
 
   return {
     getEventsByDateRange,
-    getEventsForDate,
+    getEventsForDate: getEventsForDateFn,
   };
 };

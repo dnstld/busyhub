@@ -1,3 +1,4 @@
+import { compareDateStrings, getDateKey, getMonthKey, getWeekKey } from '@/utils';
 import { useMemo } from 'react';
 import { SanitizedEvent } from './useEventsSanitization';
 
@@ -21,7 +22,7 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
       if (!dateTime) return;
       
       const dateObj = new Date(dateTime);
-      const dateKey = dateObj.toISOString().slice(0, 10);
+      const dateKey = getDateKey(dateObj);
       
       if (!byDate.has(dateKey)) byDate.set(dateKey, []);
       byDate.get(dateKey)!.push(ev);
@@ -33,7 +34,7 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
         count: events.length,
         events,
       }))
-      .sort((a, b) => a.date.localeCompare(b.date));
+      .sort((a, b) => compareDateStrings(a.date, b.date));
   }, [confirmedEvents]);
 
   const weeklyStats = useMemo(() => {
@@ -44,9 +45,7 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
       if (!dateTime) return;
       
       const date = new Date(dateTime);
-      const startOfWeek = new Date(date);
-      startOfWeek.setDate(date.getDate() - date.getDay()); // Start on Sunday
-      const weekKey = startOfWeek.toISOString().slice(0, 10);
+      const weekKey = getWeekKey(date);
       
       if (!weeklyMap.has(weekKey)) {
         weeklyMap.set(weekKey, { count: 0, events: [] });
@@ -63,7 +62,7 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
         count: data.count,
         events: data.events,
       }))
-      .sort((a, b) => a.date.localeCompare(b.date));
+      .sort((a, b) => compareDateStrings(a.date, b.date));
   }, [confirmedEvents]);
 
   const monthlyStats = useMemo(() => {
@@ -74,7 +73,7 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
       if (!dateTime) return;
       
       const date = new Date(dateTime);
-      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const monthKey = getMonthKey(date);
       
       if (!monthlyMap.has(monthKey)) {
         monthlyMap.set(monthKey, { count: 0, events: [] });
@@ -91,7 +90,7 @@ export const useEventsAggregation = (confirmedEvents: SanitizedEvent[]) => {
         count: data.count,
         events: data.events,
       }))
-      .sort((a, b) => a.date.localeCompare(b.date));
+      .sort((a, b) => compareDateStrings(a.date, b.date));
   }, [confirmedEvents]);
 
   return {

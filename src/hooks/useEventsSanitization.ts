@@ -1,4 +1,5 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
+import { getDateKey, isValidConfirmedEvent } from '@/utils';
 import { calendar_v3 } from 'googleapis';
 import { useMemo } from 'react';
 
@@ -31,9 +32,7 @@ export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
     }));
 
     // Filter confirmed events with valid dates
-    const confirmedEvents = sanitized.filter(
-      (ev) => ev.status === 'confirmed' && ev.start.dateTime
-    );
+    const confirmedEvents = sanitized.filter(isValidConfirmedEvent);
 
     // Group by date for heatmap/timeline usage
     const byDate = new Map<string, SanitizedEvent[]>();
@@ -42,7 +41,7 @@ export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
       if (!dateTime) return;
       
       const dateObj = new Date(dateTime);
-      const dateKey = dateObj.toISOString().slice(0, 10);
+      const dateKey = getDateKey(dateObj);
       
       if (!byDate.has(dateKey)) byDate.set(dateKey, []);
       byDate.get(dateKey)!.push(ev);
