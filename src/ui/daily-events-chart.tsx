@@ -10,6 +10,7 @@ import {
   CartesianGrid,
   Line,
   LineChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -31,7 +32,7 @@ interface TooltipProps {
       endDate?: string;
     };
   }>;
-  label?: string | number;
+  label?: string;
 }
 
 interface CustomTooltipComponentProps extends TooltipProps {
@@ -41,6 +42,7 @@ interface CustomTooltipComponentProps extends TooltipProps {
 const CustomTooltip = ({
   active,
   payload,
+  label,
   chartType,
 }: CustomTooltipComponentProps) => {
   if (active && payload && payload.length) {
@@ -112,26 +114,24 @@ const DailyEventsChart = () => {
 
   // Get the appropriate data based on chart type
   const getChartData = () => {
-    const currentDate = new Date();
-    const thirtyDaysAgo = new Date(
-      currentDate.getTime() - 30 * 24 * 60 * 60 * 1000
-    );
-
     switch (chartType) {
       case 'weekly':
-        // Show all weekly data (or you could filter to last 12 weeks, etc.)
         return weeklyStats;
       case 'monthly':
         return monthlyStats;
       default:
-        // Only filter daily view to last 30 days
-        return dailyStats.filter(
-          (stat) => new Date(stat.date) >= thirtyDaysAgo
-        );
+        // Show all daily data for the entire year
+        return dailyStats;
     }
   };
 
   const chartData = getChartData();
+
+  // Calculate average for the reference line
+  const averageCount =
+    chartData.length > 0
+      ? chartData.reduce((acc, d) => acc + d.count, 0) / chartData.length
+      : 0;
 
   // Format date for X-axis based on chart type
   const formatXAxisDate = (dateStr: string) => {
@@ -176,13 +176,15 @@ const DailyEventsChart = () => {
   const ChartComponent = chartView === 'line' ? LineChart : BarChart;
 
   return (
-    <div className="border border-zinc-800 rounded-lg overflow-hidden">
+    <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden">
       {/* Header */}
       <div className="p-6 pb-0">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <TrendingUp className="text-lime-400" size={20} />
-            <h2 className="font-semibold">Event Activity</h2>
+            <h3 className="text-lg font-semibold text-zinc-100">
+              Event Activity
+            </h3>
           </div>
 
           <div className="flex items-center gap-2">
@@ -190,7 +192,7 @@ const DailyEventsChart = () => {
             <div className="flex bg-zinc-800 rounded-lg p-1">
               <button
                 onClick={() => setChartView('bar')}
-                className={`p-1.5 rounded cursor-pointer ${
+                className={`p-1.5 rounded ${
                   chartView === 'bar'
                     ? 'bg-lime-400 text-zinc-900'
                     : 'text-zinc-400 hover:text-zinc-300'
@@ -200,7 +202,7 @@ const DailyEventsChart = () => {
               </button>
               <button
                 onClick={() => setChartView('line')}
-                className={`p-1.5 rounded cursor-pointer ${
+                className={`p-1.5 rounded ${
                   chartView === 'line'
                     ? 'bg-lime-400 text-zinc-900'
                     : 'text-zinc-400 hover:text-zinc-300'
@@ -218,7 +220,7 @@ const DailyEventsChart = () => {
             <button
               key={type}
               onClick={() => setChartType(type)}
-              className={`px-3 py-1.5 rounded text-sm cursor-pointer capitalize transition-colors ${
+              className={`px-3 py-1.5 rounded text-sm capitalize transition-colors ${
                 chartType === type
                   ? 'bg-lime-400 text-zinc-900 font-medium'
                   : 'text-zinc-400 hover:text-zinc-300'
@@ -258,6 +260,19 @@ const DailyEventsChart = () => {
                 content={(props) => (
                   <CustomTooltip {...props} chartType={chartType} />
                 )}
+              />
+
+              {/* Average reference line */}
+              <ReferenceLine
+                y={averageCount}
+                stroke="#71717a"
+                strokeDasharray="5 5"
+                strokeWidth={1}
+                label={{
+                  value: `Avg: ${Math.round(averageCount)}`,
+                  position: 'topRight',
+                  style: { fill: '#71717a', fontSize: '12px' },
+                }}
               />
 
               {chartView === 'line' ? (
