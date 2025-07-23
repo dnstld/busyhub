@@ -118,7 +118,7 @@ export const useEvents = (rawEvents: CalendarEvent[]) => {
     // Helper function to get filtered data for history component
     const getHistoryData = (filter: FilterType) => {
       const monthlyEvents = groupEventsByMonth(rawEvents, filter);
-      const sortedMonths = () => {
+      const sortedMonths = useMemo(() => {
         const months = Object.keys(monthlyEvents);
         if (filter === 'past') {
           return months.sort(
@@ -128,7 +128,7 @@ export const useEvents = (rawEvents: CalendarEvent[]) => {
         return months.sort(
           (a, b) => new Date(a).getTime() - new Date(b).getTime()
         );
-      };
+      }, [monthlyEvents, filter]);
       return { monthlyEvents, sortedMonths };
     };
 

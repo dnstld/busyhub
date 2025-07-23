@@ -269,7 +269,7 @@ const DailyEventsChart = () => {
                 strokeWidth={1}
                 label={{
                   value: `Avg: ${Math.round(averageCount)}`,
-                  position: 'topRight',
+                  position: 'top',
                   style: { fill: '#71717a', fontSize: '12px' },
                 }}
               />
