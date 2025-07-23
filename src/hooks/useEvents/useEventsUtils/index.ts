@@ -1,6 +1,6 @@
 import { filterEventsByDateRange, getEventsForDate } from '@/utils';
 import { useMemo } from 'react';
-import { SanitizedEvent } from './useEventsSanitization';
+import { SanitizedEvent } from '../useEventsSanitization';
 
 export const useEventsUtils = (
   confirmedEvents: SanitizedEvent[],

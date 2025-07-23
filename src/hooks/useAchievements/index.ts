@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { SanitizedEvent } from './useEvents';
+import { SanitizedEvent } from '../useEvents/useEventsSanitization';
 
 interface UseAchievementsProps {
   dailyEvents: Map<string, SanitizedEvent[]>;

@@ -1,7 +1,7 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
+import { EventsData, EventsQuery, EventsStats, UseEventsLegacyResult, UseEventsResult } from './types';
 import { DailyEventStats, useEventsAggregation } from './useEventsAggregation';
 import { FilterType, GroupedEvents, MonthData, useEventsFiltering } from './useEventsFiltering';
-import { EventsData, EventsQuery, EventsStats, UseEventsLegacyResult, UseEventsResult } from './useEventsInterface';
 import { SanitizedEvent, useEventsSanitization } from './useEventsSanitization';
 import { useEventsUtils } from './useEventsUtils';
 
@@ -92,4 +92,3 @@ export function useEventsLegacy(events: CalendarEvent[]): UseEventsLegacyResult 
     parseEventDate: query.parseEventDate,
   };
 }
-

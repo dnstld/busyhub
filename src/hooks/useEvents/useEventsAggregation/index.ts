@@ -1,6 +1,6 @@
 import { compareDateStrings, createSafeDate, getDateKey, getMonthKey, getOrSetMapValue, getWeekKey, isNonEmptyString, isValidDate } from '@/utils';
 import { useMemo } from 'react';
-import { SanitizedEvent } from './useEventsSanitization';
+import { SanitizedEvent } from '../useEventsSanitization';
 
 export interface DailyEventStats {
   date: string; // YYYY-MM-DD format

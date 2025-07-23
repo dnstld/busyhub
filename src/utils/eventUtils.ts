@@ -1,5 +1,5 @@
 import { CalendarEvent } from '@/app/actions/getEvents';
-import { SanitizedEvent } from '@/hooks/useEventsSanitization';
+import { SanitizedEvent } from '@/hooks/useEvents/useEventsSanitization';
 import { parseEventDate } from './dateUtils';
 import { EVENT_STATUS, FILTER_TYPES } from './eventConstants';
 import { isNonEmptyString, isValidDate } from './typeGuards';
