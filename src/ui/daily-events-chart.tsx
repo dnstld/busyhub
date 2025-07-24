@@ -96,7 +96,7 @@ const CustomTooltip = ({
       <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-4 shadow-xl">
         <p className="text-zinc-300 text-sm">{formatDateRange()}</p>
         <p className="text-lime-400 font-semibold">
-          {data.count} event{data.count !== 1 ? 's' : ''}hauhauhauha
+          {data.count} event{data.count !== 1 ? 's' : ''}
         </p>
       </div>
     );

@@ -42,6 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           access_type: 'offline',
           prompt: 'consent',
           response_type: 'code',
+          hl: 'en'
         }
       }
     })
