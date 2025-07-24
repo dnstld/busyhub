@@ -1,7 +1,7 @@
 import LastUpdate from '@/ui/last-update';
 import Image from 'next/image';
 
-export default function TermsAndConditions() {
+export default function TermsOfService() {
   return (
     <main className="w-full max-w-7xl lg:mx-auto p-4 gap-4">
       <Image
@@ -12,12 +12,12 @@ export default function TermsAndConditions() {
         className="mb-8"
       />
 
-      <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
+      <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
 
       <p className="mb-4">
         Welcome to <strong>BusyHub</strong>. By accessing or using our app, you
-        agree to comply with and be bound by these Terms and Conditions. Please
-        read them carefully.
+        agree to comply with and be bound by these Terms of Service. Please read
+        them carefully.
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-2">1. Use of Our Service</h2>
@@ -79,8 +79,8 @@ export default function TermsAndConditions() {
 
       <h2 className="text-xl font-semibold mt-8 mb-2">8. Changes to Terms</h2>
       <p className="mb-4">
-        We may update these Terms and Conditions from time to time. Changes will
-        be posted here with an updated “Last Update” date.
+        We may update these Terms of Service from time to time. Changes will be
+        posted here with an updated “Last Update” date.
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-2">9. Governing Law</h2>

@@ -172,8 +172,8 @@ export default async function RootPage() {
               Privacy Policy
             </a>{' '}
             |{' '}
-            <a href="/terms-and-conditions" className="hover:underline">
-              Terms and conditions
+            <a href="/terms-of-service" className="hover:underline">
+              Terms of Service
             </a>
           </p>
         </footer>
