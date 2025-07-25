@@ -1,14 +1,19 @@
 // Date utilities
-export * from './dateUtils';
+export * from './date-utils';
 
 // Event utilities  
-export * from './eventUtils';
+export * from './event-utils';
 
 // Constants
-export * from './eventConstants';
+export * from './event-constants';
 
 // Performance utilities
-export * from './performanceUtils';
+export * from './performance-utils';
 
 // Type safety utilities
-export * from './typeGuards';
+export * from './type-guards';
+
+// Format utilities
+export * from './format-date';
+export * from './format-time';
+

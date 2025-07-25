@@ -1,7 +1,7 @@
 'use client';
 
-import { CalendarEvent } from '@/app/actions/getEvents';
-import { useEvents } from '@/hooks/useEvents';
+import { CalendarEvent } from '@/app/actions/get-events';
+import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import { BarChart3, Calendar, TrendingUp } from 'lucide-react';
 import { useState } from 'react';

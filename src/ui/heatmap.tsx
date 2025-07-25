@@ -1,9 +1,12 @@
 'use client';
 
-import { CalendarEvent } from '@/app/actions/getEvents';
-import { SanitizedEvent, useEvents } from '@/hooks/useEvents';
-import { useEventsGrid } from '@/hooks/useEventsGrid';
-import { intensityColors, useIntensityScale } from '@/hooks/useIntensityScale';
+import { CalendarEvent } from '@/app/actions/get-events';
+import { SanitizedEvent, useEvents } from '@/hooks/use-events';
+import { useEventsGrid } from '@/hooks/use-events-grid';
+import {
+  intensityColors,
+  useIntensityScale,
+} from '@/hooks/use-intensity-scale';
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
 
 const Heatmap = ({

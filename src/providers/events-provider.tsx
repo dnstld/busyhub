@@ -1,6 +1,6 @@
 'use client';
 
-import type { CalendarEvent } from '@/app/actions/getEvents';
+import type { CalendarEvent } from '@/app/actions/get-events';
 import { createContext, ReactNode, useContext } from 'react';
 
 const EventsContext = createContext<CalendarEvent[] | null>(null);

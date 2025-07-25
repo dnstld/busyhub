@@ -1,6 +1,6 @@
 'use client';
 
-import { useEvents } from '@/hooks/useEvents';
+import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import Heatmap from './heatmap';
 

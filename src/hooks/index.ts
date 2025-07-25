@@ -4,18 +4,18 @@
  */
 
 // Main useEvents hook (with organized structure)
-export { useEvents, useEventsLegacy, useEventsOrganized } from './useEvents';
+export { useEvents, useEventsLegacy, useEventsOrganized } from './use-events';
 export type {
     DailyEventStats, EventsData, EventsQuery, EventsStats, FilterType,
     GroupedEvents,
     MonthData,
     SanitizedEvent, UseEventsLegacyResult, UseEventsResult
-} from './useEvents';
+} from './use-events';
 
 // Individual hooks
-export { useAchievements } from './useAchievements';
-export { useDate } from './useDate';
-export { useEventsGrid } from './useEventsGrid';
-export type { GridCell } from './useEventsGrid';
-export { intensityColors, useIntensityScale } from './useIntensityScale';
+export { useAchievements } from './use-achievements';
+export { useDate } from './use-date';
+export { useEventsGrid } from './use-events-grid';
+export type { GridCell } from './use-events-grid';
+export { intensityColors, useIntensityScale } from './use-intensity-scale';
 

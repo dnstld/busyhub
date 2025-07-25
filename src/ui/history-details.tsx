@@ -1,4 +1,4 @@
-import { CalendarEvent } from '@/app/actions/getEvents';
+import { CalendarEvent } from '@/app/actions/get-events';
 import { MapPin, User, Users } from 'lucide-react';
 import { JSX } from 'react';
 

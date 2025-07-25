@@ -1,4 +1,4 @@
-import { getEvents } from '@/app/actions/getEvents';
+import { getEvents } from '@/app/actions/get-events';
 import { auth } from '@/lib/auth';
 import EventsProvider from '@/providers/events-provider';
 import EventsContent from '@/ui/events';
