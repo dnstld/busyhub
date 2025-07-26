@@ -3,10 +3,12 @@ import Image from 'next/image';
 import Achievements from './achievements';
 import DailyEventsChart from './daily-events-chart';
 import History from './history';
+import MonthlyEventsChart from './monthly-events-chart';
 import Profile from './profile';
 import Timeline from './timeline';
+import WeeklyEventsChart from './weekly-events-chart';
 
-export default function EventsContent() {
+export default function Events() {
   return (
     <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-4">
       <div className="flex flex-col gap-8 lg:col-span-3">
@@ -35,6 +37,17 @@ export default function EventsContent() {
           </h2>
           <Timeline />
         </section>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <section aria-labelledby="weekly-events-chart">
+            <h2 className="sr-only">Weekly Events Chart</h2>
+            <WeeklyEventsChart />
+          </section>
+          <section aria-labelledby="monthly-events-chart">
+            <h2 className="sr-only">Monthly Events Chart</h2>
+            <MonthlyEventsChart />
+          </section>
+        </div>
 
         <DailyEventsChart />
 
