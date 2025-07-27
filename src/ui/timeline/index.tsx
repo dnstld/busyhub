@@ -2,7 +2,7 @@
 
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
-import Heatmap from './heatmap';
+import Heatmap from '../heatmap';
 
 const Timeline = ({ year = new Date().getFullYear() }: { year?: number }) => {
   const events = useCalendar();

@@ -5,7 +5,7 @@ import { useDate } from '@/hooks/use-date';
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import Image from 'next/image';
-import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
 
 const badgeData = [
   {
@@ -24,7 +24,7 @@ const badgeData = [
     id: 'onFire',
     src: '/images/achievement-on-fire.png',
     title: 'On Fire badge',
-    description: 'You’re on a roll! 10-day streak and 100 active days!',
+    description: 'You are on a roll! 10-day streak and 100 active days!',
   },
   {
     id: 'king',

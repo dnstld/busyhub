@@ -10,8 +10,8 @@ import {
   ChartFilter,
   ChartHeader,
   FilterType,
-} from './chart-components';
-import { HistoryItem } from './history-item';
+} from '../chart-components';
+import { HistoryItem } from '../history-item';
 
 const History = () => {
   const events = useCalendar();

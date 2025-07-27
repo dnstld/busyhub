@@ -1,6 +1,6 @@
 'use client';
 
-import { ButtonGroup } from './button-group';
+import { ButtonGroup } from '../button-group';
 
 export type ChartType = 'daily' | 'weekly' | 'monthly';
 

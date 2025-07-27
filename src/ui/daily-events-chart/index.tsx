@@ -24,7 +24,7 @@ import {
   ChartType,
   ChartTypeSelector,
   FilterType,
-} from './chart-components';
+} from '../chart-components';
 
 const DailyEventsChart = () => {
   const events = useCalendar();

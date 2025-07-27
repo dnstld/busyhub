@@ -22,7 +22,7 @@ import {
   ChartSummaryStats,
   ChartTooltip,
   FilterType,
-} from './chart-components';
+} from '../chart-components';
 
 const WeeklyEventsChart = () => {
   const events = useCalendar();

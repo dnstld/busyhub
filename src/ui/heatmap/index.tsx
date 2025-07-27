@@ -7,7 +7,7 @@ import {
   intensityColors,
   useIntensityScale,
 } from '@/hooks/use-intensity-scale';
-import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
 
 const Heatmap = ({
   events,

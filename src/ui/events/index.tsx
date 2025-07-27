@@ -1,12 +1,12 @@
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
-import Achievements from './achievements';
-import DailyEventsChart from './daily-events-chart';
-import History from './history';
-import MonthlyEventsChart from './monthly-events-chart';
-import Profile from './profile';
-import Timeline from './timeline';
-import WeeklyEventsChart from './weekly-events-chart';
+import Achievements from '../achievements';
+import DailyEventsChart from '../daily-events-chart';
+import History from '../history';
+import MonthlyEventsChart from '../monthly-events-chart';
+import Profile from '../profile';
+import Timeline from '../timeline';
+import WeeklyEventsChart from '../weekly-events-chart';
 
 export default function Events() {
   return (
