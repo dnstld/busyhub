@@ -1,5 +1,7 @@
 'use client';
 
+import { ButtonGroup } from './button-group';
+
 export type ChartType = 'daily' | 'weekly' | 'monthly';
 
 interface ChartTypeSelectorProps {
@@ -8,26 +10,23 @@ interface ChartTypeSelectorProps {
   className?: string;
 }
 
+const chartTypeOptions = [
+  { value: 'daily' as const, label: 'Daily' },
+  { value: 'weekly' as const, label: 'Weekly' },
+  { value: 'monthly' as const, label: 'Monthly' },
+];
+
 export const ChartTypeSelector = ({
   chartType,
   onChartTypeChange,
   className = '',
 }: ChartTypeSelectorProps) => {
   return (
-    <div className={`flex gap-1 bg-zinc-800 rounded-lg p-2 w-fit ${className}`}>
-      {(['daily', 'weekly', 'monthly'] as const).map((type) => (
-        <button
-          key={type}
-          onClick={() => onChartTypeChange(type)}
-          className={`px-3 p-1.5 rounded text-sm capitalize transition-colors cursor-pointer ${
-            chartType === type
-              ? 'bg-lime-400 text-zinc-900 font-medium'
-              : 'text-zinc-400 hover:text-zinc-300'
-          }`}
-        >
-          {type}
-        </button>
-      ))}
-    </div>
+    <ButtonGroup
+      options={chartTypeOptions}
+      value={chartType}
+      onChange={onChartTypeChange}
+      className={className}
+    />
   );
 };
