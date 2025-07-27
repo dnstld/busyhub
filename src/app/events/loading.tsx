@@ -1,4 +1,4 @@
-import CalendarLoading from '@/ui/calendar-loading';
+import CalendarLoading from '@/components/ui/calendar-loading';
 
 export default function Loading() {
   return (

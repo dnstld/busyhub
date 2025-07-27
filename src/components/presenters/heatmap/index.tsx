@@ -2,9 +2,9 @@
 
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
-import Heatmap from '../heatmap';
+import HeatmapChart from '../charts/heatmap-chart';
 
-const Timeline = ({ year = new Date().getFullYear() }: { year?: number }) => {
+const Heatmap = ({ year = new Date().getFullYear() }: { year?: number }) => {
   const events = useCalendar();
   const { totalEvents, dailyEvents } = useEvents(events);
 
@@ -14,7 +14,7 @@ const Timeline = ({ year = new Date().getFullYear() }: { year?: number }) => {
         {totalEvents} events in <b>{year}</b>
       </p>
 
-      <Heatmap
+      <HeatmapChart
         events={events}
         year={year}
         aria-label={`Your heatmap timeline indicates that you have confirmed ${totalEvents} events over ${dailyEvents.size} days in ${year}.`}
@@ -23,4 +23,4 @@ const Timeline = ({ year = new Date().getFullYear() }: { year?: number }) => {
   );
 };
 
-export default Timeline;
+export default Heatmap;

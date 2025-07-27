@@ -1,15 +1,19 @@
 'use client';
 
 import { CalendarEvent } from '@/app/actions/get-events';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { SanitizedEvent, useEvents } from '@/hooks/use-events';
 import { useEventsGrid } from '@/hooks/use-events-grid';
 import {
   intensityColors,
   useIntensityScale,
 } from '@/hooks/use-intensity-scale';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
 
-const Heatmap = ({
+const HeatmapChart = ({
   events,
   year = new Date().getFullYear(),
   ...rest
@@ -132,4 +136,4 @@ const Heatmap = ({
   );
 };
 
-export default Heatmap;
+export default HeatmapChart;

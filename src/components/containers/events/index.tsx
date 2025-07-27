@@ -1,12 +1,12 @@
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
-import Achievements from '../achievements';
-import DailyEventsChart from '../daily-events-chart';
-import History from '../history';
-import MonthlyEventsChart from '../monthly-events-chart';
-import Profile from '../profile';
-import Timeline from '../timeline';
-import WeeklyEventsChart from '../weekly-events-chart';
+import Achievements from '../../presenters/achievements';
+import DailyEventsChart from '../../presenters/charts/daily-events-chart';
+import MonthlyEventsChart from '../../presenters/charts/monthly-events-chart';
+import WeeklyEventsChart from '../../presenters/charts/weekly-events-chart';
+import Heatmap from '../../presenters/heatmap';
+import History from '../../presenters/history';
+import Profile from '../../presenters/profile';
 
 export default function Events() {
   return (
@@ -35,7 +35,7 @@ export default function Events() {
           <h2 id="events-section" className="sr-only">
             Events timeline
           </h2>
-          <Timeline />
+          <Heatmap />
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

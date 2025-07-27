@@ -1,7 +1,7 @@
-import LastUpdate from '@/ui/last-update';
+import LastUpdate from '@/components/ui/last-update';
 import Image from 'next/image';
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicyPage() {
   return (
     <main className="w-full max-w-7xl lg:mx-auto p-4 gap-4">
       <Image

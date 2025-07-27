@@ -1,11 +1,15 @@
 'use client';
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { useAchievements } from '@/hooks/use-achievements';
 import { useDate } from '@/hooks/use-date';
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import Image from 'next/image';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
 
 const badgeData = [
   {

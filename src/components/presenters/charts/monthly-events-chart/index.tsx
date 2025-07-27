@@ -1,6 +1,14 @@
 'use client';
 
-import { useEvents } from '@/hooks/use-events';
+import {
+  ChartContainer,
+  ChartEmptyState,
+  ChartFilter,
+  ChartHeader,
+  ChartSummaryStats,
+  ChartTooltip,
+} from '@/components/presenters/charts/chart-components';
+import { FilterType, useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import { BarChart3 } from 'lucide-react';
 import { useState } from 'react';
@@ -13,15 +21,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import {
-  ChartContainer,
-  ChartEmptyState,
-  ChartFilter,
-  ChartHeader,
-  ChartSummaryStats,
-  ChartTooltip,
-  FilterType,
-} from '../chart-components';
 
 const MonthlyEventsChart = () => {
   const events = useCalendar();

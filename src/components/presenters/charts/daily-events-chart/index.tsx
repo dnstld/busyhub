@@ -1,6 +1,16 @@
 'use client';
 
-import { useEvents } from '@/hooks/use-events';
+import {
+  ChartContainer,
+  ChartEmptyState,
+  ChartFilter,
+  ChartHeader,
+  ChartSummaryStats,
+  ChartTooltip,
+  ChartType,
+  ChartTypeSelector,
+} from '@/components/presenters/charts/chart-components';
+import { FilterType, useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import { TrendingUp } from 'lucide-react';
 import { useState } from 'react';
@@ -14,17 +24,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import {
-  ChartContainer,
-  ChartEmptyState,
-  ChartFilter,
-  ChartHeader,
-  ChartSummaryStats,
-  ChartTooltip,
-  ChartType,
-  ChartTypeSelector,
-  FilterType,
-} from '../chart-components';
 
 const DailyEventsChart = () => {
   const events = useCalendar();

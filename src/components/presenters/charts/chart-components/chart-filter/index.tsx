@@ -1,6 +1,6 @@
 'use client';
 
-import { ButtonGroup } from '../button-group';
+import { ButtonGroup } from '@/components/ui/button-group';
 
 export type FilterType = 'all' | 'past' | 'upcoming';
 

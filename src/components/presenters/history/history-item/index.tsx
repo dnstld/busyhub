@@ -1,7 +1,6 @@
-import { MonthData } from '@/hooks/use-events';
+import { FilterType, MonthData } from '@/hooks/use-events';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { JSX, useState } from 'react';
-import { FilterType } from '../chart-components';
 import { HistoryDetails } from '../history-details';
 
 export function HistoryItem({

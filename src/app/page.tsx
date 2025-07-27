@@ -5,7 +5,7 @@ import {
   TerminalIcon,
 } from 'lucide-react';
 
-import EventsPanel from '@/ui/heatmap';
+import HeatmapChart from '@/components/presenters/charts/heatmap-chart';
 import Image from 'next/image';
 import fakeData from '../fake-data.json';
 import { login } from './actions/login';
@@ -38,7 +38,7 @@ export default async function RootPage() {
           </h2>
 
           <div className="max-w-fit mx-auto">
-            <EventsPanel
+            <HeatmapChart
               events={fakeData}
               aria-label="A visual timeline of Google Calendar events displayed as a heatmap panel"
             />

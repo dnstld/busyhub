@@ -1,5 +1,5 @@
 // Re-export all chart components for easy importing
-export { ButtonGroup } from './button-group';
+export { ButtonGroup } from '@/components/ui/button-group';
 export { ChartContainer } from './chart-container';
 export { ChartEmptyState } from './chart-empty-state';
 export { ChartFilter, type FilterType } from './chart-filter';
