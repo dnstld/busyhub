@@ -9,15 +9,15 @@ import { HistoryItem } from './history-item';
 
 const History = () => {
   const events = useCalendar();
-  const [filter, setFilter] = useState<FilterType>('past');
+  const [filter, setFilter] = useState<FilterType>('all');
   const { getHistoryData } = useEvents(events);
 
   const { sortedMonths, monthlyEvents } = getHistoryData(filter);
 
   return (
-    <section className="border border-zinc-800 rounded-xl">
+    <section className="border border-zinc-800 rounded-xl overflow-hidden">
       {/* Header */}
-      <div className="p-6 pb-0">
+      <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <HistoryIcon className="text-lime-400" size={20} />
@@ -28,8 +28,8 @@ const History = () => {
         </div>
 
         {/* Filter Type Selector */}
-        <div className="flex gap-1 bg-zinc-800 rounded-lg p-1 w-fit">
-          {(['past', 'upcoming', 'all'] as const).map((type) => (
+        <div className="flex gap-1 bg-zinc-800 rounded-lg p-2 w-fit">
+          {(['all', 'past', 'upcoming'] as const).map((type) => (
             <button
               key={type}
               onClick={() => setFilter(type)}
@@ -39,16 +39,16 @@ const History = () => {
                   : 'text-zinc-400 hover:text-zinc-300'
               }`}
             >
-              {type === 'all' ? 'All Events' : type}
+              {type}
             </button>
           ))}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 pt-4">
+      <div className="p-4 pt-0">
         {sortedMonths.length === 0 ? (
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-4 py-8">
             <div className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center">
               <Calendar className="text-lime-400" size={24} />
             </div>
@@ -62,7 +62,7 @@ const History = () => {
             </p>
           </div>
         ) : (
-          <ul className="space-y-4">
+          <div className="space-y-0">
             {sortedMonths.map((month) => (
               <HistoryItem
                 key={month}
@@ -71,7 +71,7 @@ const History = () => {
                 filter={filter}
               />
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </section>

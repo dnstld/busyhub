@@ -90,7 +90,7 @@ const WeeklyEventsChart = () => {
             No Events Data
           </h2>
           <p className="text-zinc-400">
-            Add some events to see your weekday distribution
+            Add some events to see your weekday activity chart
           </p>
         </div>
       </div>
@@ -105,7 +105,7 @@ const WeeklyEventsChart = () => {
           <div className="flex items-center gap-2">
             <BarChart3 className="text-lime-400" size={20} aria-hidden="true" />
             <h2 className="text-lg font-semibold text-zinc-100">
-              Weekday Distribution
+              Weekday Activity
             </h2>
           </div>
         </div>

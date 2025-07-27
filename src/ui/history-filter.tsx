@@ -11,8 +11,8 @@ export function HistoryFilter({
 }): JSX.Element {
   const options = [
     { value: 'past' as FilterType, label: 'Past Events' },
-    { value: 'upcoming' as FilterType, label: 'Upcoming Events' },
     { value: 'all' as FilterType, label: 'All Events' },
+    { value: 'upcoming' as FilterType, label: 'Upcoming Events' },
   ];
 
   return (

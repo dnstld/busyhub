@@ -2,7 +2,7 @@
 
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
-import { Calendar, TrendingUp } from 'lucide-react';
+import { BarChart3, Calendar } from 'lucide-react';
 import { useState } from 'react';
 import {
   Bar,
@@ -162,7 +162,7 @@ const MonthlyEventsChart = () => {
       {/* Header */}
       <div className="p-4">
         <div className="flex items-center gap-2 mb-4">
-          <TrendingUp className="text-lime-400" size={20} aria-hidden="true" />
+          <BarChart3 className="text-lime-400" size={20} aria-hidden="true" />
           <h2 className="text-lg font-semibold text-zinc-100">
             Monthly Activity
           </h2>
