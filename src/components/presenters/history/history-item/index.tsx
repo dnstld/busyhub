@@ -1,7 +1,7 @@
+import { HistoryDetails } from '@/components/presenters/history/history-details';
 import { FilterType, MonthData } from '@/hooks/use-events';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { JSX, useState } from 'react';
-import { HistoryDetails } from '../history-details';
 
 export function HistoryItem({
   month,

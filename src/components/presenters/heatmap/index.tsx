@@ -1,8 +1,8 @@
 'use client';
 
+import HeatmapChart from '@/components/presenters/charts/heatmap-chart';
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
-import HeatmapChart from '../charts/heatmap-chart';
 
 const Heatmap = ({ year = new Date().getFullYear() }: { year?: number }) => {
   const events = useCalendar();

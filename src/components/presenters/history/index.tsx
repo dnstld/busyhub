@@ -1,14 +1,14 @@
 'use client';
 
+import { ChartContainer } from '@/components/presenters/charts/chart-components';
+import { ChartEmptyState } from '@/components/presenters/charts/chart-components/chart-empty-state';
+import { ChartFilter } from '@/components/presenters/charts/chart-components/chart-filter';
+import { ChartHeader } from '@/components/presenters/charts/chart-components/chart-header';
+import { HistoryItem } from '@/components/presenters/history/history-item';
 import { FilterType, useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import { History as HistoryIcon } from 'lucide-react';
 import { useState } from 'react';
-import { ChartContainer } from '../charts/chart-components/chart-container';
-import { ChartEmptyState } from '../charts/chart-components/chart-empty-state';
-import { ChartFilter } from '../charts/chart-components/chart-filter';
-import { ChartHeader } from '../charts/chart-components/chart-header';
-import { HistoryItem } from './history-item';
 
 const History = () => {
   const events = useCalendar();

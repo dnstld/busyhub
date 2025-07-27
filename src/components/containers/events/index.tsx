@@ -1,12 +1,12 @@
+import Achievements from '@/components/presenters/achievements';
+import DailyEventsChart from '@/components/presenters/charts/daily-events-chart';
+import MonthlyEventsChart from '@/components/presenters/charts/monthly-events-chart';
+import WeeklyEventsChart from '@/components/presenters/charts/weekly-events-chart';
+import Heatmap from '@/components/presenters/heatmap';
+import History from '@/components/presenters/history';
+import Profile from '@/components/presenters/profile';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
-import Achievements from '../../presenters/achievements';
-import DailyEventsChart from '../../presenters/charts/daily-events-chart';
-import MonthlyEventsChart from '../../presenters/charts/monthly-events-chart';
-import WeeklyEventsChart from '../../presenters/charts/weekly-events-chart';
-import Heatmap from '../../presenters/heatmap';
-import History from '../../presenters/history';
-import Profile from '../../presenters/profile';
 
 export default function Events() {
   return (
