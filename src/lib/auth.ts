@@ -1,3 +1,4 @@
+import { AUTH_CONFIG } from '@/constants/authConstants';
 import NextAuth from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import Google from 'next-auth/providers/google';
@@ -17,12 +18,6 @@ declare module 'next-auth/jwt' {
     error?: 'RefreshAccessTokenError' | 'TokenExpiredError' | 'InvalidTokenError';
   }
 }
-
-const CONFIG = {
-  TOKEN_REFRESH_BUFFER: 5 * 60 * 1000, // 5 minutes
-  SESSION_MAX_AGE: 30 * 24 * 60 * 60, // 30 days
-  SESSION_UPDATE_AGE: 24 * 60 * 60, // 24 hours
-} as const;
 
 const GOOGLE_SCOPES = [
   'openid',
@@ -115,8 +110,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
   session: {
     strategy: 'jwt',
-    maxAge: CONFIG.SESSION_MAX_AGE,
-    updateAge: CONFIG.SESSION_UPDATE_AGE,
+    maxAge: AUTH_CONFIG.SESSION_MAX_AGE,
+    updateAge: AUTH_CONFIG.SESSION_UPDATE_AGE,
   },
 
   pages: {
@@ -130,7 +125,7 @@ function isTokenExpired(tokenExpiresAt?: number): boolean {
   if (!tokenExpiresAt || tokenExpiresAt <= 0) {
     return true;
   }
-  return tokenExpiresAt <= Date.now() + CONFIG.TOKEN_REFRESH_BUFFER;
+  return tokenExpiresAt <= Date.now() + AUTH_CONFIG.TOKEN_REFRESH_BUFFER;
 }
 
 async function refreshAccessToken(token: JWT): Promise<JWT> {
