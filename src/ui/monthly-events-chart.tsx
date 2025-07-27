@@ -2,7 +2,7 @@
 
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
-import { BarChart3, Calendar } from 'lucide-react';
+import { BarChart3 } from 'lucide-react';
 import { useState } from 'react';
 import {
   Bar,
@@ -13,40 +13,15 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-
-type FilterType = 'all' | 'past' | 'upcoming';
-
-interface TooltipProps {
-  active?: boolean;
-  payload?: Array<{
-    value: number;
-    payload: {
-      date: string;
-      count: number;
-      monthName: string;
-    };
-  }>;
-}
-
-const CustomTooltip = ({ active, payload }: TooltipProps) => {
-  if (active && payload && payload.length) {
-    const data = payload[0].payload;
-    const monthYear = new Date(data.date).toLocaleDateString('en-US', {
-      month: 'long',
-      year: 'numeric',
-    });
-
-    return (
-      <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-4 shadow-xl">
-        <p className="text-zinc-300 text-sm">{monthYear}</p>
-        <p className="text-lime-400 font-semibold">
-          {data.count} event{data.count !== 1 ? 's' : ''}
-        </p>
-      </div>
-    );
-  }
-  return null;
-};
+import {
+  ChartContainer,
+  ChartEmptyState,
+  ChartFilter,
+  ChartHeader,
+  ChartSummaryStats,
+  ChartTooltip,
+  FilterType,
+} from './chart-components';
 
 const MonthlyEventsChart = () => {
   const events = useCalendar();
@@ -129,22 +104,10 @@ const MonthlyEventsChart = () => {
 
   if (filteredTotalEvents === 0) {
     return (
-      <div className="border border-zinc-800 rounded-xl p-4">
-        <div className="text-center space-y-4">
-          <div
-            className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center"
-            aria-hidden="true"
-          >
-            <Calendar className="text-lime-400" size={24} />
-          </div>
-          <h2 className="text-xl font-semibold text-zinc-100">
-            No Events Data
-          </h2>
-          <p className="text-zinc-400">
-            Add some events to see your monthly activity
-          </p>
-        </div>
-      </div>
+      <ChartEmptyState
+        title="No Events Data"
+        description="Add some events to see your monthly activity"
+      />
     );
   }
 
@@ -158,33 +121,15 @@ const MonthlyEventsChart = () => {
   }));
 
   return (
-    <section className="border border-zinc-800 rounded-xl overflow-hidden">
-      {/* Header */}
-      <div className="p-4">
-        <div className="flex items-center gap-2 mb-4">
+    <ChartContainer>
+      <ChartHeader
+        icon={
           <BarChart3 className="text-lime-400" size={20} aria-hidden="true" />
-          <h2 className="text-lg font-semibold text-zinc-100">
-            Monthly Activity
-          </h2>
-        </div>
-
-        {/* Filter Selector */}
-        <div className="flex gap-1 bg-zinc-800 rounded-lg p-1 w-fit">
-          {(['all', 'past', 'upcoming'] as const).map((type) => (
-            <button
-              key={type}
-              onClick={() => setFilter(type)}
-              className={`px-2 py-1 rounded text-xs transition-colors ${
-                filter === type
-                  ? 'bg-lime-400 text-zinc-900 font-medium'
-                  : 'text-zinc-400 hover:text-zinc-300'
-              }`}
-            >
-              {type === 'all' ? 'All' : type === 'past' ? 'Past' : 'Upcoming'}
-            </button>
-          ))}
-        </div>
-      </div>
+        }
+        title="Monthly Activity"
+      >
+        <ChartFilter filter={filter} onFilterChange={setFilter} />
+      </ChartHeader>
 
       {/* Chart */}
       <div className="p-4 pt-0">
@@ -209,41 +154,36 @@ const MonthlyEventsChart = () => {
                 axisLine={false}
                 allowDecimals={false}
               />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip content={<ChartTooltip chartType="monthly" />} />
               <Bar dataKey="count" fill="#a3e635" radius={[2, 2, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Summary Stats */}
-        <div className="mt-3 pt-3 border-t border-zinc-800">
-          <div className="grid grid-cols-2 gap-4 text-center">
-            <div>
-              <p className="text-zinc-400 text-xs">
-                {filter === 'all'
+        <ChartSummaryStats
+          stats={[
+            {
+              label:
+                filter === 'all'
                   ? 'This Year'
                   : filter === 'past'
                   ? 'Past Months'
-                  : 'Upcoming'}
-              </p>
-              <p className="text-lime-400 font-semibold text-sm">
-                {filteredTotalEvents}
-              </p>
-            </div>
-            <div>
-              <p className="text-zinc-400 text-xs">Peak Month</p>
-              <p className="text-lime-400 font-semibold text-sm">
-                {chartData.length > 0
+                  : 'Upcoming',
+              value: filteredTotalEvents,
+            },
+            {
+              label: 'Peak Month',
+              value:
+                chartData.length > 0
                   ? chartData.reduce((max, current) =>
                       current.count > max.count ? current : max
                     ).monthName
-                  : 'N/A'}
-              </p>
-            </div>
-          </div>
-        </div>
+                  : 'N/A',
+            },
+          ]}
+        />
       </div>
-    </section>
+    </ChartContainer>
   );
 };
 
