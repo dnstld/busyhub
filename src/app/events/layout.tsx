@@ -2,8 +2,8 @@ import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
-  title: 'Your events',
-  description: 'Your personal calendar with events',
+  title: 'BusyHub | Your events',
+  description: 'Your events timeline and analytics',
 };
 
 export default async function EventsLayout({
