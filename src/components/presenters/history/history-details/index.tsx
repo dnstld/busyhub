@@ -1,4 +1,5 @@
 import { CalendarEvent } from '@/app/actions/get-events';
+import { useUser } from '@/providers';
 import { JSX } from 'react';
 
 export function HistoryDetails({
@@ -6,6 +7,40 @@ export function HistoryDetails({
 }: {
   event: CalendarEvent;
 }): JSX.Element {
+  const user = useUser();
+  const userEmail = user?.email;
+
+  // Get user's response status
+  const getUserResponseStatus = () => {
+    if (!userEmail || !event.attendees) return null;
+
+    const userAttendee = event.attendees.find(
+      (attendee) => attendee.email === userEmail
+    );
+
+    return userAttendee?.responseStatus || null;
+  };
+
+  const userResponse = getUserResponseStatus();
+
+  const getResponseStatusDisplay = () => {
+    console.log('Processing response status:', userResponse);
+
+    switch (userResponse) {
+      case 'accepted':
+        return { text: 'Confirmed', color: 'text-lime-400' };
+      case 'declined':
+        return { text: 'Declined', color: 'text-red-400' };
+      case 'tentative':
+        return { text: 'Tentative', color: 'text-yellow-400' };
+      case 'needsAction':
+        return { text: 'Pending', color: 'text-gray-400' };
+      case null:
+        return { text: 'No Response', color: 'text-gray-400' };
+      default:
+        return { text: `Unknown (${userResponse})`, color: 'text-gray-400' };
+    }
+  };
   const formatDate = (
     dateInput: string | { dateTime?: string | null } | null | undefined
   ) => {
@@ -73,6 +108,7 @@ export function HistoryDetails({
   };
 
   const duration = formatDuration();
+  const responseStatus = getResponseStatusDisplay();
 
   return (
     <div className="py-3 hover:bg-zinc-800/30 transition-colors border-b border-zinc-800/50 last:border-b-0">
@@ -99,19 +135,9 @@ export function HistoryDetails({
           </div>
         </div>
         <div
-          className={`text-xs px-2 py-0.5 rounded-full bg-zinc-800 ${
-            event.status === 'confirmed'
-              ? 'text-lime-400'
-              : event.status === 'tentative'
-              ? 'text-yellow-400'
-              : 'text-red-400'
-          } ml-2 flex-shrink-0`}
+          className={`text-xs px-2 py-0.5 rounded-full bg-zinc-800 ${responseStatus.color} ml-2 flex-shrink-0`}
         >
-          {event.status === 'confirmed'
-            ? 'Confirmed'
-            : event.status === 'tentative'
-            ? 'Tentative'
-            : 'Cancelled'}
+          {responseStatus.text}
         </div>
       </div>
 

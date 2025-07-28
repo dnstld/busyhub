@@ -39,7 +39,7 @@ const History = () => {
             }
           />
         ) : (
-          <div className="space-y-0">
+          <div>
             {sortedMonths.map((month) => (
               <HistoryItem
                 key={month}

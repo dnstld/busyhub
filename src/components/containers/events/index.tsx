@@ -29,43 +29,18 @@ export default function Events() {
           height={32}
         />
 
-        <section
-          className="flex flex-col gap-2"
-          aria-labelledby="events-section"
-        >
-          <h2 id="events-section" className="sr-only">
-            Events timeline
-          </h2>
-          <Heatmap />
-        </section>
+        <Heatmap />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <section aria-labelledby="weekly-events-chart">
-            <h2 className="sr-only">Weekly Events Chart</h2>
-            <WeeklyEventsChart />
-          </section>
-          <section aria-labelledby="monthly-events-chart">
-            <h2 className="sr-only">Monthly Events Chart</h2>
-            <MonthlyEventsChart />
-          </section>
+          <WeeklyEventsChart />
+          <MonthlyEventsChart />
         </div>
+
+        <EventAnalyticsChart />
 
         <DailyEventsChart />
 
-        <section aria-labelledby="event-analytics-chart">
-          <h2 className="sr-only">Event Analytics Chart</h2>
-          <EventAnalyticsChart />
-        </section>
-
-        <section
-          className="flex flex-col gap-4 w-full"
-          aria-labelledby="events-history"
-        >
-          <h2 id="events-history" className="sr-only">
-            Events history
-          </h2>
-          <History />
-        </section>
+        <History />
 
         <footer>
           <p className="text-sm">

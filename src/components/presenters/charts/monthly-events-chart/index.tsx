@@ -125,7 +125,7 @@ const MonthlyEventsChart = () => {
         icon={
           <BarChart3 className="text-lime-400" size={20} aria-hidden="true" />
         }
-        title="Monthly"
+        title="Monthly Activity"
       >
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>
@@ -167,7 +167,7 @@ const MonthlyEventsChart = () => {
                   ? 'This Year'
                   : filter === 'past'
                   ? 'Past Months'
-                  : 'Upcoming',
+                  : 'Upcoming Months',
               value: filteredTotalEvents,
             },
             {

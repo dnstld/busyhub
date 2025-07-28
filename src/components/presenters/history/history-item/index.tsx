@@ -22,7 +22,7 @@ export function HistoryItem({
   return (
     <div className="border-b border-zinc-800 last:border-b-0">
       <button
-        className="w-full py-3 flex items-center justify-between hover:bg-zinc-800/30 transition-colors"
+        className="w-full py-3 flex items-center justify-between hover:bg-zinc-800/30 transition-colors cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center gap-3">

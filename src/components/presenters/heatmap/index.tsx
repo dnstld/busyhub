@@ -9,17 +9,17 @@ const Heatmap = ({ year = new Date().getFullYear() }: { year?: number }) => {
   const { totalEvents, dailyEvents } = useEvents(events);
 
   return (
-    <div className="flex flex-col gap-4">
-      <p>
-        {totalEvents} events in <b>{year}</b>
-      </p>
+    <section className="flex flex-col gap-4">
+      <h2 className="text-lg font-semibold">
+        {totalEvents} events in {year}
+      </h2>
 
       <HeatmapChart
         events={events}
         year={year}
-        aria-label={`Your heatmap timeline indicates that you have confirmed ${totalEvents} events over ${dailyEvents.size} days in ${year}.`}
+        aria-label={`Your heatmap timeline indicates that you have ${totalEvents} events over ${dailyEvents.size} days in ${year}.`}
       />
-    </div>
+    </section>
   );
 };
 

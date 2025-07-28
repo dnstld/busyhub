@@ -5,7 +5,6 @@ import {
   ChartEmptyState,
   ChartFilter,
   ChartHeader,
-  ChartSummaryStats,
 } from '@/components/presenters/charts/chart-components';
 import { FilterType, useEvents } from '@/hooks/use-events';
 import { useCalendar, useUser } from '@/providers';
@@ -126,7 +125,14 @@ const EventAnalyticsChart = () => {
     );
 
     return Object.entries(responseCounts).map(([response, count]) => ({
-      name: response.charAt(0).toUpperCase() + response.slice(1),
+      name:
+        response === 'accepted'
+          ? 'Accepted (Yes)'
+          : response === 'declined'
+          ? 'Declined (No)'
+          : response === 'tentative'
+          ? 'Tentative (Maybe)'
+          : response.charAt(0).toUpperCase() + response.slice(1),
       value: count,
       color: RESPONSE_COLORS[response as AttendeeResponse],
       percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
@@ -147,7 +153,7 @@ const EventAnalyticsChart = () => {
 
       if (durationHours < 1) {
         durationCounts.short++;
-      } else if (durationHours <= 4) {
+      } else if (durationHours < 3) {
         durationCounts.medium++;
       } else {
         durationCounts.long++;
@@ -164,8 +170,8 @@ const EventAnalyticsChart = () => {
         duration === 'short'
           ? 'Short (<1hr)'
           : duration === 'medium'
-          ? 'Medium (1-4hrs)'
-          : 'Long (4+hrs)',
+          ? 'Medium (1-3hrs)'
+          : 'Long (3+hrs)',
       value: count,
       color: DURATION_COLORS[duration as EventDuration],
       percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
@@ -258,12 +264,10 @@ const EventAnalyticsChart = () => {
       </ChartHeader>
 
       <div className="p-4 pt-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Response Status Distribution */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-sm font-medium text-zinc-300 mb-3">
-              Response Status
-            </h3>
+            <h3 className="text-sm font-medium">Response Status</h3>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -283,13 +287,28 @@ const EventAnalyticsChart = () => {
                 </PieChart>
               </ResponsiveContainer>
             </div>
+            <div className="mt-3 space-y-1">
+              {responseData.map((item) => (
+                <div
+                  key={item.name}
+                  className="flex items-center justify-between text-xs"
+                >
+                  <div className="flex items-center space-x-2">
+                    <div
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: item.color }}
+                    ></div>
+                    <span className="text-zinc-300">{item.name}</span>
+                  </div>
+                  <span className="text-zinc-400">{item.percentage}%</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Duration Distribution */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-sm font-medium text-zinc-300 mb-3">
-              Duration Distribution
-            </h3>
+            <h3 className="text-sm font-medium">Duration Distribution</h3>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -309,13 +328,28 @@ const EventAnalyticsChart = () => {
                 </PieChart>
               </ResponsiveContainer>
             </div>
+            <div className="mt-3 space-y-1">
+              {durationData.map((item) => (
+                <div
+                  key={item.name}
+                  className="flex items-center justify-between text-xs"
+                >
+                  <div className="flex items-center space-x-2">
+                    <div
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: item.color }}
+                    ></div>
+                    <span className="text-zinc-300">{item.name}</span>
+                  </div>
+                  <span className="text-zinc-400">{item.percentage}%</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Time Distribution */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-sm font-medium text-zinc-300 mb-3">
-              Time Distribution
-            </h3>
+            <h3 className="text-sm font-medium">Time Distribution</h3>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -335,63 +369,7 @@ const EventAnalyticsChart = () => {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-          </div>
-        </div>
-
-        {/* Legend */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          {/* Response Status Legend */}
-          <div>
-            <h4 className="text-xs font-medium text-zinc-400 mb-2">
-              RESPONSE STATUS
-            </h4>
-            <div className="space-y-1">
-              {responseData.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center justify-between text-xs"
-                >
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                    ></div>
-                    <span className="text-zinc-300">{item.name}</span>
-                  </div>
-                  <span className="text-zinc-400">{item.percentage}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Duration Legend */}
-          <div>
-            <h4 className="text-xs font-medium text-zinc-400 mb-2">DURATION</h4>
-            <div className="space-y-1">
-              {durationData.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center justify-between text-xs"
-                >
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                    ></div>
-                    <span className="text-zinc-300">{item.name}</span>
-                  </div>
-                  <span className="text-zinc-400">{item.percentage}%</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Time Legend */}
-          <div>
-            <h4 className="text-xs font-medium text-zinc-400 mb-2">
-              TIME OF DAY
-            </h4>
-            <div className="space-y-1">
+            <div className="mt-3 space-y-1">
               {timeData.map((item) => (
                 <div
                   key={item.name}
@@ -410,33 +388,6 @@ const EventAnalyticsChart = () => {
             </div>
           </div>
         </div>
-
-        <ChartSummaryStats
-          columns={3}
-          stats={[
-            { label: 'Total Events', value: totalEvents },
-            {
-              label: 'Most Common Response',
-              value:
-                responseData.length > 0
-                  ? responseData.reduce((max, current) =>
-                      current.value > max.value ? current : max
-                    ).name
-                  : 'N/A',
-            },
-            {
-              label: 'Most Common Duration',
-              value:
-                durationData.length > 0
-                  ? durationData
-                      .reduce((max, current) =>
-                        current.value > max.value ? current : max
-                      )
-                      .name.split(' ')[0]
-                  : 'N/A',
-            },
-          ]}
-        />
       </div>
     </ChartContainer>
   );

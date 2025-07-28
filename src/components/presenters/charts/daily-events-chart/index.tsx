@@ -117,7 +117,7 @@ const DailyEventsChart = () => {
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>
 
-      <div className="px-4 pb-4">
+      <div className="px-4">
         <ChartTypeSelector
           chartType={chartType}
           onChartTypeChange={setChartType}
