@@ -12,8 +12,12 @@ export default auth((req) => {
   const isEvents = pathname.startsWith('/events');
   const isHome = pathname === '/';
 
-  if (isHome && isLoggedIn) {
-    return NextResponse.redirect(new URL('/events', req.url));
+  if (isHome) {
+    if (isLoggedIn) {
+      return NextResponse.redirect(new URL('/events', req.url));
+    } else {
+      return NextResponse.next();
+    }
   }
 
   if (isEvents && !isLoggedIn) {
