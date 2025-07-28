@@ -1,6 +1,7 @@
 import Achievements from '@/components/presenters/achievements';
 import DailyEventsChart from '@/components/presenters/charts/daily-events-chart';
 import MonthlyEventsChart from '@/components/presenters/charts/monthly-events-chart';
+import EventAnalyticsChart from '@/components/presenters/charts/response-analytics-chart';
 import WeeklyEventsChart from '@/components/presenters/charts/weekly-events-chart';
 import Heatmap from '@/components/presenters/heatmap';
 import History from '@/components/presenters/history';
@@ -50,6 +51,11 @@ export default function Events() {
         </div>
 
         <DailyEventsChart />
+
+        <section aria-labelledby="event-analytics-chart">
+          <h2 className="sr-only">Event Analytics Chart</h2>
+          <EventAnalyticsChart />
+        </section>
 
         <section
           className="flex flex-col gap-4 w-full"

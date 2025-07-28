@@ -1,11 +1,12 @@
+'use client';
+
 import { logout } from '@/app/actions/logout';
-import { auth } from '@/lib/auth';
+import { useUser } from '@/providers';
 import { LogOutIcon } from 'lucide-react';
 import Image from 'next/image';
 
-export default async function Profile() {
-  const session = await auth();
-  const user = session?.user;
+export default function Profile() {
+  const user = useUser();
 
   return (
     <section>
