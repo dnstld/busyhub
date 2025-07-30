@@ -2,7 +2,6 @@
 
 import {
   ChartContainer,
-  ChartEmptyState,
   ChartFilter,
   ChartHeader,
   ChartSummaryStats,
@@ -32,7 +31,6 @@ const DailyEventsChart = () => {
   const [chartType, setChartType] = useState<ChartType>('daily');
   const [filter, setFilter] = useState<FilterType>('all');
 
-  // Get the appropriate data based on chart type and filter
   const getChartData = () => {
     const now = new Date();
     let baseData;
@@ -49,7 +47,6 @@ const DailyEventsChart = () => {
         break;
     }
 
-    // Apply time-based filter
     if (filter === 'all') {
       return baseData;
     }
@@ -96,15 +93,6 @@ const DailyEventsChart = () => {
         });
     }
   };
-
-  if (totalEvents === 0) {
-    return (
-      <ChartEmptyState
-        title="No Events Data"
-        description="Add some events to see your activity chart"
-      />
-    );
-  }
 
   return (
     <ChartContainer>

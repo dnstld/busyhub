@@ -2,7 +2,6 @@
 
 import {
   ChartContainer,
-  ChartEmptyState,
   ChartFilter,
   ChartHeader,
 } from '@/components/presenters/charts/chart-components';
@@ -50,11 +49,9 @@ const EventAnalyticsChart = () => {
   const user = useUser();
   const userEmail = user?.email;
 
-  // Get filtered events based on filter - use sanitized events (all statuses) but with valid dates
   const getFilteredEvents = () => {
     const now = new Date();
 
-    // First filter to events with valid dates only
     const validEvents = sanitized.filter((event) => {
       const startTime = event.start.dateTime;
       return startTime && !isNaN(new Date(startTime).getTime());
@@ -77,11 +74,9 @@ const EventAnalyticsChart = () => {
 
   const filteredEvents = getFilteredEvents();
 
-  // Response Status Distribution Data - analyze attendee responses for the current user
   const responseData = useMemo(() => {
     if (!events || events.length === 0 || !userEmail) return [];
 
-    // Apply time filtering to raw events for status consistency
     const now = new Date();
     let eventsToAnalyze = events;
 
@@ -104,7 +99,6 @@ const EventAnalyticsChart = () => {
       });
     }
 
-    // Count responses for the current user's email across all events
     const responseCounts = eventsToAnalyze.reduce((acc, event) => {
       const attendees = event.attendees || [];
       const targetAttendee = attendees.find(
@@ -139,7 +133,6 @@ const EventAnalyticsChart = () => {
     })) as ChartData[];
   }, [events, filter, userEmail]);
 
-  // Duration Distribution Data
   const durationData = useMemo(() => {
     if (!filteredEvents || filteredEvents.length === 0) return [];
 
@@ -178,7 +171,6 @@ const EventAnalyticsChart = () => {
     })) as ChartData[];
   }, [filteredEvents]);
 
-  // Time of Day Distribution Data
   const timeData = useMemo(() => {
     if (!filteredEvents || filteredEvents.length === 0) return [];
 
@@ -215,9 +207,6 @@ const EventAnalyticsChart = () => {
     })) as ChartData[];
   }, [filteredEvents]);
 
-  const totalEvents = filteredEvents.length;
-
-  // Custom tooltip for pie charts - follows ChartTooltip styling
   const PieChartTooltip = ({
     active,
     payload,
@@ -238,15 +227,6 @@ const EventAnalyticsChart = () => {
     }
     return null;
   };
-
-  if (totalEvents === 0) {
-    return (
-      <ChartEmptyState
-        title="No Events Data"
-        description="Add some events to see your analytics charts"
-      />
-    );
-  }
 
   return (
     <ChartContainer>

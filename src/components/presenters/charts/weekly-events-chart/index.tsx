@@ -2,7 +2,6 @@
 
 import {
   ChartContainer,
-  ChartEmptyState,
   ChartFilter,
   ChartHeader,
   ChartSummaryStats,
@@ -53,15 +52,6 @@ const WeeklyEventsChart = () => {
 
   const weekdayStats = useWeekdayStats(getFilteredEvents());
   const totalEvents = weekdayStats.reduce((sum, stat) => sum + stat.count, 0);
-
-  if (totalEvents === 0) {
-    return (
-      <ChartEmptyState
-        title="No Events Data"
-        description="Add some events to see your weekday activity chart"
-      />
-    );
-  }
 
   return (
     <ChartContainer>

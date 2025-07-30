@@ -2,7 +2,6 @@
 
 import {
   ChartContainer,
-  ChartEmptyState,
   ChartFilter,
   ChartHeader,
   ChartSummaryStats,
@@ -100,15 +99,6 @@ const MonthlyEventsChart = () => {
     (sum, stat) => sum + stat.count,
     0
   );
-
-  if (filteredTotalEvents === 0) {
-    return (
-      <ChartEmptyState
-        title="No Events Data"
-        description="Add some events to see your monthly activity"
-      />
-    );
-  }
 
   // Format month data for chart
   const chartData = currentYearMonthlyStats.map((stat) => ({

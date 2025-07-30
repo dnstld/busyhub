@@ -2,7 +2,6 @@
 
 import {
   ChartContainer,
-  ChartEmptyState,
   ChartFilter,
   ChartHeader,
   ChartSummaryStats,
@@ -232,15 +231,6 @@ const EventAnalyticsChart = () => {
     }
     return null;
   };
-
-  if (totalEvents === 0) {
-    return (
-      <ChartEmptyState
-        title="No Events Data"
-        description="Add some events to see your analytics charts"
-      />
-    );
-  }
 
   return (
     <ChartContainer>
