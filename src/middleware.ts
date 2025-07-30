@@ -16,12 +16,20 @@ export default auth((req) => {
     if (isLoggedIn) {
       return NextResponse.redirect(new URL('/events', req.url));
     } else {
-      return NextResponse.next();
+      const response = NextResponse.next();
+      if (req.cookies.get('calendarAccessToken')) {
+        response.cookies.delete('calendarAccessToken');
+      }
+      return response;
     }
   }
 
   if (isEvents && !isLoggedIn) {
-    return NextResponse.redirect(new URL('/', req.url));
+    const response = NextResponse.redirect(new URL('/', req.url));
+    if (req.cookies.get('calendarAccessToken')) {
+      response.cookies.delete('calendarAccessToken');
+    }
+    return response;
   }
 
   return NextResponse.next();

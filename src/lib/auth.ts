@@ -1,4 +1,4 @@
-import { AUTH_CONFIG } from '@/constants/authConstants';
+import { AUTH_CONFIG, GOOGLE_BASIC_SCOPES } from '@/constants/authConstants';
 import NextAuth from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import Google from 'next-auth/providers/google';
@@ -6,6 +6,7 @@ import Google from 'next-auth/providers/google';
 declare module 'next-auth' {
   interface Session {
     accessToken?: string;
+    calendarAccessToken?: string;
     error?: string;
   }
 }
@@ -14,17 +15,12 @@ declare module 'next-auth/jwt' {
   interface JWT {
     accessToken?: string;
     refreshToken?: string;
+    calendarAccessToken?: string;
     accessTokenExpires?: number;
     error?: 'RefreshAccessTokenError' | 'TokenExpiredError' | 'InvalidTokenError';
   }
 }
 
-const GOOGLE_SCOPES = [
-  'openid',
-  'email', 
-  'profile',
-  'https://www.googleapis.com/auth/calendar.events.readonly'
-].join(' ');
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -33,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
       authorization: {
         params: {
-          scope: GOOGLE_SCOPES,
+          scope: GOOGLE_BASIC_SCOPES,
           access_type: 'offline',
           prompt: 'consent',
           response_type: 'code',
@@ -46,17 +42,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, account, user }) {
       if (account && user) {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Initial sign in detected, storing tokens from account');
-          console.log('Account data:', {
-            provider: account.provider,
-            type: account.type,
-            hasAccessToken: !!account.access_token,
-            hasRefreshToken: !!account.refresh_token,
-            expiresAt: account.expires_at
-          });
-        }
-
         return {
           ...token,
           accessToken: account.access_token,

@@ -1,15 +1,19 @@
+import { getCalendarAccessToken } from '@/app/actions/get-calendar-token';
 import Achievements from '@/components/presenters/achievements';
 import DailyEventsChart from '@/components/presenters/charts/daily-events-chart';
 import MonthlyEventsChart from '@/components/presenters/charts/monthly-events-chart';
 import EventAnalyticsChart from '@/components/presenters/charts/response-analytics-chart';
 import WeeklyEventsChart from '@/components/presenters/charts/weekly-events-chart';
+import ConnectStepper from '@/components/presenters/connect-stepper';
 import Heatmap from '@/components/presenters/heatmap';
 import History from '@/components/presenters/history';
 import Profile from '@/components/presenters/profile';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
 
-export default function Events() {
+export default async function Events() {
+  const calendarToken = await getCalendarAccessToken();
+
   return (
     <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-4">
       <div className="flex flex-col gap-8 lg:col-span-3">
@@ -28,6 +32,8 @@ export default function Events() {
           width={125}
           height={32}
         />
+
+        {!calendarToken && <ConnectStepper />}
 
         <Heatmap />
 
