@@ -15,21 +15,11 @@ export default auth((req) => {
   if (isHome) {
     if (isLoggedIn) {
       return NextResponse.redirect(new URL('/events', req.url));
-    } else {
-      const response = NextResponse.next();
-      if (req.cookies.get('calendarAccessToken')) {
-        response.cookies.delete('calendarAccessToken');
-      }
-      return response;
     }
   }
 
   if (isEvents && !isLoggedIn) {
-    const response = NextResponse.redirect(new URL('/', req.url));
-    if (req.cookies.get('calendarAccessToken')) {
-      response.cookies.delete('calendarAccessToken');
-    }
-    return response;
+    return NextResponse.redirect(new URL('/', req.url));
   }
 
   return NextResponse.next();

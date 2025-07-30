@@ -6,7 +6,6 @@ import Google from 'next-auth/providers/google';
 declare module 'next-auth' {
   interface Session {
     accessToken?: string;
-    calendarAccessToken?: string;
     error?: string;
   }
 }
@@ -15,7 +14,6 @@ declare module 'next-auth/jwt' {
   interface JWT {
     accessToken?: string;
     refreshToken?: string;
-    calendarAccessToken?: string;
     accessTokenExpires?: number;
     error?: 'RefreshAccessTokenError' | 'TokenExpiredError' | 'InvalidTokenError';
   }

@@ -11,6 +11,8 @@ import Profile from '@/components/presenters/profile';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Events() {
   const calendarToken = await getCalendarAccessToken();
 
