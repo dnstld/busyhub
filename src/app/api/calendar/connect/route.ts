@@ -1,7 +1,14 @@
+import { auth } from '@/lib/auth';
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const oauth2Client = new google.auth.OAuth2(
     process.env.AUTH_GOOGLE_ID,
     process.env.AUTH_GOOGLE_SECRET,
@@ -14,7 +21,8 @@ export async function GET() {
     include_granted_scopes: true,
     prompt: 'consent',
     state: 'calendar_permission',
-    hl: 'en'
+    hl: 'en',
+    login_hint: session.user.email,
   });
 
   return NextResponse.json({ authUrl });

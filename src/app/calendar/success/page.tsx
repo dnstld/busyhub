@@ -1,5 +1,6 @@
 'use client';
 
+import CalendarLoading from '@/components/ui/calendar-loading';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -16,8 +17,16 @@ export default function CalendarSuccessPage() {
         if (response.ok) {
           router.push('/events');
         } else {
-          console.error('Failed to store calendar tokens');
-          router.push('/events?error=calendar_auth_failed');
+          console.error(
+            'Failed to store calendar tokens',
+            response.status,
+            response.statusText
+          );
+          const errorType =
+            response.status === 401
+              ? 'calendar_auth_failed'
+              : 'calendar_auth_failed';
+          router.push(`/events?error=${errorType}`);
         }
       } catch (error) {
         console.error('Error storing calendar tokens:', error);
@@ -29,15 +38,9 @@ export default function CalendarSuccessPage() {
   }, [router]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="text-center">
-        <h1 className="text-xl font-semibold mb-2">
-          Setting up Calendar Access
-        </h1>
-        <p className="text-gray-600">
-          Please wait while we complete the setup...
-        </p>
-      </div>
-    </div>
+    <CalendarLoading
+      title="Setting up Calendar Access"
+      subtitle="Please wait while we finalize your calendar integration"
+    />
   );
 }

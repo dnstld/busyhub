@@ -42,7 +42,12 @@ export default async function Events() {
 
         {!calendarToken && <ConnectStepper />}
 
-        <div className="flex flex-col gap-8" aria-hidden={!calendarToken}>
+        <div
+          className={`flex flex-col gap-8 ${
+            !calendarToken ? 'opacity-50' : ''
+          }`}
+          aria-hidden={!calendarToken}
+        >
           <Heatmap />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

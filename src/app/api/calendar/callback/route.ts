@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
 
-    // Store the calendar tokens temporarily in cookies to be picked up by the JWT callback
     const cookieStore = await cookies();
     cookieStore.set('temp_calendar_access_token', tokens.access_token!, {
       httpOnly: true,
@@ -34,10 +33,11 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const redirectUrl = new URL('/auth/calendar-success', req.url);
+    const redirectUrl = new URL('/calendar/success', req.url);
     return NextResponse.redirect(redirectUrl);
   } catch (err) {
     console.error('OAuth callback error:', err);
-    return new NextResponse('Authentication failed', { status: 500 });
+    const redirectUrl = new URL('/events', req.url);
+    return NextResponse.redirect(redirectUrl);
   }
 }

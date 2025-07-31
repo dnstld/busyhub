@@ -42,7 +42,6 @@ export async function POST() {
       });
     }
 
-    // Clean up temporary cookies
     response.cookies.delete('temp_calendar_access_token');
     response.cookies.delete('temp_calendar_refresh_token');
 
