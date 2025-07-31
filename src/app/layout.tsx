@@ -14,9 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'BusyHub',
+  title: 'BusyHub - Made for Busy People',
   description:
     'Your calendar is more than meetings — it\'s your life, visualized',
+  keywords: [
+    'calendar heatmap',
+    'Google Calendar visualization',
+    'productivity tracker',
+    'calendar analytics',
+    'busyhub',
+    'calendar app for busy people',
+  ],
+  metadataBase: new URL('https://www.busyhub.app'),
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({
