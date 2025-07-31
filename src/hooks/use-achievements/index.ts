@@ -38,13 +38,13 @@ export const useAchievements = ({
     };
 
     const daysWith2Plus = countDaysWithMinEvents(2);
-    const daysWith4Plus = countDaysWithMinEvents(4);
+    const daysWith3Plus = countDaysWithMinEvents(3);
 
     return {
       welcome: true,
       beginner: daysWith2Plus >= 50,
       onFire: hasStreak(3, 10) && daysWith2Plus >= 100,
-      king: daysWith2Plus >= 200 && daysWith4Plus >= 50,
+      king: daysWith2Plus >= 200 && daysWith3Plus >= 50,
     };
   }, [dailyEvents]);
 };

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getCalendarAccessToken } from '@/app/actions/get-calendar-token';
 import Achievements from '@/components/presenters/achievements';
 import DailyEventsChart from '@/components/presenters/charts/daily-events-chart';
@@ -11,8 +13,6 @@ import Profile from '@/components/presenters/profile';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Events() {
   const calendarToken = await getCalendarAccessToken();
 
@@ -20,11 +20,7 @@ export default async function Events() {
     <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-4">
       <div className="flex flex-col gap-8 lg:col-span-3">
         <Profile />
-
-        <section>
-          <h2 className="mb-4">Achievements</h2>
-          <Achievements />
-        </section>
+        <Achievements />
       </div>
 
       <div className="flex flex-col gap-8 lg:min-w-max">

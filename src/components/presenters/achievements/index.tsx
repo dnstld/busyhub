@@ -34,7 +34,7 @@ const badgeData = [
     id: 'king',
     src: '/images/achievement-king.png',
     title: 'The King badge',
-    description: '200+ busy days and 50 days with 4+ events? You rule!',
+    description: '200+ busy days and 50 days with 3+ events? You rule!',
   },
 ] as const;
 
@@ -50,27 +50,31 @@ const Achievements = () => {
   });
 
   return (
-    <div className="flex gap-2">
-      {badgeData.map(({ id, src, title, description }) => (
-        <Tooltip key={id}>
-          <TooltipTrigger asChild>
-            <Image
-              key={id}
-              src={src}
-              alt={title}
-              width={48}
-              height={48}
-              className={`w-12 h-12 ${
-                !achievements[id as keyof typeof achievements]
-                  ? 'opacity-15'
-                  : ''
-              }`}
-            />
-          </TooltipTrigger>
-          <TooltipContent>{description}</TooltipContent>
-        </Tooltip>
-      ))}
-    </div>
+    <section className="flex flex-col gap-4">
+      <h2 className="text-lg font-semibold">Achievements</h2>
+
+      <div className="flex gap-2">
+        {badgeData.map(({ id, src, title, description }) => (
+          <Tooltip key={id}>
+            <TooltipTrigger asChild>
+              <Image
+                key={id}
+                src={src}
+                alt={title}
+                width={48}
+                height={48}
+                className={`w-12 h-12 ${
+                  !achievements[id as keyof typeof achievements]
+                    ? 'opacity-15'
+                    : ''
+                }`}
+              />
+            </TooltipTrigger>
+            <TooltipContent>{description}</TooltipContent>
+          </Tooltip>
+        ))}
+      </div>
+    </section>
   );
 };
 
