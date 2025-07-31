@@ -17,7 +17,15 @@ export default async function Events() {
   const calendarToken = await getCalendarAccessToken();
 
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-4">
+    <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-8">
+      <Image
+        src="./images/logo-vertical.svg"
+        alt="BusyHub Logo"
+        width={125}
+        height={32}
+        className="lg:hidden"
+      />
+
       <div className="flex flex-col gap-8 lg:col-span-3">
         <Profile />
         <Achievements />
@@ -29,27 +37,30 @@ export default async function Events() {
           alt="BusyHub Logo"
           width={125}
           height={32}
+          className="hidden lg:block"
         />
 
         {!calendarToken && <ConnectStepper />}
 
-        <Heatmap />
+        <div className="flex flex-col gap-8" aria-hidden={!calendarToken}>
+          <Heatmap />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <WeeklyEventsChart />
-          <MonthlyEventsChart />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <WeeklyEventsChart />
+            <MonthlyEventsChart />
+          </div>
+
+          <EventAnalyticsChart />
+
+          <DailyEventsChart />
+
+          <History />
         </div>
-
-        <EventAnalyticsChart />
-
-        <DailyEventsChart />
-
-        <History />
 
         <footer>
           <p className="text-sm">
             <TerminalIcon className="inline-block mr-1" aria-hidden="true" />
-            Developed by{' '}
+            Built with care by{' '}
             <a
               href="https://www.linkedin.com/in/denistoledo/"
               target="_blank"
