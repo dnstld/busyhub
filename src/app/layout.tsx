@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'BusyHub',
   description:
-    'Visualize your year calendar with a timeline that tells your story',
+    'Your calendar is more than meetings — it\'s your life, visualized',
 };
 
 export default function RootLayout({
