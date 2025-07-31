@@ -114,47 +114,63 @@ const DailyEventsChart = () => {
 
       {/* Chart */}
       <div className="p-4">
-        <div className="h-64">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={chartData}
-              margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="#3f3f46" />
-              <XAxis
-                dataKey="date"
-                tickFormatter={formatXAxisDate}
-                stroke="#71717a"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-              />
-              <YAxis
-                stroke="#71717a"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                allowDecimals={false}
-              />
-              <Tooltip content={<ChartTooltip chartType={chartType} />} />
+        {chartData.length === 0 ? (
+          // Empty state
+          <div className="h-64 flex items-center justify-center border border-zinc-800 rounded-lg bg-zinc-900/30">
+            <div className="text-center">
+              <div className="text-zinc-500 text-sm mb-1">No events found</div>
+              <div className="text-zinc-600 text-xs">
+                {filter === 'past'
+                  ? 'No past events to display'
+                  : filter === 'upcoming'
+                  ? 'No upcoming events to display'
+                  : 'No events available for this period'}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={chartData}
+                margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#3f3f46" />
+                <XAxis
+                  dataKey="date"
+                  tickFormatter={formatXAxisDate}
+                  stroke="#71717a"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis
+                  stroke="#71717a"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                  allowDecimals={false}
+                />
+                <Tooltip content={<ChartTooltip chartType={chartType} />} />
 
-              {/* Average reference line */}
-              <ReferenceLine
-                y={averageCount}
-                stroke="#71717a"
-                strokeDasharray="5 5"
-                strokeWidth={1}
-                label={{
-                  value: `Avg: ${Math.round(averageCount)}`,
-                  position: 'top',
-                  style: { fill: '#71717a', fontSize: '12px' },
-                }}
-              />
+                {/* Average reference line */}
+                <ReferenceLine
+                  y={averageCount}
+                  stroke="#71717a"
+                  strokeDasharray="5 5"
+                  strokeWidth={1}
+                  label={{
+                    value: `Avg: ${Math.round(averageCount)}`,
+                    position: 'top',
+                    style: { fill: '#71717a', fontSize: '12px' },
+                  }}
+                />
 
-              <Bar dataKey="count" fill="#a3e635" radius={[2, 2, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+                <Bar dataKey="count" fill="#a3e635" radius={[2, 2, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        )}
 
         <ChartSummaryStats
           columns={3}

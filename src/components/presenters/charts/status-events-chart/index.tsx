@@ -8,6 +8,7 @@ import {
 } from '@/components/presenters/charts/chart-components';
 import { FilterType, useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
+import { useUser } from '@/providers/user-provider';
 import { PieChart as PieChartIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
@@ -46,6 +47,7 @@ interface ChartData {
 const EventAnalyticsChart = () => {
   const events = useCalendar();
   const { sanitized } = useEvents(events);
+  const { email: userEmail } = useUser();
   const [filter, setFilter] = useState<FilterType>('all');
 
   // Get filtered events based on filter - use sanitized events (all statuses) but with valid dates
@@ -79,8 +81,6 @@ const EventAnalyticsChart = () => {
   const responseData = useMemo(() => {
     if (!events || events.length === 0) return [];
 
-    const targetEmail = 'contato@denistoledo.com.br'; // The email we're tracking
-
     // Apply time filtering to raw events for status consistency
     const now = new Date();
     let eventsToAnalyze = events;
@@ -108,7 +108,7 @@ const EventAnalyticsChart = () => {
     const responseCounts = eventsToAnalyze.reduce((acc, event) => {
       const attendees = event.attendees || [];
       const targetAttendee = attendees.find(
-        (attendee) => attendee.email === targetEmail
+        (attendee) => attendee.email === userEmail
       );
 
       if (targetAttendee && targetAttendee.responseStatus) {
@@ -124,13 +124,18 @@ const EventAnalyticsChart = () => {
       0
     );
 
-    return Object.entries(responseCounts).map(([response, count]) => ({
-      name: response.charAt(0).toUpperCase() + response.slice(1),
-      value: count,
-      color: RESPONSE_COLORS[response as AttendeeResponse],
-      percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
-    })) as ChartData[];
-  }, [events, filter]);
+    const chartData = Object.entries(responseCounts)
+      .map(([response, count]) => ({
+        name: response.charAt(0).toUpperCase() + response.slice(1),
+        value: count,
+        color: RESPONSE_COLORS[response as AttendeeResponse],
+        percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
+      }))
+      .filter((item) => item.value > 0) as ChartData[];
+
+    // Return empty array if no data after filtering
+    return chartData.length > 0 ? chartData : [];
+  }, [events, filter, userEmail]);
 
   // Duration Distribution Data
   const durationData = useMemo(() => {
@@ -158,17 +163,22 @@ const EventAnalyticsChart = () => {
       0
     );
 
-    return Object.entries(durationCounts).map(([duration, count]) => ({
-      name:
-        duration === 'short'
-          ? 'Short (<1hr)'
-          : duration === 'medium'
-          ? 'Medium (1-4hrs)'
-          : 'Long (4+hrs)',
-      value: count,
-      color: DURATION_COLORS[duration as EventDuration],
-      percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
-    })) as ChartData[];
+    const chartData = Object.entries(durationCounts)
+      .map(([duration, count]) => ({
+        name:
+          duration === 'short'
+            ? 'Short (<1hr)'
+            : duration === 'medium'
+            ? 'Medium (1-4hrs)'
+            : 'Long (4+hrs)',
+        value: count,
+        color: DURATION_COLORS[duration as EventDuration],
+        percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
+      }))
+      .filter((item) => item.value > 0) as ChartData[];
+
+    // Return empty array if no data after filtering
+    return chartData.length > 0 ? chartData : [];
   }, [filteredEvents]);
 
   // Time of Day Distribution Data
@@ -181,11 +191,11 @@ const EventAnalyticsChart = () => {
       const start = new Date(event.start.dateTime || '');
       const hour = start.getHours();
 
-      if (hour < 12) {
+      if (hour >= 6 && hour < 12) {
         timeCounts.morning++;
-      } else if (hour < 18) {
+      } else if (hour >= 12 && hour < 18) {
         timeCounts.afternoon++;
-      } else {
+      } else if (hour >= 18 || hour < 6) {
         timeCounts.evening++;
       }
     });
@@ -195,17 +205,22 @@ const EventAnalyticsChart = () => {
       0
     );
 
-    return Object.entries(timeCounts).map(([time, count]) => ({
-      name:
-        time === 'morning'
-          ? 'Morning (6-12)'
-          : time === 'afternoon'
-          ? 'Afternoon (12-18)'
-          : 'Evening (18-24)',
-      value: count,
-      color: TIME_COLORS[time as EventTime],
-      percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
-    })) as ChartData[];
+    const chartData = Object.entries(timeCounts)
+      .map(([time, count]) => ({
+        name:
+          time === 'morning'
+            ? 'Morning (6AM-12PM)'
+            : time === 'afternoon'
+            ? 'Afternoon (12PM-6PM)'
+            : 'Evening (6PM-6AM)',
+        value: count,
+        color: TIME_COLORS[time as EventTime],
+        percentage: totalCount > 0 ? Math.round((count / totalCount) * 100) : 0,
+      }))
+      .filter((item) => item.value > 0) as ChartData[];
+
+    // Return empty array if no data after filtering
+    return chartData.length > 0 ? chartData : [];
   }, [filteredEvents]);
 
   const totalEvents = filteredEvents.length;
@@ -247,15 +262,6 @@ const EventAnalyticsChart = () => {
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>
 
-      <div className="px-4 pb-2">
-        <p className="text-sm text-zinc-400">
-          Tracking responses for{' '}
-          <span className="text-lime-400 font-mono">
-            contato@denistoledo.com.br
-          </span>
-        </p>
-      </div>
-
       <div className="p-4 pt-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {/* Response Status Distribution */}
@@ -266,19 +272,36 @@ const EventAnalyticsChart = () => {
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={responseData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={20}
-                    outerRadius={50}
-                    dataKey="value"
-                  >
-                    {responseData.map((entry, index) => (
-                      <Cell key={`response-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip content={<PieChartTooltip />} />
+                  {responseData.length === 0 ? (
+                    // Empty pie chart - just the border/circle
+                    <Pie
+                      data={[{ value: 1 }]}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={20}
+                      outerRadius={50}
+                      dataKey="value"
+                      fill="transparent"
+                      stroke="#3f3f46"
+                      strokeWidth={2}
+                    />
+                  ) : (
+                    <Pie
+                      data={responseData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={20}
+                      outerRadius={50}
+                      dataKey="value"
+                    >
+                      {responseData.map((entry, index) => (
+                        <Cell key={`response-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                  )}
+                  {responseData.length > 0 && (
+                    <Tooltip content={<PieChartTooltip />} />
+                  )}
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -292,19 +315,36 @@ const EventAnalyticsChart = () => {
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={durationData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={20}
-                    outerRadius={50}
-                    dataKey="value"
-                  >
-                    {durationData.map((entry, index) => (
-                      <Cell key={`duration-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip content={<PieChartTooltip />} />
+                  {durationData.length === 0 ? (
+                    // Empty pie chart - just the border/circle
+                    <Pie
+                      data={[{ value: 1 }]}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={20}
+                      outerRadius={50}
+                      dataKey="value"
+                      fill="transparent"
+                      stroke="#3f3f46"
+                      strokeWidth={2}
+                    />
+                  ) : (
+                    <Pie
+                      data={durationData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={20}
+                      outerRadius={50}
+                      dataKey="value"
+                    >
+                      {durationData.map((entry, index) => (
+                        <Cell key={`duration-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                  )}
+                  {durationData.length > 0 && (
+                    <Tooltip content={<PieChartTooltip />} />
+                  )}
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -318,19 +358,36 @@ const EventAnalyticsChart = () => {
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={timeData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={20}
-                    outerRadius={50}
-                    dataKey="value"
-                  >
-                    {timeData.map((entry, index) => (
-                      <Cell key={`time-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip content={<PieChartTooltip />} />
+                  {timeData.length === 0 ? (
+                    // Empty pie chart - just the border/circle
+                    <Pie
+                      data={[{ value: 1 }]}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={20}
+                      outerRadius={50}
+                      dataKey="value"
+                      fill="transparent"
+                      stroke="#3f3f46"
+                      strokeWidth={2}
+                    />
+                  ) : (
+                    <Pie
+                      data={timeData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={20}
+                      outerRadius={50}
+                      dataKey="value"
+                    >
+                      {timeData.map((entry, index) => (
+                        <Cell key={`time-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                  )}
+                  {timeData.length > 0 && (
+                    <Tooltip content={<PieChartTooltip />} />
+                  )}
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -345,21 +402,25 @@ const EventAnalyticsChart = () => {
               RESPONSE STATUS
             </h4>
             <div className="space-y-1">
-              {responseData.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center justify-between text-xs"
-                >
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                    ></div>
-                    <span className="text-zinc-300">{item.name}</span>
+              {responseData.length === 0 ? (
+                <div className="text-xs text-zinc-500">No data available</div>
+              ) : (
+                responseData.map((item) => (
+                  <div
+                    key={item.name}
+                    className="flex items-center justify-between text-xs"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: item.color }}
+                      ></div>
+                      <span className="text-zinc-300">{item.name}</span>
+                    </div>
+                    <span className="text-zinc-400">{item.percentage}%</span>
                   </div>
-                  <span className="text-zinc-400">{item.percentage}%</span>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
 
@@ -367,21 +428,25 @@ const EventAnalyticsChart = () => {
           <div>
             <h4 className="text-xs font-medium text-zinc-400 mb-2">DURATION</h4>
             <div className="space-y-1">
-              {durationData.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center justify-between text-xs"
-                >
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                    ></div>
-                    <span className="text-zinc-300">{item.name}</span>
+              {durationData.length === 0 ? (
+                <div className="text-xs text-zinc-500">No data available</div>
+              ) : (
+                durationData.map((item) => (
+                  <div
+                    key={item.name}
+                    className="flex items-center justify-between text-xs"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: item.color }}
+                      ></div>
+                      <span className="text-zinc-300">{item.name}</span>
+                    </div>
+                    <span className="text-zinc-400">{item.percentage}%</span>
                   </div>
-                  <span className="text-zinc-400">{item.percentage}%</span>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
 
@@ -391,21 +456,25 @@ const EventAnalyticsChart = () => {
               TIME OF DAY
             </h4>
             <div className="space-y-1">
-              {timeData.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center justify-between text-xs"
-                >
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                    ></div>
-                    <span className="text-zinc-300">{item.name}</span>
+              {timeData.length === 0 ? (
+                <div className="text-xs text-zinc-500">No data available</div>
+              ) : (
+                timeData.map((item) => (
+                  <div
+                    key={item.name}
+                    className="flex items-center justify-between text-xs"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: item.color }}
+                      ></div>
+                      <span className="text-zinc-300">{item.name}</span>
+                    </div>
+                    <span className="text-zinc-400">{item.percentage}%</span>
                   </div>
-                  <span className="text-zinc-400">{item.percentage}%</span>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
