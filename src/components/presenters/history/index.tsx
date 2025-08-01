@@ -20,7 +20,7 @@ const History = () => {
     <ChartContainer>
       <ChartHeader
         icon={<HistoryIcon className="text-lime-400" size={20} />}
-        title="Event History"
+        title="Monthly History"
       >
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>

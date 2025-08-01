@@ -244,7 +244,7 @@ const EventAnalyticsChart = () => {
             aria-hidden="true"
           />
         }
-        title="Response Analytics"
+        title="Response Breakdown"
       >
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>
@@ -253,7 +253,7 @@ const EventAnalyticsChart = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Response Status Distribution */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-sm font-medium">Response Status</h3>
+            <h3 className="text-sm font-medium">RSVP Status</h3>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -313,9 +313,9 @@ const EventAnalyticsChart = () => {
             </div>
           </div>
 
-          {/* Duration Distribution */}
+          {/* Event Lengths */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-sm font-medium">Duration Distribution</h3>
+            <h3 className="text-sm font-medium">Event Lengths</h3>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -375,9 +375,9 @@ const EventAnalyticsChart = () => {
             </div>
           </div>
 
-          {/* Time Distribution */}
+          {/* Time of Day */}
           <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
-            <h3 className="text-sm font-medium">Time Distribution</h3>
+            <h3 className="text-sm font-medium">Time of Day</h3>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>

@@ -59,7 +59,7 @@ const WeeklyEventsChart = () => {
         icon={
           <BarChart3 className="text-lime-400" size={20} aria-hidden="true" />
         }
-        title="Daily Events"
+        title="By Weekday"
       >
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>

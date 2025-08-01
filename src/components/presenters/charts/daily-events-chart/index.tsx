@@ -6,8 +6,6 @@ import {
   ChartHeader,
   ChartSummaryStats,
   ChartTooltip,
-  ChartType,
-  ChartTypeSelector,
 } from '@/components/presenters/charts/chart-components';
 import { FilterType, useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
@@ -26,32 +24,17 @@ import {
 
 const DailyEventsChart = () => {
   const events = useCalendar();
-  const { dailyStats, weeklyStats, monthlyStats, totalEvents } =
-    useEvents(events);
-  const [chartType, setChartType] = useState<ChartType>('daily');
+  const { dailyStats, totalEvents } = useEvents(events);
   const [filter, setFilter] = useState<FilterType>('all');
 
   const getChartData = () => {
     const now = new Date();
-    let baseData;
-
-    switch (chartType) {
-      case 'weekly':
-        baseData = weeklyStats;
-        break;
-      case 'monthly':
-        baseData = monthlyStats;
-        break;
-      default:
-        baseData = dailyStats;
-        break;
-    }
 
     if (filter === 'all') {
-      return baseData;
+      return dailyStats;
     }
 
-    return baseData.filter((item) => {
+    return dailyStats.filter((item) => {
       const itemDate = new Date(item.date);
 
       if (filter === 'past') {
@@ -72,26 +55,13 @@ const DailyEventsChart = () => {
       ? chartData.reduce((acc, d) => acc + d.count, 0) / chartData.length
       : 0;
 
-  // Format date for X-axis based on chart type
+  // Format date for X-axis - always show daily format since we're showing daily data
   const formatXAxisDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    switch (chartType) {
-      case 'weekly':
-        return date.toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-        });
-      case 'monthly':
-        return date.toLocaleDateString('en-US', {
-          month: 'short',
-          year: '2-digit',
-        });
-      default:
-        return date.toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-        });
-    }
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    });
   };
 
   return (
@@ -100,17 +70,10 @@ const DailyEventsChart = () => {
         icon={
           <TrendingUp className="text-lime-400" size={20} aria-hidden="true" />
         }
-        title="Event Activity"
+        title="By Day"
       >
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>
-
-      <div className="px-4">
-        <ChartTypeSelector
-          chartType={chartType}
-          onChartTypeChange={setChartType}
-        />
-      </div>
 
       {/* Chart */}
       <div className="p-4">
@@ -151,7 +114,7 @@ const DailyEventsChart = () => {
                   axisLine={false}
                   allowDecimals={false}
                 />
-                <Tooltip content={<ChartTooltip chartType={chartType} />} />
+                <Tooltip content={<ChartTooltip chartType="daily" />} />
 
                 {/* Average reference line */}
                 <ReferenceLine
@@ -180,13 +143,7 @@ const DailyEventsChart = () => {
               value: totalEvents,
             },
             {
-              label: `Avg per ${
-                chartType === 'daily'
-                  ? 'Day'
-                  : chartType === 'weekly'
-                  ? 'Week'
-                  : 'Month'
-              }`,
+              label: 'Avg per Day',
               value:
                 chartData.length > 0
                   ? Math.round(
@@ -196,13 +153,7 @@ const DailyEventsChart = () => {
                   : 0,
             },
             {
-              label: `Peak ${
-                chartType === 'daily'
-                  ? 'Day'
-                  : chartType === 'weekly'
-                  ? 'Week'
-                  : 'Month'
-              }`,
+              label: 'Most Active Day',
               value:
                 chartData.length > 0
                   ? Math.max(...chartData.map((d) => d.count))

@@ -115,7 +115,7 @@ const MonthlyEventsChart = () => {
         icon={
           <BarChart3 className="text-lime-400" size={20} aria-hidden="true" />
         }
-        title="Monthly Activity"
+        title="By Month"
       >
         <ChartFilter filter={filter} onFilterChange={setFilter} />
       </ChartHeader>
@@ -177,7 +177,7 @@ const MonthlyEventsChart = () => {
               value: filteredTotalEvents,
             },
             {
-              label: 'Peak Month',
+              label: 'Most Active',
               value:
                 chartData.length > 0
                   ? chartData.reduce((max, current) =>
