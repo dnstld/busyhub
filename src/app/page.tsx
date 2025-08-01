@@ -7,6 +7,7 @@ import {
 
 import { login } from '@/app/actions/login';
 import HeatmapChart from '@/components/presenters/charts/heatmap-chart';
+import ParallaxImage from '@/components/ui/parallax-image';
 import Image from 'next/image';
 import fakeData from '../fake-data.json';
 
@@ -111,16 +112,7 @@ export default async function RootPage() {
         </ul>
       </section>
 
-      <section className="aspect-video max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto relative overflow-hidden rounded-lg shadow-xl">
-        <h2 className="sr-only">App Screenshot</h2>
-        <Image
-          src="/images/app.jpg"
-          fill
-          sizes="(max-width: 480px) 320px, (max-width: 768px) 448px, (max-width: 1024px) 512px, 672px"
-          className="object-cover"
-          alt="A screenshot of the app showing the heatmap panel and calendar events of the app creator, Denis Toledo"
-        />
-      </section>
+      <ParallaxImage />
 
       <section className="max-w-4xl mx-auto">
         <div className="max-w-2xl mx-auto space-y-6">

@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.13",
+    "framer-motion": "^12.23.12",
     "googleapis": "^150.0.1",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.524.0",
