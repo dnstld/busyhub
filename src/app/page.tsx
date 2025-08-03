@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import {
   BarChart2Icon,
   CalendarCheckIcon,
@@ -11,7 +14,7 @@ import ParallaxImage from '@/components/ui/parallax-image';
 import Image from 'next/image';
 import fakeData from '../fake-data.json';
 
-export default async function RootPage() {
+export default function RootPage() {
   return (
     <main className="relative z-10 px-4 py-16 space-y-16 lg:space-y-24 text-center">
       <header className="max-w-7xl mx-auto text-center space-y-8">
@@ -29,11 +32,56 @@ export default async function RootPage() {
           <p>Made for busy people</p>
         </div>
 
-        <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-          <span>Make time</span>
-          <br />
-          <span className="text-lime-400">visible</span>
-        </h2>
+        <motion.h2
+          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.3,
+                delayChildren: 0.2,
+              },
+            },
+          }}
+        >
+          <motion.span
+            className="block"
+            variants={{
+              hidden: { opacity: 0, y: 50, rotateX: -90 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                rotateX: 0,
+                transition: {
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                },
+              },
+            }}
+          >
+            Make time
+          </motion.span>
+          <motion.span
+            className="block text-lime-400"
+            variants={{
+              hidden: { opacity: 0, y: 50, rotateX: -90 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                rotateX: 0,
+                transition: {
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                },
+              },
+            }}
+          >
+            visible
+          </motion.span>
+        </motion.h2>
 
         <div className="max-w-fit mx-auto">
           <HeatmapChart
