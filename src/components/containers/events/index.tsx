@@ -10,6 +10,7 @@ import ConnectStepper from '@/components/presenters/connect-stepper';
 import Heatmap from '@/components/presenters/heatmap';
 import History from '@/components/presenters/history';
 import Profile from '@/components/presenters/profile';
+import LastUpdate from '@/components/ui/last-update';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
 
@@ -74,6 +75,7 @@ export default async function Events() {
               Denis Toledo
             </a>
           </p>
+          <LastUpdate />
         </footer>
       </div>
     </main>
