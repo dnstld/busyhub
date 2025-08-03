@@ -15,10 +15,29 @@ export async function getCalendarAccessToken() {
     const token = cookieStore.get(userSpecificKey)?.value;
     
     if (!token || token.trim().length === 0) {
+      console.log('No calendar access token found in cookies');
       return null;
     }
     
-    return token;
+    // Test if the token is valid by making a simple API call
+    try {
+      const testResponse = await fetch('https://www.googleapis.com/calendar/v3/users/me/settings/timezone', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (!testResponse.ok) {
+        console.log('Calendar token appears to be invalid or expired');
+        return null;
+      }
+      
+      console.log('Calendar token is valid');
+      return token;
+    } catch (error) {
+      console.error('Error validating calendar token:', error);
+      return null;
+    }
   } catch (error) {
     console.error('Error retrieving calendar access token:', error);
     return null;
