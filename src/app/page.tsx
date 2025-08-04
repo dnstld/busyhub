@@ -105,7 +105,9 @@ export default function RootPage() {
         </form>
 
         <h1 className="text-xl md:text-2xl lg:text-4xl max-w-2xl mx-auto leading-relaxed">
-          Your calendar is more than meetings — it's your life, visualized
+          Your calendar is more than meetings.
+          <br />
+          It's your life, visualized.
         </h1>
       </header>
 
