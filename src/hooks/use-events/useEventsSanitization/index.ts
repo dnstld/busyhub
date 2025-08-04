@@ -12,6 +12,7 @@ export interface SanitizedEvent {
   end: DateTimeTZ;
   attendees: CalendarEvent['attendees'];
   eventType: CalendarEvent['eventType'];
+  summary?: CalendarEvent['summary'];
 }
 
 export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
@@ -30,6 +31,7 @@ export const useEventsSanitization = (rawEvents: CalendarEvent[]) => {
       },
       attendees: e.attendees ?? [],
       eventType: e.eventType,
+      summary: e.summary,
     }));
   }, [rawEvents]);
 
