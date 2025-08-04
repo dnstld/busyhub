@@ -24,12 +24,15 @@ export default function Profile() {
         height={100}
         priority
       />
-      <div className="flex flex-col gap-2">
-        <p className="text-2xl font-bold">{user?.name}</p>
+      <div className="flex flex-col gap-4">
+        <div>
+          <p className="text-2xl font-bold">{user?.name}</p>
+          <p className="text-xs text-zinc-400">{user?.email}</p>
+        </div>
         <form action={logout}>
           <button
             type="submit"
-            className="group flex items-center gap-2 text-zinc-500 hover:text-zinc-400 transition-colors cursor-pointer"
+            className="group flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
           >
             <LogOutIcon
               size={16}

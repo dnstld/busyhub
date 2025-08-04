@@ -51,7 +51,7 @@ const Achievements = () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-lg font-semibold">Badges</h2>
+      <h2 className="text-lg font-semibold">Your Badges</h2>
 
       <div className="flex gap-2">
         {badgeData.map(({ id, src, title, description }) => (
