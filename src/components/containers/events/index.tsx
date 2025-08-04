@@ -1,6 +1,5 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
-import { getCalendarAccessToken } from '@/app/actions/get-calendar-token';
 import Achievements from '@/components/presenters/achievements';
 import DailyEventsChart from '@/components/presenters/charts/daily-events-chart';
 import MonthlyEventsChart from '@/components/presenters/charts/monthly-events-chart';
@@ -14,9 +13,11 @@ import LastUpdate from '@/components/ui/last-update';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
 
-export default async function Events() {
-  const calendarToken = await getCalendarAccessToken();
+interface Props {
+  hasCalendarToken: boolean;
+}
 
+export default function Events({ hasCalendarToken }: Props) {
   return (
     <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-8">
       <Image
@@ -41,13 +42,13 @@ export default async function Events() {
           className="hidden lg:block"
         />
 
-        {!calendarToken && <ConnectStepper />}
+        {!hasCalendarToken && <ConnectStepper />}
 
         <div
           className={`flex flex-col gap-8 ${
-            !calendarToken ? 'opacity-50' : ''
+            !hasCalendarToken ? 'opacity-50' : ''
           }`}
-          aria-hidden={!calendarToken}
+          aria-hidden={!hasCalendarToken}
         >
           <Heatmap />
 

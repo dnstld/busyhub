@@ -33,7 +33,7 @@ export default async function EventsPage() {
     >
       <SessionProvider>
         <EventsProvider events={events}>
-          <Events />
+          <Events hasCalendarToken={!!calendarToken} />
         </EventsProvider>
       </SessionProvider>
     </UserProvider>
