@@ -93,9 +93,16 @@ const HeatmapChart = ({
                   <Tooltip key={`${day.dateKey}-${di}`} placement="top">
                     <TooltipTrigger asChild>
                       <div
+                        role="gridcell"
+                        aria-label={formatTooltipContent(
+                          day.date,
+                          day.events as SanitizedEvent[]
+                        )}
+                        tabIndex={0}
                         className={`
                             w-[10px] xl:w-3 h-[10px] xl:h-3 rounded-xs cursor-pointer transition-all
                             hover:ring hover:ring-white hover:ring-opacity-50
+                            focus:ring focus:ring-white focus:ring-opacity-50 focus:outline-none
                             ${di === week.length - 1 ? 'mb-0' : 'mb-1'}
                             ${
                               day.isCurrentYear
