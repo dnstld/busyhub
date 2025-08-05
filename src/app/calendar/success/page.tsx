@@ -37,5 +37,5 @@ export default function CalendarSuccessPage() {
     storeCalendarTokens();
   }, [router]);
 
-  return <CalendarLoading title="Setting up Calendar Access" />;
+  return <CalendarLoading title="Setting up Calendar Access" active={false} />;
 }
