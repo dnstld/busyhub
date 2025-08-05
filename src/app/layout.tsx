@@ -15,8 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'BusyHub - Made for Busy People',
-  description:
-    'Your calendar is more than meetings — it\'s your life, visualized',
+  description: 'Your calendar is more than meetings. It\'s your life, visualized.',
   keywords: [
     'calendar heatmap',
     'Google Calendar visualization',
