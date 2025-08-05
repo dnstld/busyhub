@@ -83,12 +83,19 @@ export default function RootPage() {
           </motion.span>
         </motion.h2>
 
-        <div className="max-w-fit mx-auto">
-          <HeatmapChart
-            events={fakeData}
-            aria-label="A visual timeline of Google Calendar events displayed as a heatmap panel"
-          />
-        </div>
+        <section
+          className="max-w-fit mx-auto"
+          aria-describedby="heatmap-description"
+        >
+          <p id="heatmap-description" className="sr-only">
+            This is a visual heatmap showing a sample timeline of calendar
+            activity. Lighter squares represent days with more events. This
+            preview uses fictional data and is not interactive. Your actual
+            calendar heatmap will appear here after connecting your Google
+            Calendar.
+          </p>
+          <HeatmapChart events={fakeData} />
+        </section>
 
         <form action={login}>
           <button
@@ -189,23 +196,29 @@ export default function RootPage() {
       </section>
 
       <footer className="max-w-4xl mx-auto space-y-2 text-zinc-400">
-        <p className="text-sm">
+        <p>
           <TerminalIcon className="inline-block mr-1" aria-hidden="true" />
           Built with care by{' '}
           <a
             href="https://www.linkedin.com/in/denistoledo/"
             target="_blank"
-            className="text-lime-400 hover:underline"
+            className="text-lime-400 underline hover:opacity-50 transition-opacity font-semibold"
           >
             Denis Toledo
           </a>
         </p>
-        <p className="text-xs">
-          <a href="/privacy-policy" className="hover:underline">
+        <p className="text-sm">
+          <a
+            href="/privacy-policy"
+            className="underline hover:opacity-50 transition-opacity"
+          >
             Privacy Policy
           </a>{' '}
           |{' '}
-          <a href="/terms-and-conditions" className="hover:underline">
+          <a
+            href="/terms-and-conditions"
+            className="underline hover:opacity-50 transition-opacity"
+          >
             Terms of Service
           </a>
         </p>
