@@ -1,9 +1,8 @@
 interface Props {
   title: string;
-  subtitle: string;
 }
 
-export default function CalendarLoading({ title, subtitle }: Props) {
+export default function CalendarLoading({ title }: Props) {
   return (
     <div
       className="flex items-center justify-center min-h-screen"
@@ -52,10 +51,7 @@ export default function CalendarLoading({ title, subtitle }: Props) {
           <div className="absolute -inset-2 border-2 border-lime-500 rounded-xl opacity-30 animate-ping"></div>
         </div>
 
-        <div>
-          <h1 className="text-xl font-semibold mt-4">{title}</h1>
-          <p className="text-sm text-zinc-400 mt-2">{subtitle}</p>
-        </div>
+        <p className="font-semibold mt-4">{title}</p>
       </div>
     </div>
   );

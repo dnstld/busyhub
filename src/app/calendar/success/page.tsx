@@ -37,10 +37,5 @@ export default function CalendarSuccessPage() {
     storeCalendarTokens();
   }, [router]);
 
-  return (
-    <CalendarLoading
-      title="Setting up Calendar Access"
-      subtitle="Please wait while we finalize your calendar integration"
-    />
-  );
+  return <CalendarLoading title="Setting up Calendar Access" />;
 }
