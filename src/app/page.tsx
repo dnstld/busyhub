@@ -216,7 +216,7 @@ export default function RootPage() {
           </a>{' '}
           |{' '}
           <a
-            href="/terms-and-conditions"
+            href="/terms-of-service"
             className="underline hover:opacity-50 transition-opacity"
           >
             Terms of Service

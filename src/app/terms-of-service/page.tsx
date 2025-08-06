@@ -1,7 +1,7 @@
 import LastUpdate from '@/components/ui/last-update';
 import Image from 'next/image';
 
-export default function TermsAndConditionsPage() {
+export default function TermsOfServicePage() {
   return (
     <main className="w-full max-w-7xl lg:mx-auto p-4 gap-4">
       <Image
