@@ -19,16 +19,7 @@ export function ShareStat() {
   const { setIsSharing } = useSharing();
 
   useEffect(() => {
-    // Check if browser supports sharing files
-    if (
-      typeof navigator !== 'undefined' &&
-      typeof window !== 'undefined' &&
-      'share' in navigator &&
-      'canShare' in navigator
-    ) {
-      // We will later test actual file support after blob generation
-      setCanShareStat(true);
-    }
+    setCanShareStat(true);
   }, []);
 
   const handleShare = async () => {
@@ -58,28 +49,17 @@ export function ShareStat() {
         }, 'image/png')
       );
 
-      const file = new File([blob], 'busyhub-stats.png', { type: 'image/png' });
-
-      if (navigator.canShare?.({ files: [file] })) {
-        await navigator.share({
-          title: 'My BusyHub Calendar Stats',
-          text: 'Check out my calendar activity stats from BusyHub!',
-          files: [file],
-        });
-      } else {
-        // Fallback: download the image
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'busyhub-stats.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'busyhub-stats.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error sharing stats:', error);
-      alert('Failed to generate or share the image. Please try again.');
+      console.error('Error generating stats image:', error);
+      alert('Failed to generate the image. Please try again.');
     } finally {
       setIsGenerating(false);
       setIsSharing(false); // Reset the UI state
@@ -102,15 +82,8 @@ export function ShareStat() {
           className="group-hover:translate-x-1 transition-transform"
           aria-hidden="true"
         />
-        {isGenerating ? 'Generating...' : 'Share Stats'}
+        {isGenerating ? 'Generating...' : 'Download Stats'}
       </button>
-
-      {!canShareStat && (
-        <p className="text-xs text-zinc-400 text-center max-w-xs">
-          This feature is not supported in your browser. On mobile, it may
-          download the image instead.
-        </p>
-      )}
 
       {/* Hidden element rendered off-screen for screenshot generation */}
       <div
