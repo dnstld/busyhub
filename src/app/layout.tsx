@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -15,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'BusyHub - Made for Busy People',
-  description: 'Your calendar is more than meetings. It\'s your life, visualized.',
+  description:
+    'Your calendar is more than meetings. It\'s your life, visualized.',
   keywords: [
     'calendar heatmap',
     'Google Calendar visualization',
@@ -41,6 +43,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
