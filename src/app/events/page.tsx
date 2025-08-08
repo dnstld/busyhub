@@ -2,7 +2,7 @@ import { getCalendarAccessToken } from '@/app/actions/get-calendar-token';
 import { CalendarEvent, getEvents } from '@/app/actions/get-events';
 import Events from '@/components/containers/events';
 import { auth } from '@/lib/auth';
-import { EventsProvider, UserProvider } from '@/providers';
+import { EventsProvider, SharingProvider, UserProvider } from '@/providers';
 import SessionProvider from '@/providers/session-provider';
 
 export const dynamic = 'force-dynamic';
@@ -32,9 +32,11 @@ export default async function EventsPage() {
       }}
     >
       <SessionProvider>
-        <EventsProvider events={events}>
-          <Events hasCalendarToken={!!calendarToken} />
-        </EventsProvider>
+        <SharingProvider>
+          <EventsProvider events={events}>
+            <Events hasCalendarToken={!!calendarToken} />
+          </EventsProvider>
+        </SharingProvider>
       </SessionProvider>
     </UserProvider>
   );

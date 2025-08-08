@@ -10,6 +10,7 @@ import Heatmap from '@/components/presenters/heatmap';
 import History from '@/components/presenters/history';
 import Profile from '@/components/presenters/profile';
 import LastUpdate from '@/components/ui/last-update';
+import { ShareStat } from '@/components/ui/share-stat';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
 
@@ -51,6 +52,8 @@ export default function Events({ hasCalendarToken }: Props) {
           aria-hidden={!hasCalendarToken}
         >
           <Heatmap />
+
+          {hasCalendarToken && <ShareStat />}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <WeeklyEventsChart />
