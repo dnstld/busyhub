@@ -1,6 +1,7 @@
 'use client';
 
 import Achievements from '@/components/presenters/achievements';
+import CalendarIntelligenceWithSuspense from '@/components/presenters/calendar-intelligence/with-suspense';
 import DailyEventsChart from '@/components/presenters/charts/daily-events-chart';
 import MonthlyEventsChart from '@/components/presenters/charts/monthly-events-chart';
 import EventAnalyticsChart from '@/components/presenters/charts/response-analytics-chart';
@@ -19,7 +20,7 @@ interface Props {
 
 export default function Events({ hasCalendarToken }: Props) {
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-12 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-8">
+    <main className="grid grid-cols-1 lg:grid-cols-9 xl:grid-cols-9 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-8">
       <Image
         src="./images/logo-vertical.svg"
         alt="BusyHub Logo"
@@ -28,12 +29,12 @@ export default function Events({ hasCalendarToken }: Props) {
         className="lg:hidden"
       />
 
-      <div className="flex flex-col gap-8 lg:col-span-3">
+      <div className="flex flex-col gap-8 lg:col-span-3 xl:col-span-2">
         <Profile />
         <Achievements />
       </div>
 
-      <div className="flex flex-col gap-8 lg:min-w-max">
+      <div className="flex flex-col gap-8 lg:col-span-6 xl:col-span-7">
         <Image
           src="./images/logo-vertical.svg"
           alt="BusyHub Logo"
@@ -51,6 +52,8 @@ export default function Events({ hasCalendarToken }: Props) {
           aria-hidden={!hasCalendarToken}
         >
           <Heatmap />
+
+          <CalendarIntelligenceWithSuspense />
 
           {/* {hasCalendarToken && <ShareStat />} */}
 

@@ -71,7 +71,7 @@ export function useEventsOrganized(events: CalendarEvent[]): UseEventsResult {
  */
 export function useEventsLegacy(events: CalendarEvent[]): UseEventsLegacyResult {
   const { data, stats, query } = useEventsOrganized(events);
-  
+
   return {
     // Data properties
     sanitized: data.sanitized,

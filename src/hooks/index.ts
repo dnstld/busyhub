@@ -14,8 +14,13 @@ export type {
 
 // Individual hooks
 export { useAchievements } from './use-achievements';
+export { useAIAnalysis } from './use-ai-analysis';
 export { useDate } from './use-date';
 export { useEventsGrid } from './use-events-grid';
 export type { GridCell } from './use-events-grid';
+export { useInsight } from './use-insight';
+export type {
+    DailyTotal, HeavyStreaks, InsightData, MeetingGaps, MeetingTypes, MonthlyTrends, WeeklyDistribution, WorkdayPatterns
+} from './use-insight';
 export { intensityColors, useIntensityScale } from './use-intensity-scale';
 
