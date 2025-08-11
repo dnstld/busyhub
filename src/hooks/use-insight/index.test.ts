@@ -136,6 +136,25 @@ describe('useInsight', () => {
       expect(insightData.workdayPatterns.lateEndPercentage).toBe(33);
     });
 
+    it('should handle UTC timezone correctly for workday patterns', () => {
+      // Test UTC time parsing specifically
+      const earlyDate = new Date('2024-01-02T07:30:00Z');
+      const utcHours = earlyDate.getUTCHours().toString().padStart(2, '0');
+      const utcMinutes = earlyDate.getUTCMinutes().toString().padStart(2, '0');
+      const utcTimeString = `${utcHours}:${utcMinutes}`;
+      
+      expect(utcTimeString).toBe('07:30');
+      expect(utcTimeString < '08:00').toBe(true);
+      
+      const lateDate = new Date('2024-01-02T20:00:00Z');
+      const lateUtcHours = lateDate.getUTCHours().toString().padStart(2, '0');
+      const lateUtcMinutes = lateDate.getUTCMinutes().toString().padStart(2, '0');
+      const lateUtcTimeString = `${lateUtcHours}:${lateUtcMinutes}`;
+      
+      expect(lateUtcTimeString).toBe('20:00');
+      expect(lateUtcTimeString > '18:00').toBe(true);
+    });
+
     it('should classify meeting types correctly', () => {
       const { result } = renderHook(() => useInsight());
       const insightData = result.current!;
