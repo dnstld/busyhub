@@ -129,10 +129,10 @@ describe('useInsight', () => {
       const { result } = renderHook(() => useInsight());
       const insightData = result.current!;
       
-      expect(insightData.workdayPatterns.earlyStarts).toBe(0);
+      expect(insightData.workdayPatterns.earlyStarts).toBe(1);
       expect(insightData.workdayPatterns.lateEnds).toBe(1);
       expect(insightData.workdayPatterns.longDays).toBe(1);
-      expect(insightData.workdayPatterns.earlyStartPercentage).toBe(0);
+      expect(insightData.workdayPatterns.earlyStartPercentage).toBe(33);
       expect(insightData.workdayPatterns.lateEndPercentage).toBe(33);
     });
 

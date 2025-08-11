@@ -126,10 +126,16 @@ export const useInsight = (): InsightData | null => {
         let workdayHours = 0;
 
         if (earliestStart) {
-          earliestTime = (earliestStart as Date).toTimeString().substring(0, 5);
+          // Use UTC time to ensure consistent timezone handling
+          const utcHours = (earliestStart as Date).getUTCHours().toString().padStart(2, '0');
+          const utcMinutes = (earliestStart as Date).getUTCMinutes().toString().padStart(2, '0');
+          earliestTime = `${utcHours}:${utcMinutes}`;
         }
         if (latestEnd) {
-          latestTime = (latestEnd as Date).toTimeString().substring(0, 5);
+          // Use UTC time to ensure consistent timezone handling
+          const utcHours = (latestEnd as Date).getUTCHours().toString().padStart(2, '0');
+          const utcMinutes = (latestEnd as Date).getUTCMinutes().toString().padStart(2, '0');
+          latestTime = `${utcHours}:${utcMinutes}`;
         }
         if (earliestStart && latestEnd) {
           workdayHours =
