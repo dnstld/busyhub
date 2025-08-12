@@ -29,7 +29,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
     return (
       <section className="flex flex-col gap-4 p-6 bg-zinc-900/50 rounded-lg border border-zinc-800">
         <div className="flex items-center gap-3">
-          <Brain className="w-5 h-5 text-blue-400" />
+          <Brain className="text-lime-400" size={20} aria-hidden="true" />
           <h2 className="text-lg font-semibold">Calendar Intelligence</h2>
         </div>
         <p className="text-sm text-zinc-400">

@@ -13,22 +13,22 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 // Define colors for each chart
 const RESPONSE_COLORS = {
-  accepted: '#22c55e', // green
-  tentative: '#f59e0b', // amber
-  declined: '#ef4444', // red
-  needsAction: '#6b7280', // gray
+  accepted: '#bbf451',
+  declined: '#ee9661',
+  tentative: '#b26231',
+  needsAction: '#ffcc95',
 } as const;
 
 const DURATION_COLORS = {
-  short: '#3b82f6', // blue
-  medium: '#8b5cf6', // purple
-  long: '#f97316', // orange
+  short: '#bbf451',
+  medium: '#444939',
+  long: '#a8ad9b',
 } as const;
 
 const TIME_COLORS = {
-  morning: '#fbbf24', // yellow
-  afternoon: '#06b6d4', // cyan
-  evening: '#7c3aed', // violet
+  morning: '#bbf451',
+  afternoon: '#00daff',
+  evening: '#ff7560',
 } as const;
 
 type AttendeeResponse = keyof typeof RESPONSE_COLORS;
