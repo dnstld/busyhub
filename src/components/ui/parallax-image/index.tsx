@@ -19,23 +19,37 @@ export default function ParallaxImage() {
       <h2 className="text-4xl font-bold tracking-tight mb-8">
         Your Calendar, Beautifully Visualized
       </h2>
-
-      <div
-        ref={containerRef}
-        className="relative overflow-hidden aspect-video w-full max-w-[275px] xs:max-w-[300px] sm:max-w-lg md:max-w-xl lg:max-w-2xl rounded-sm border border-zinc-800 mx-auto"
-      >
-        <motion.div
-          style={{ y }}
-          className="absolute top-0 left-0 w-full h-[150%]"
+      <div className="w-full max-w-[275px] xs:max-w-[300px] sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
+        <div
+          className="bg-zinc-800/50 px-4 py-2 border-b border-zinc-700"
+          aria-hidden="true"
         >
-          <Image
-            src="/images/app.jpg"
-            alt="A screenshot of the app showing the heatmap panel and calendar events"
-            fill
-            className="object-cover object-top"
-            priority
-          />
-        </motion.div>
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-xs text-zinc-400 font-mono">BusyHub</span>
+          </div>
+        </div>
+        <div
+          ref={containerRef}
+          className="relative overflow-hidden aspect-video rounded-sm border border-zinc-800"
+        >
+          <motion.div
+            style={{ y }}
+            className="absolute top-0 left-0 w-full h-[150%]"
+          >
+            <Image
+              src="/images/app.jpg"
+              alt="A screenshot of the app showing the heatmap panel and calendar events"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
