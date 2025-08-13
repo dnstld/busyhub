@@ -62,8 +62,8 @@ export default function PrivacyPolicyPage() {
           <strong>Google OAuth & Calendar API:</strong> We access your calendar
           events using Google's secure OAuth 2.0 system with read-only
           permissions (scope:
-          https://www.googleapis.com/auth/calendar.readonly). Google's privacy
-          policy applies to this data access.
+          https://www.googleapis.com/auth/calendar.events.readonly). Google's
+          privacy policy applies to this data access.
         </li>
         <li>
           <strong>OpenAI API:</strong> Anonymous calendar event patterns (no

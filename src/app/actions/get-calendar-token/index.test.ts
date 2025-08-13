@@ -94,7 +94,7 @@ describe('getCalendarAccessToken', () => {
 
     expect(result).toBe(mockToken);
     expect(mockFetch).toHaveBeenCalledWith(
-      'https://www.googleapis.com/calendar/v3/users/me/settings/timezone',
+      'https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=1',
       {
         headers: {
           Authorization: `Bearer ${mockToken}`

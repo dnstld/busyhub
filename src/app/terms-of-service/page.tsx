@@ -39,7 +39,7 @@ export default function TermsOfServicePage() {
       <ul className="list-disc list-inside mb-4">
         <li>
           BusyHub will only access your calendar data with the scope
-          "https://www.googleapis.com/auth/calendar.readonly"
+          "https://www.googleapis.com/auth/calendar.events.readonly"
         </li>
         <li>
           Your calendar data will be processed in real-time and not stored
@@ -151,7 +151,9 @@ export default function TermsOfServicePage() {
           authentication
         </li>
         <li>
-          <strong>https://www.googleapis.com/auth/calendar.readonly:</strong>{' '}
+          <strong>
+            https://www.googleapis.com/auth/calendar.events.readonly:
+          </strong>{' '}
           Read-only access to your calendar events to generate visualizations
           and insights
         </li>

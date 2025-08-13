@@ -21,7 +21,7 @@ export async function getCalendarAccessToken() {
     
     // Test if the token is valid by making a simple API call
     try {
-      const testResponse = await fetch('https://www.googleapis.com/calendar/v3/users/me/settings/timezone', {
+      const testResponse = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=1', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

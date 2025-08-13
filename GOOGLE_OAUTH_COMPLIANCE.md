@@ -26,7 +26,7 @@
 
 - Explicitly lists the scopes requested:
   - `openid email profile` (for authentication)
-  - `https://www.googleapis.com/auth/calendar.readonly` (read-only calendar access)
+  - `https://www.googleapis.com/auth/calendar.events.readonly` (read-only calendar access)
 - Confirms these are the minimum required scopes
 - States we don't request write access or access to other Google services
 
@@ -45,7 +45,7 @@
    - `profile` - Basic profile information
 
 2. **Calendar Access Scope:**
-   - `https://www.googleapis.com/auth/calendar.readonly` - Read-only access to calendar events
+   - `https://www.googleapis.com/auth/calendar.events.readonly` - Read-only access to calendar events
 
 ## Third-Party Data Sharing
 
@@ -85,7 +85,7 @@
    - `openid`
    - `email`
    - `profile`
-   - `https://www.googleapis.com/auth/calendar.readonly`
+   - `https://www.googleapis.com/auth/calendar.events.readonly`
 4. **Reference Updated Policies:** Point to the specific sections about data sharing and protection mechanisms
 
 ## Key Changes Made
