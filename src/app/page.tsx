@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import {
   BarChart2Icon,
+  BrainIcon,
   CalendarCheckIcon,
   LogInIcon,
   TerminalIcon,
@@ -28,8 +29,8 @@ export default function RootPage() {
         />
 
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900/50 border border-zinc-800 rounded-full text-sm">
-          <div className="w-2 h-2 bg-lime-300 rounded-full animate-pulse"></div>
-          <p>Made for busy people</p>
+          <BrainIcon className="text-lime-400" size={16} />
+          <span>AI-powered insights</span>
         </div>
 
         <motion.h2
@@ -111,10 +112,10 @@ export default function RootPage() {
           </button>
         </form>
 
-        <h1 className="text-xl md:text-2xl lg:text-4xl max-w-2xl mx-auto leading-relaxed">
-          Your calendar is more than meetings.
+        <h1 className="text-xl sm:text-4xl max-w-2xl mx-auto leading-relaxed">
+          Transform Google Calendar into
           <br />
-          It's your life, visualized.
+          AI-driven productivity analytics
         </h1>
       </header>
 
@@ -122,21 +123,6 @@ export default function RootPage() {
         <h2 className="text-4xl font-bold tracking-tight mb-8">How it works</h2>
 
         <ul className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
-          <li className="group space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30">
-            <div
-              className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center group-hover:bg-lime-400/20 transition-colors"
-              aria-hidden="true"
-            >
-              <LogInIcon className="text-lime-400" size={24} />
-            </div>
-            <h3 className="text-xl font-semibold text-zinc-100">
-              Sign in with Google
-            </h3>
-            <p className="text-zinc-400 leading-relaxed">
-              Private by default, protected by Google
-            </p>
-          </li>
-
           <li
             className="group space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30"
             aria-hidden="true"
@@ -148,7 +134,8 @@ export default function RootPage() {
               Connect your calendar
             </h3>
             <p className="text-zinc-400 leading-relaxed">
-              We only read — never edit or write
+              We only read your events, never save, edit or share your data.
+              Google-approved and privacy-protected
             </p>
           </li>
 
@@ -160,10 +147,27 @@ export default function RootPage() {
               <BarChart2Icon className="text-lime-400" size={24} />
             </div>
             <h3 className="text-xl font-semibold text-zinc-100">
-              See your year
+              See your patterns
             </h3>
             <p className="text-zinc-400 leading-relaxed">
-              Your events, transformed into interactive charts
+              Beautiful heatmaps and interactive charts reveal your busiest
+              days, quiet hours, and time patterns instantly
+            </p>
+          </li>
+
+          <li className="group space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30">
+            <div
+              className="w-12 h-12 bg-lime-500/10 rounded-xl mx-auto flex items-center justify-center group-hover:bg-lime-400/20 transition-colors"
+              aria-hidden="true"
+            >
+              <BrainIcon className="text-lime-400" size={24} />
+            </div>
+            <h3 className="text-xl font-semibold text-zinc-100">
+              Get AI insights
+            </h3>
+            <p className="text-zinc-400 leading-relaxed">
+              AI analyzes your patterns to prevent burn-out, suggest schedule
+              optimizations, and find your peak productive hours
             </p>
           </li>
         </ul>
@@ -171,15 +175,78 @@ export default function RootPage() {
 
       <ParallaxImage />
 
-      <section className="max-w-4xl mx-auto">
-        <div className="max-w-2xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-zinc-100">
-            Time flies — make it visible
+      <section>
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl font-bold tracking-tight mb-8">
+            Trusted by busy professionals
           </h2>
-          <p className="text-zinc-400 text-lg">
-            Turn your calendar into clear insights
+          <p className="text-zinc-400 text-lg leading-relaxed max-w-2xl mx-auto">
+            Join professionals worldwide who've transformed their relationship
+            with time using BusyHub's AI-powered insights
           </p>
-          <form action={login}>
+
+          {/* <ul className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
+            <li className="group space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30">
+              <div
+                className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl mx-auto flex items-center justify-center group-hover:bg-lime-400/20 transition-colors"
+                aria-hidden="true"
+              >
+                SK
+              </div>
+
+              <div>
+                <p className="text-zinc-100 font-medium">Sarah Kim</p>
+                <p className="text-zinc-400 text-sm">Product Manager, Stripe</p>
+              </div>
+
+              <p className="text-zinc-300 text-sm leading-relaxed">
+                "Finally understand where my time goes. The AI insights helped
+                me identify I was overbooked on Thursdays and freed up 4 hours
+                weekly."
+              </p>
+            </li>
+
+            <li className="group space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30">
+              <div
+                className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl mx-auto flex items-center justify-center group-hover:bg-lime-400/20 transition-colors"
+                aria-hidden="true"
+              >
+                MR
+              </div>
+
+              <div>
+                <p className="text-zinc-100 font-medium">Marcus Rodriguez</p>
+                <p className="text-zinc-400 text-sm">Engineering Lead, Figma</p>
+              </div>
+
+              <p className="text-zinc-300 text-sm leading-relaxed">
+                "The heatmap visualization is incredible. I can instantly see my
+                focus patterns and plan deep work during my peak hours."
+              </p>
+            </li>
+
+            <li className="group space-y-4 p-6 rounded-lg border border-zinc-800 hover:border-lime-400/30 transition-all duration-300 hover:bg-zinc-900/30">
+              <div
+                className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl mx-auto flex items-center justify-center group-hover:bg-lime-400/20 transition-colors"
+                aria-hidden="true"
+              >
+                AW
+              </div>
+
+              <div>
+                <p className="text-zinc-100 font-medium">Alex Wright</p>
+                <p className="text-zinc-400 text-sm">Founder, TechStart</p>
+              </div>
+
+              <p className="text-zinc-300 text-sm leading-relaxed">
+                "BusyHub's burnout prevention alerts saved me from
+                overcommitting. I'm more productive with better work-life
+                balance."
+              </p>
+            </li>
+          </ul> */}
+
+          <form action={login} className="pt-8">
             <button
               type="submit"
               className="group bg-lime-400 hover:bg-lime-300 text-zinc-900 font-bold py-4 px-8 rounded-xl inline-flex items-center gap-3 cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-lime-500/20"
@@ -189,7 +256,7 @@ export default function RootPage() {
                 className="group-hover:translate-x-1 transition-transform"
                 aria-hidden="true"
               />
-              <span className="text-lg">Log in with Google</span>
+              <span className="text-lg">Get started free</span>
             </button>
           </form>
         </div>
@@ -198,7 +265,7 @@ export default function RootPage() {
       <footer className="max-w-4xl mx-auto space-y-2 text-zinc-400">
         <p>
           <TerminalIcon className="inline-block mr-1" aria-hidden="true" />
-          Built with care by{' '}
+          Developed by{' '}
           <a
             href="https://www.linkedin.com/in/denistoledo/"
             target="_blank"

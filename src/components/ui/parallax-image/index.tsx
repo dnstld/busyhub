@@ -17,7 +17,7 @@ export default function ParallaxImage() {
   return (
     <section>
       <h2 className="text-4xl font-bold tracking-tight mb-8">
-        Your Calendar, Beautifully Visualized
+        See it in action
       </h2>
       <div className="w-full max-w-[275px] xs:max-w-[300px] sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
         <div
@@ -39,11 +39,11 @@ export default function ParallaxImage() {
         >
           <motion.div
             style={{ y }}
-            className="absolute top-0 left-0 w-full h-[150%]"
+            className="absolute top-0 left-0 w-full h-[250%]"
           >
             <Image
               src="/images/app.jpg"
-              alt="A screenshot of the app showing the heatmap panel and calendar events"
+              alt="BusyHub dashboard displaying interactive calendar heatmap and productivity insights for a real user"
               fill
               className="object-cover object-top"
               priority

@@ -72,7 +72,7 @@ export default function Events({ hasCalendarToken }: Props) {
         <footer>
           <p className="text-sm">
             <TerminalIcon className="inline-block mr-1" aria-hidden="true" />
-            Built with care by{' '}
+            Developed by{' '}
             <a
               href="https://www.linkedin.com/in/denistoledo/"
               target="_blank"
