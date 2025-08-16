@@ -2,6 +2,7 @@
 
 import CalendarIntelligence from '@/components/presenters/calendar-intelligence';
 import { useInsight } from '@/hooks/use-insight';
+import { useCalendar } from '@/providers/events-provider';
 import { useCallback, useEffect, useState } from 'react';
 
 interface CalendarIntelligenceContainerProps {
@@ -12,12 +13,28 @@ function CalendarIntelligenceContainer({
   onAnalysisGenerated,
 }: CalendarIntelligenceContainerProps) {
   const insightData = useInsight();
+  const events = useCalendar();
   const [analysis, setAnalysis] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const hasCalendarToken = events !== null;
+
   const generateAnalysis = useCallback(async () => {
-    if (!insightData?.aiPrompt || isLoading) return;
+    if (isLoading) return;
+
+    let promptToUse: string;
+
+    if (insightData?.aiPrompt) {
+      // Normal case: user has events, use the generated AI prompt
+      promptToUse = insightData.aiPrompt;
+    } else if (hasCalendarToken && !insightData) {
+      // Special case: user has calendar connected but no events
+      promptToUse = 'Act as a productivity and time management consultant. The user has successfully connected their calendar but currently has no scheduled events or meetings for this time period. Write a natural, encouraging paragraph that acknowledges their fresh start and provides practical guidance. Focus on the opportunity for intentional planning, time blocking for deep work, and building sustainable scheduling habits. Suggest starting with personal time blocks, gradual meeting scheduling, and protecting focused work periods. Avoid lists or bullet points. Keep it conversational, under 500 characters, and inspiring for someone beginning their organized calendar journey.';
+    } else {
+      // No calendar token or other edge case
+      return;
+    }
 
     setIsLoading(true);
     setError(null);
@@ -28,7 +45,7 @@ function CalendarIntelligenceContainer({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: insightData.aiPrompt }),
+        body: JSON.stringify({ prompt: promptToUse }),
       });
 
       if (!response.ok) {
@@ -51,14 +68,15 @@ function CalendarIntelligenceContainer({
     } finally {
       setIsLoading(false);
     }
-  }, [insightData?.aiPrompt, isLoading, onAnalysisGenerated]);
+  }, [hasCalendarToken, insightData, isLoading, onAnalysisGenerated]);
 
   useEffect(() => {
-    // Auto-generate analysis when insight data is available
-    if (insightData && !analysis && !isLoading) {
+    // Auto-generate analysis when conditions are met
+    if (hasCalendarToken && !analysis && !isLoading) {
+      // Either has insightData (events) or doesn't (empty calendar) - both should trigger analysis
       generateAnalysis();
     }
-  }, [insightData, analysis, isLoading, generateAnalysis]);
+  }, [hasCalendarToken, insightData, analysis, isLoading, generateAnalysis]);
   return (
     <CalendarIntelligence
       insightData={insightData}
@@ -66,6 +84,7 @@ function CalendarIntelligenceContainer({
       isLoading={isLoading}
       error={error}
       onGenerateAnalysis={generateAnalysis}
+      hasCalendarToken={hasCalendarToken}
     />
   );
 }

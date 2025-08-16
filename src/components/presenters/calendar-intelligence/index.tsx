@@ -10,6 +10,7 @@ interface CalendarIntelligenceProps {
   isLoading: boolean;
   error: string | null;
   onGenerateAnalysis: () => void;
+  hasCalendarToken: boolean;
 }
 
 const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
@@ -18,14 +19,26 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
   isLoading,
   error,
   onGenerateAnalysis,
+  hasCalendarToken,
 }) => {
   useEffect(() => {
-    if (insightData && !analysis && !isLoading && !error) {
+    if (hasCalendarToken && !insightData && !analysis && !isLoading && !error) {
+      // Calendar connected but no events - generate analysis for empty calendar
+      onGenerateAnalysis();
+    } else if (insightData && !analysis && !isLoading && !error) {
+      // Calendar connected with events - generate normal analysis
       onGenerateAnalysis();
     }
-  }, [insightData, analysis, isLoading, error, onGenerateAnalysis]);
+  }, [
+    hasCalendarToken,
+    insightData,
+    analysis,
+    isLoading,
+    error,
+    onGenerateAnalysis,
+  ]);
 
-  if (!insightData) {
+  if (!hasCalendarToken) {
     return (
       <section className="flex flex-col gap-4 p-6 bg-zinc-900/50 rounded-lg border border-zinc-800">
         <div className="flex items-center gap-3">
