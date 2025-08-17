@@ -22,12 +22,14 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
   hasCalendarToken,
 }) => {
   useEffect(() => {
-    if (hasCalendarToken && !insightData && !analysis && !isLoading && !error) {
-      // Calendar connected but no events - generate analysis for empty calendar
-      onGenerateAnalysis();
-    } else if (insightData && !analysis && !isLoading && !error) {
-      // Calendar connected with events - generate normal analysis
-      onGenerateAnalysis();
+    if (hasCalendarToken && !analysis && !isLoading && !error) {
+      if (!insightData) {
+        // Calendar connected but no events - generate analysis for empty calendar
+        onGenerateAnalysis();
+      } else {
+        // Calendar connected with events - generate normal analysis
+        onGenerateAnalysis();
+      }
     }
   }, [
     hasCalendarToken,
@@ -60,7 +62,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
         <h2 className="text-lg font-semibold">Calendar Intelligence</h2>
       </div>
 
-      {error && (
+      {error && hasCalendarToken && (
         <div className="p-3 bg-red-900/20 border border-red-700/50 rounded-lg">
           <div className="flex items-center gap-2 text-red-400">
             <AlertCircle
@@ -79,7 +81,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
         </div>
       )}
 
-      {isLoading && !analysis && !error && (
+      {isLoading && !analysis && !error && hasCalendarToken && (
         <div role="status" className="animate-pulse">
           <div className="h-2 bg-zinc-700 rounded-full w-[95%] mb-2.5"></div>
           <div className="h-2 bg-zinc-700 rounded-full w-full mb-2.5"></div>
@@ -90,7 +92,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
         </div>
       )}
 
-      {analysis && (
+      {analysis && hasCalendarToken && (
         <p className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line break-words max-w-full overflow-hidden">
           {analysis}
         </p>

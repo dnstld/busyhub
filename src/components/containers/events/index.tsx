@@ -53,7 +53,9 @@ export default function Events({ hasCalendarToken }: Props) {
         >
           <Heatmap />
 
-          <CalendarIntelligenceWithSuspense />
+          <CalendarIntelligenceWithSuspense
+            hasCalendarToken={hasCalendarToken}
+          />
 
           {/* {hasCalendarToken && <ShareStat />} */}
 
