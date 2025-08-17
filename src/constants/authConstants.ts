@@ -14,6 +14,7 @@ export const AUTH_CONFIG = {
 
 /**
  * Google OAuth scopes
+ * Note: Using user's email as calendar ID instead of 'primary' to avoid needing calendar.readonly scope
  */
 export const GOOGLE_BASIC_SCOPES = 'openid email profile';
 export const GOOGLE_CALENDAR_SCOPES = 'https://www.googleapis.com/auth/calendar.events.readonly';

@@ -5,13 +5,14 @@ import type { calendar_v3 } from 'googleapis';
 export type CalendarEvent = calendar_v3.Schema$Event;
 
 export async function getEvents(
-  accessToken: string
+  accessToken: string,
+  userEmail: string
 ): Promise<CalendarEvent[]> {
   const year = new Date().getFullYear();
   const timeMin = new Date(Date.UTC(year, 0, 1, 0, 0, 0)).toISOString();
   const timeMax = new Date(Date.UTC(year + 1, 0, 1, 0, 0, 0)).toISOString();
   const url = new URL(
-    'https://www.googleapis.com/calendar/v3/calendars/primary/events'
+    `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(userEmail)}/events`
   );
 
   url.searchParams.set('singleEvents', 'true');

@@ -14,9 +14,9 @@ export default async function EventsPage() {
 
   let events: CalendarEvent[] = [];
 
-  if (session?.user && calendarToken) {
+  if (session?.user?.email && calendarToken) {
     try {
-      events = await getEvents(calendarToken);
+      events = await getEvents(calendarToken, session.user.email);
     } catch (e) {
       console.error('Failed to fetch calendar events:', e);
       events = [];

@@ -7,6 +7,7 @@ global.fetch = mockFetch;
 
 describe('getEvents server action', () => {
   const mockAccessToken = 'mock-access-token';
+  const mockUserEmail = 'test@example.com';
   
   beforeEach(() => {
     vi.clearAllMocks();
@@ -42,7 +43,7 @@ describe('getEvents server action', () => {
       })
     });
 
-    const result = await getEvents(mockAccessToken);
+    const result = await getEvents(mockAccessToken, mockUserEmail);
 
     expect(result).toEqual(mockEvents);
     expect(mockFetch).toHaveBeenCalledTimes(1);
@@ -54,11 +55,11 @@ describe('getEvents server action', () => {
       json: vi.fn().mockResolvedValueOnce({ items: [] })
     });
 
-    await getEvents(mockAccessToken);
+    await getEvents(mockAccessToken, mockUserEmail);
 
     const [[url, options]] = mockFetch.mock.calls;
     
-    expect(url).toContain('https://www.googleapis.com/calendar/v3/calendars/primary/events');
+    expect(url).toContain(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(mockUserEmail)}/events`);
     expect(url).toContain('singleEvents=true');
     expect(url).toContain('orderBy=startTime');
     expect(url).toContain('maxResults=2500');
@@ -77,7 +78,7 @@ describe('getEvents server action', () => {
       json: vi.fn().mockResolvedValueOnce({})
     });
 
-    const result = await getEvents(mockAccessToken);
+    const result = await getEvents(mockAccessToken, mockUserEmail);
 
     expect(result).toEqual([]);
   });
@@ -88,7 +89,7 @@ describe('getEvents server action', () => {
       json: vi.fn().mockResolvedValueOnce({ items: null })
     });
 
-    const result = await getEvents(mockAccessToken);
+    const result = await getEvents(mockAccessToken, mockUserEmail);
 
     expect(result).toEqual([]);
   });
@@ -106,7 +107,7 @@ describe('getEvents server action', () => {
       json: vi.fn().mockResolvedValueOnce(mockError)
     });
 
-    await expect(getEvents(mockAccessToken)).rejects.toThrow('Invalid credentials');
+    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('Invalid credentials');
   });
 
   it('should throw generic error when no error message provided', async () => {
@@ -116,13 +117,13 @@ describe('getEvents server action', () => {
       json: vi.fn().mockResolvedValueOnce({})
     });
 
-    await expect(getEvents(mockAccessToken)).rejects.toThrow('HTTP 500');
+    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('HTTP 500');
   });
 
   it('should handle network errors', async () => {
     mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
-    await expect(getEvents(mockAccessToken)).rejects.toThrow('Network error');
+    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('Network error');
   });
 
   it('should use correct time range for current year', async () => {
@@ -134,7 +135,7 @@ describe('getEvents server action', () => {
       json: vi.fn().mockResolvedValueOnce({ items: [] })
     });
 
-    await getEvents(mockAccessToken);
+    await getEvents(mockAccessToken, mockUserEmail);
 
     const [[url]] = mockFetch.mock.calls;
     
@@ -149,6 +150,6 @@ describe('getEvents server action', () => {
       json: vi.fn().mockRejectedValueOnce(new Error('Invalid JSON'))
     });
 
-    await expect(getEvents(mockAccessToken)).rejects.toThrow('Invalid JSON');
+    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('Invalid JSON');
   });
 });
