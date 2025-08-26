@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   BarChart2Icon,
   BrainIcon,
@@ -8,6 +8,7 @@ import {
   LogInIcon,
   TerminalIcon,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 import { login } from '@/app/actions/login';
 import HeatmapChart from '@/components/presenters/charts/heatmap-chart';
@@ -16,6 +17,17 @@ import Image from 'next/image';
 import fakeData from '../fake-data.json';
 
 export default function RootPage() {
+  const words = ['visible', 'efficient', 'optimized', 'intelligent'];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [words.length]);
+
   return (
     <main className="relative z-10 px-4 py-16 space-y-16 lg:space-y-24 text-center">
       <header className="max-w-7xl mx-auto text-center space-y-8">
@@ -33,56 +45,31 @@ export default function RootPage() {
           <span>AI-powered insights</span>
         </div>
 
-        <motion.h2
+        <h2 className="sr-only">Make time visible</h2>
+
+        <div
           className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.2,
-              },
-            },
-          }}
+          aria-hidden="true"
         >
-          <motion.span
-            className="block"
-            variants={{
-              hidden: { opacity: 0, y: 50, rotateX: -90 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                rotateX: 0,
-                transition: {
-                  duration: 0.8,
+          <span className="block">Make time</span>
+          <span className="block text-lime-400">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentWordIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  duration: 0.5,
                   ease: [0.22, 1, 0.36, 1],
-                },
-              },
-            }}
-          >
-            Make time
-          </motion.span>
-          <motion.span
-            className="block text-lime-400"
-            variants={{
-              hidden: { opacity: 0, y: 50, rotateX: -90 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                rotateX: 0,
-                transition: {
-                  duration: 0.8,
-                  ease: [0.22, 1, 0.36, 1],
-                },
-              },
-            }}
-          >
-            visible
-          </motion.span>
-        </motion.h2>
+                }}
+                className="block"
+              >
+                {words[currentWordIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+        </div>
 
         <section
           className="max-w-fit mx-auto"
