@@ -1,33 +1,33 @@
 [
   {
-    "kind": "calendar#event",
-    "etag": "\"3963535356143772\"",
+    "kind": "",
+    "etag": "",
     "id": "0463825993c74c18958ee1cafe",
     "status": "confirmed",
-    "htmlLink": "https://www.google.com/calendar/event?eid=MDQ2MzgyNTk5M2M3NGMxODk1OGVlMWNhZmU=",
-    "created": "2024-11-17T08:00:00.000Z",
-    "updated": "2024-11-17T09:06:00.000Z",
+    "htmlLink": "",
+    "created": "",
+    "updated": "",
     "summary": "Awesome Meeting",
     "creator": {
-      "email": "charlie@testmail.com",
-      "self": true
+      "email": "",
+      "self": false
     },
     "organizer": {
-      "email": "trent@example.com",
-      "self": true
+      "email": "",
+      "self": false
     },
     "start": {
-      "dateTime": "2024-12-29T08:00:00+02:00",
+      "dateTime": "2025-12-29T08:00:00+02:00",
       "timeZone": "Europe/Berlin"
     },
     "end": {
-      "dateTime": "2024-12-29T09:00:00+02:00",
+      "dateTime": "2025-12-29T09:00:00+02:00",
       "timeZone": "Europe/Berlin"
     },
-    "iCalUID": "0463825993c74c18958ee1cafe@google.com",
+    "iCalUID": "",
     "sequence": 0,
     "reminders": {
-      "useDefault": true
+      "useDefault": false
     },
     "eventType": "default"
   },
@@ -37,8 +37,8 @@
     "id": "2c91a8bb3e7e4a4cbb6e515238",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MmM5MWE4YmIzZTdlNGE0Y2JiNmU1MTUyMzg=",
-    "created": "2024-11-02T12:00:00.000Z",
-    "updated": "2024-11-02T12:50:00.000Z",
+    "created": "2025-11-02T12:00:00.000Z",
+    "updated": "2025-11-02T12:50:00.000Z",
     "summary": "Brilliant Review",
     "creator": {
       "email": "mallory@mailinator.com",
@@ -49,11 +49,11 @@
       "self": true
     },
     "start": {
-      "dateTime": "2024-12-30T12:00:00+02:00",
+      "dateTime": "2025-12-30T12:00:00+02:00",
       "timeZone": "Europe/Berlin"
     },
     "end": {
-      "dateTime": "2024-12-30T13:00:00+02:00",
+      "dateTime": "2025-12-30T13:00:00+02:00",
       "timeZone": "Europe/Berlin"
     },
     "iCalUID": "2c91a8bb3e7e4a4cbb6e515238@google.com",
@@ -69,8 +69,8 @@
     "id": "345b3b571f044e5eb939758eb2",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MzQ1YjNiNTcxZjA0NGU1ZWI5Mzk3NThlYjI=",
-    "created": "2024-10-23T09:00:00.000Z",
-    "updated": "2024-10-23T10:11:00.000Z",
+    "created": "2025-10-23T09:00:00.000Z",
+    "updated": "2025-10-23T10:11:00.000Z",
     "summary": "Awesome Brainstorm",
     "creator": {
       "email": "alice@example.com",
@@ -81,11 +81,11 @@
       "self": true
     },
     "start": {
-      "dateTime": "2024-12-31T09:00:00+02:00",
+      "dateTime": "2025-12-31T09:00:00+02:00",
       "timeZone": "Europe/Berlin"
     },
     "end": {
-      "dateTime": "2024-12-31T10:00:00+02:00",
+      "dateTime": "2025-12-31T10:00:00+02:00",
       "timeZone": "Europe/Berlin"
     },
     "iCalUID": "345b3b571f044e5eb939758eb2@google.com",
@@ -101,8 +101,8 @@
     "id": "926a2827dc784189939fdf7200",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=OTI2YTI4MjdkYzc4NDE4OTkzOWZkZjcyMDA=",
-    "created": "2024-10-14T10:00:00.000Z",
-    "updated": "2024-10-14T10:32:00.000Z",
+    "created": "2025-10-14T10:00:00.000Z",
+    "updated": "2025-10-14T10:32:00.000Z",
     "summary": "Epic Review",
     "creator": {
       "email": "eve@example.com",
@@ -133,8 +133,8 @@
     "id": "5b450d4b238948ea995a03ebd4",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NWI0NTBkNGIyMzg5NDhlYTk5NWEwM2ViZDQ=",
-    "created": "2024-11-26T11:00:00.000Z",
-    "updated": "2024-11-26T11:21:00.000Z",
+    "created": "2025-11-26T11:00:00.000Z",
+    "updated": "2025-11-26T11:21:00.000Z",
     "summary": "Brilliant Planning",
     "creator": {
       "email": "charlie@mailinator.com",
@@ -165,8 +165,8 @@
     "id": "dd0b401c035f4861a9ceab4f62",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZGQwYjQwMWMwMzVmNDg2MWE5Y2VhYjRmNjI=",
-    "created": "2024-12-26T14:00:00.000Z",
-    "updated": "2024-12-26T14:10:00.000Z",
+    "created": "2025-12-26T14:00:00.000Z",
+    "updated": "2025-12-26T14:10:00.000Z",
     "summary": "Creative Brainstorm",
     "creator": {
       "email": "trent@testmail.com",
@@ -197,8 +197,8 @@
     "id": "de776f42aab14a93ae457f89cd",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZGU3NzZmNDJhYWIxNGE5M2FlNDU3Zjg5Y2Q=",
-    "created": "2024-12-16T15:00:00.000Z",
-    "updated": "2024-12-16T16:41:00.000Z",
+    "created": "2025-12-16T15:00:00.000Z",
+    "updated": "2025-12-16T16:41:00.000Z",
     "summary": "Brilliant Workshop",
     "creator": {
       "email": "mallory@testmail.com",
@@ -229,8 +229,8 @@
     "id": "653b0088ded74ea197cde76ad3",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NjUzYjAwODhkZWQ3NGVhMTk3Y2RlNzZhZDM=",
-    "created": "2024-10-05T10:00:00.000Z",
-    "updated": "2024-10-05T10:57:00.000Z",
+    "created": "2025-10-05T10:00:00.000Z",
+    "updated": "2025-10-05T10:57:00.000Z",
     "summary": "Brilliant Brainstorm",
     "creator": {
       "email": "mallory@mailinator.com",
@@ -261,8 +261,8 @@
     "id": "d0c2670d5af046769029f8a4d6",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZDBjMjY3MGQ1YWYwNDY3NjkwMjlmOGE0ZDY=",
-    "created": "2024-11-16T11:00:00.000Z",
-    "updated": "2024-11-16T11:27:00.000Z",
+    "created": "2025-11-16T11:00:00.000Z",
+    "updated": "2025-11-16T11:27:00.000Z",
     "summary": "Awesome Brainstorm",
     "creator": {
       "email": "mallory@example.com",
@@ -293,8 +293,8 @@
     "id": "cb67f9315cf64c3da3b2573d76",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=Y2I2N2Y5MzE1Y2Y2NGMzZGEzYjI1NzNkNzY=",
-    "created": "2024-11-20T09:00:00.000Z",
-    "updated": "2024-11-20T10:26:00.000Z",
+    "created": "2025-11-20T09:00:00.000Z",
+    "updated": "2025-11-20T10:26:00.000Z",
     "summary": "Creative Sync",
     "creator": {
       "email": "bob@mailinator.com",
@@ -325,8 +325,8 @@
     "id": "a27d97e90aa34e1d94ccd47fa6",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YTI3ZDk3ZTkwYWEzNGUxZDk0Y2NkNDdmYTY=",
-    "created": "2024-12-08T10:00:00.000Z",
-    "updated": "2024-12-08T10:03:00.000Z",
+    "created": "2025-12-08T10:00:00.000Z",
+    "updated": "2025-12-08T10:03:00.000Z",
     "summary": "Dynamic Sync",
     "creator": {
       "email": "trent@mailinator.com",
@@ -357,8 +357,8 @@
     "id": "a77f2a6a09344fc59af4438366",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YTc3ZjJhNmEwOTM0NGZjNTlhZjQ0MzgzNjY=",
-    "created": "2024-12-12T11:00:00.000Z",
-    "updated": "2024-12-12T12:09:00.000Z",
+    "created": "2025-12-12T11:00:00.000Z",
+    "updated": "2025-12-12T12:09:00.000Z",
     "summary": "Creative Sync",
     "creator": {
       "email": "trent@example.com",
@@ -389,8 +389,8 @@
     "id": "ba48827988244de08d75703ce7",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YmE0ODgyNzk4ODI0NGRlMDhkNzU3MDNjZTc=",
-    "created": "2024-11-29T10:00:00.000Z",
-    "updated": "2024-11-29T10:10:00.000Z",
+    "created": "2025-11-29T10:00:00.000Z",
+    "updated": "2025-11-29T10:10:00.000Z",
     "summary": "Exciting Review",
     "creator": {
       "email": "trent@mailinator.com",
@@ -421,8 +421,8 @@
     "id": "dba3e6a030d644d2ba1beec647",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZGJhM2U2YTAzMGQ2NDRkMmJhMWJlZWM2NDc=",
-    "created": "2024-12-20T11:00:00.000Z",
-    "updated": "2024-12-20T12:24:00.000Z",
+    "created": "2025-12-20T11:00:00.000Z",
+    "updated": "2025-12-20T12:24:00.000Z",
     "summary": "Epic Workshop",
     "creator": {
       "email": "denis@mailinator.com",
@@ -453,8 +453,8 @@
     "id": "630421f7ce404332bcda014a8a",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NjMwNDIxZjdjZTQwNDMzMmJjZGEwMTRhOGE=",
-    "created": "2024-10-26T09:00:00.000Z",
-    "updated": "2024-10-26T09:21:00.000Z",
+    "created": "2025-10-26T09:00:00.000Z",
+    "updated": "2025-10-26T09:21:00.000Z",
     "summary": "Exciting Standup",
     "creator": {
       "email": "bob@mailinator.com",
@@ -485,8 +485,8 @@
     "id": "0faa445d489b451e86043002c8",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MGZhYTQ0NWQ0ODliNDUxZTg2MDQzMDAyYzg=",
-    "created": "2024-12-20T10:00:00.000Z",
-    "updated": "2024-12-20T11:15:00.000Z",
+    "created": "2025-12-20T10:00:00.000Z",
+    "updated": "2025-12-20T11:15:00.000Z",
     "summary": "Amazing Brainstorm",
     "creator": {
       "email": "charlie@testmail.com",
@@ -549,8 +549,8 @@
     "id": "565523bff033434a9c0fb1d939",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NTY1NTIzYmZmMDMzNDM0YTljMGZiMWQ5Mzk=",
-    "created": "2024-11-23T11:00:00.000Z",
-    "updated": "2024-11-23T12:09:00.000Z",
+    "created": "2025-11-23T11:00:00.000Z",
+    "updated": "2025-11-23T12:09:00.000Z",
     "summary": "Dynamic Brainstorm",
     "creator": {
       "email": "bob@example.com",
@@ -581,8 +581,8 @@
     "id": "c3507ff4964247e091f239f0f2",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YzM1MDdmZjQ5NjQyNDdlMDkxZjIzOWYwZjI=",
-    "created": "2024-12-20T12:00:00.000Z",
-    "updated": "2024-12-20T12:03:00.000Z",
+    "created": "2025-12-20T12:00:00.000Z",
+    "updated": "2025-12-20T12:03:00.000Z",
     "summary": "Exciting Brainstorm",
     "creator": {
       "email": "denis@example.com",
@@ -613,8 +613,8 @@
     "id": "d33de23b0dd34cd693d8773f24",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZDMzZGUyM2IwZGQzNGNkNjkzZDg3NzNmMjQ=",
-    "created": "2024-12-10T10:00:00.000Z",
-    "updated": "2024-12-10T10:17:00.000Z",
+    "created": "2025-12-10T10:00:00.000Z",
+    "updated": "2025-12-10T10:17:00.000Z",
     "summary": "Exciting Brainstorm",
     "creator": {
       "email": "alice@mailinator.com",
@@ -645,8 +645,8 @@
     "id": "9c34e29acaa641d194aafdd9dd",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=OWMzNGUyOWFjYWE2NDFkMTk0YWFmZGQ5ZGQ=",
-    "created": "2024-11-08T11:00:00.000Z",
-    "updated": "2024-11-08T11:50:00.000Z",
+    "created": "2025-11-08T11:00:00.000Z",
+    "updated": "2025-11-08T11:50:00.000Z",
     "summary": "Amazing Meeting",
     "creator": {
       "email": "charlie@example.com",
@@ -677,8 +677,8 @@
     "id": "a4b07eec10dd42aa80b0b4828b",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YTRiMDdlZWMxMGRkNDJhYTgwYjBiNDgyOGI=",
-    "created": "2024-12-20T13:00:00.000Z",
-    "updated": "2024-12-20T14:53:00.000Z",
+    "created": "2025-12-20T13:00:00.000Z",
+    "updated": "2025-12-20T14:53:00.000Z",
     "summary": "Brilliant Sync",
     "creator": {
       "email": "denis@mailinator.com",
@@ -709,8 +709,8 @@
     "id": "9d70c025ae1e4f5ab526032995",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=OWQ3MGMwMjVhZTFlNGY1YWI1MjYwMzI5OTU=",
-    "created": "2024-12-25T08:00:00.000Z",
-    "updated": "2024-12-25T08:08:00.000Z",
+    "created": "2025-12-25T08:00:00.000Z",
+    "updated": "2025-12-25T08:08:00.000Z",
     "summary": "Creative Standup",
     "creator": {
       "email": "alice@testmail.com",
@@ -741,8 +741,8 @@
     "id": "8aeaedac49e64c92a0c6e1e66e",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=OGFlYWVkYWM0OWU2NGM5MmEwYzZlMWU2NmU=",
-    "created": "2024-10-27T14:00:00.000Z",
-    "updated": "2024-10-27T15:14:00.000Z",
+    "created": "2025-10-27T14:00:00.000Z",
+    "updated": "2025-10-27T15:14:00.000Z",
     "summary": "Exciting Brainstorm",
     "creator": {
       "email": "charlie@testmail.com",
@@ -773,8 +773,8 @@
     "id": "c30b9432d18747a5bc8a31ccb5",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YzMwYjk0MzJkMTg3NDdhNWJjOGEzMWNjYjU=",
-    "created": "2024-12-06T14:00:00.000Z",
-    "updated": "2024-12-06T15:12:00.000Z",
+    "created": "2025-12-06T14:00:00.000Z",
+    "updated": "2025-12-06T15:12:00.000Z",
     "summary": "Amazing Brainstorm",
     "creator": {
       "email": "trent@testmail.com",
@@ -805,8 +805,8 @@
     "id": "db5a7e780c7441d684d47e3bbf",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZGI1YTdlNzgwYzc0NDFkNjg0ZDQ3ZTNiYmY=",
-    "created": "2024-11-16T11:00:00.000Z",
-    "updated": "2024-11-16T11:32:00.000Z",
+    "created": "2025-11-16T11:00:00.000Z",
+    "updated": "2025-11-16T11:32:00.000Z",
     "summary": "Awesome Meeting",
     "creator": {
       "email": "mallory@mailinator.com",
@@ -837,8 +837,8 @@
     "id": "b53387b8541e42bc8e2c34d575",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YjUzMzg3Yjg1NDFlNDJiYzhlMmMzNGQ1NzU=",
-    "created": "2024-12-17T12:00:00.000Z",
-    "updated": "2024-12-17T12:25:00.000Z",
+    "created": "2025-12-17T12:00:00.000Z",
+    "updated": "2025-12-17T12:25:00.000Z",
     "summary": "Brilliant Standup",
     "creator": {
       "email": "eve@testmail.com",
@@ -933,8 +933,8 @@
     "id": "6777f5ebfc0b4986a62ae6a022",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=Njc3N2Y1ZWJmYzBiNDk4NmE2MmFlNmEwMjI=",
-    "created": "2024-12-10T08:00:00.000Z",
-    "updated": "2024-12-10T08:33:00.000Z",
+    "created": "2025-12-10T08:00:00.000Z",
+    "updated": "2025-12-10T08:33:00.000Z",
     "summary": "Amazing Brainstorm",
     "creator": {
       "email": "denis@example.com",
@@ -997,8 +997,8 @@
     "id": "bb569b79938842a3b21a4dc443",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YmI1NjliNzk5Mzg4NDJhM2IyMWE0ZGM0NDM=",
-    "created": "2024-11-28T10:00:00.000Z",
-    "updated": "2024-11-28T10:27:00.000Z",
+    "created": "2025-11-28T10:00:00.000Z",
+    "updated": "2025-11-28T10:27:00.000Z",
     "summary": "Creative Standup",
     "creator": {
       "email": "eve@testmail.com",
@@ -1029,8 +1029,8 @@
     "id": "25e3c627a82940d89e37035724",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MjVlM2M2MjdhODI5NDBkODllMzcwMzU3MjQ=",
-    "created": "2024-11-09T11:00:00.000Z",
-    "updated": "2024-11-09T12:21:00.000Z",
+    "created": "2025-11-09T11:00:00.000Z",
+    "updated": "2025-11-09T12:21:00.000Z",
     "summary": "Dynamic Meeting",
     "creator": {
       "email": "trent@mailinator.com",
@@ -1093,8 +1093,8 @@
     "id": "825894a51d5143b0a0f38d6af5",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ODI1ODk0YTUxZDUxNDNiMGEwZjM4ZDZhZjU=",
-    "created": "2024-11-23T11:00:00.000Z",
-    "updated": "2024-11-23T11:27:00.000Z",
+    "created": "2025-11-23T11:00:00.000Z",
+    "updated": "2025-11-23T11:27:00.000Z",
     "summary": "Exciting Standup",
     "creator": {
       "email": "bob@mailinator.com",
@@ -1125,8 +1125,8 @@
     "id": "8188aab9ecee45ffbde9930152",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ODE4OGFhYjllY2VlNDVmZmJkZTk5MzAxNTI=",
-    "created": "2024-12-07T13:00:00.000Z",
-    "updated": "2024-12-07T14:27:00.000Z",
+    "created": "2025-12-07T13:00:00.000Z",
+    "updated": "2025-12-07T14:27:00.000Z",
     "summary": "Awesome Planning",
     "creator": {
       "email": "trent@mailinator.com",
@@ -1157,8 +1157,8 @@
     "id": "551332b3a6d14327975be32175",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NTUxMzMyYjNhNmQxNDMyNzk3NWJlMzIxNzU=",
-    "created": "2024-11-09T14:00:00.000Z",
-    "updated": "2024-11-09T15:54:00.000Z",
+    "created": "2025-11-09T14:00:00.000Z",
+    "updated": "2025-11-09T15:54:00.000Z",
     "summary": "Epic Meeting",
     "creator": {
       "email": "charlie@testmail.com",
@@ -1189,8 +1189,8 @@
     "id": "2e64b948aaa84f5eaee1961acc",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MmU2NGI5NDhhYWE4NGY1ZWFlZTE5NjFhY2M=",
-    "created": "2024-11-25T08:00:00.000Z",
-    "updated": "2024-11-25T09:27:00.000Z",
+    "created": "2025-11-25T08:00:00.000Z",
+    "updated": "2025-11-25T09:27:00.000Z",
     "summary": "Creative Meeting",
     "creator": {
       "email": "bob@testmail.com",
@@ -1221,8 +1221,8 @@
     "id": "0480527f4a694d3f9b3cfbdaf8",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MDQ4MDUyN2Y0YTY5NGQzZjliM2NmYmRhZjg=",
-    "created": "2024-12-13T09:00:00.000Z",
-    "updated": "2024-12-13T10:26:00.000Z",
+    "created": "2025-12-13T09:00:00.000Z",
+    "updated": "2025-12-13T10:26:00.000Z",
     "summary": "Brilliant Workshop",
     "creator": {
       "email": "eve@mailinator.com",
@@ -1285,8 +1285,8 @@
     "id": "56b96b7b5b4945fcbcd69c9ab7",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NTZiOTZiN2I1YjQ5NDVmY2JjZDY5YzlhYjc=",
-    "created": "2024-11-17T12:00:00.000Z",
-    "updated": "2024-11-17T12:30:00.000Z",
+    "created": "2025-11-17T12:00:00.000Z",
+    "updated": "2025-11-17T12:30:00.000Z",
     "summary": "Brilliant Review",
     "creator": {
       "email": "trent@mailinator.com",
@@ -1317,8 +1317,8 @@
     "id": "d59588c8c6be416890055898a6",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZDU5NTg4YzhjNmJlNDE2ODkwMDU1ODk4YTY=",
-    "created": "2024-11-09T09:00:00.000Z",
-    "updated": "2024-11-09T10:47:00.000Z",
+    "created": "2025-11-09T09:00:00.000Z",
+    "updated": "2025-11-09T10:47:00.000Z",
     "summary": "Exciting Standup",
     "creator": {
       "email": "bob@testmail.com",
@@ -1381,8 +1381,8 @@
     "id": "e72c2ca01714462fa8d28d87e3",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZTcyYzJjYTAxNzE0NDYyZmE4ZDI4ZDg3ZTM=",
-    "created": "2024-12-28T09:00:00.000Z",
-    "updated": "2024-12-28T10:38:00.000Z",
+    "created": "2025-12-28T09:00:00.000Z",
+    "updated": "2025-12-28T10:38:00.000Z",
     "summary": "Exciting Standup",
     "creator": {
       "email": "charlie@testmail.com",
@@ -1413,8 +1413,8 @@
     "id": "0d823b0fb02d471b96a544abf5",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MGQ4MjNiMGZiMDJkNDcxYjk2YTU0NGFiZjU=",
-    "created": "2024-11-06T11:00:00.000Z",
-    "updated": "2024-11-06T11:07:00.000Z",
+    "created": "2025-11-06T11:00:00.000Z",
+    "updated": "2025-11-06T11:07:00.000Z",
     "summary": "Creative Review",
     "creator": {
       "email": "alice@testmail.com",
@@ -1445,8 +1445,8 @@
     "id": "db2872327c0a48d9bface69e7e",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZGIyODcyMzI3YzBhNDhkOWJmYWNlNjllN2U=",
-    "created": "2024-12-15T12:00:00.000Z",
-    "updated": "2024-12-15T13:37:00.000Z",
+    "created": "2025-12-15T12:00:00.000Z",
+    "updated": "2025-12-15T13:37:00.000Z",
     "summary": "Awesome Brainstorm",
     "creator": {
       "email": "eve@testmail.com",
@@ -1509,8 +1509,8 @@
     "id": "ba08ff7c77ea4ca69690dcb617",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YmEwOGZmN2M3N2VhNGNhNjk2OTBkY2I2MTc=",
-    "created": "2024-12-30T12:00:00.000Z",
-    "updated": "2024-12-30T12:44:00.000Z",
+    "created": "2025-12-30T12:00:00.000Z",
+    "updated": "2025-12-30T12:44:00.000Z",
     "summary": "Epic Planning",
     "creator": {
       "email": "denis@mailinator.com",
@@ -1573,8 +1573,8 @@
     "id": "d60032f8c1b746929e786fb7ae",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZDYwMDMyZjhjMWI3NDY5MjllNzg2ZmI3YWU=",
-    "created": "2024-11-07T11:00:00.000Z",
-    "updated": "2024-11-07T11:51:00.000Z",
+    "created": "2025-11-07T11:00:00.000Z",
+    "updated": "2025-11-07T11:51:00.000Z",
     "summary": "Creative Brainstorm",
     "creator": {
       "email": "mallory@example.com",
@@ -1605,8 +1605,8 @@
     "id": "6c6c9ea3fd4a401b9049886d58",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NmM2YzllYTNmZDRhNDAxYjkwNDk4ODZkNTg=",
-    "created": "2024-12-04T09:00:00.000Z",
-    "updated": "2024-12-04T10:12:00.000Z",
+    "created": "2025-12-04T09:00:00.000Z",
+    "updated": "2025-12-04T10:12:00.000Z",
     "summary": "Brilliant Planning",
     "creator": {
       "email": "alice@testmail.com",
@@ -1669,8 +1669,8 @@
     "id": "51ebc50dee864203a1e58beaa1",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NTFlYmM1MGRlZTg2NDIwM2ExZTU4YmVhYTE=",
-    "created": "2024-11-27T12:00:00.000Z",
-    "updated": "2024-11-27T13:28:00.000Z",
+    "created": "2025-11-27T12:00:00.000Z",
+    "updated": "2025-11-27T13:28:00.000Z",
     "summary": "Brilliant Sync",
     "creator": {
       "email": "denis@example.com",
@@ -1733,8 +1733,8 @@
     "id": "3ac635eafa264a6d8a0498e7dd",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=M2FjNjM1ZWFmYTI2NGE2ZDhhMDQ5OGU3ZGQ=",
-    "created": "2024-12-11T12:00:00.000Z",
-    "updated": "2024-12-11T12:25:00.000Z",
+    "created": "2025-12-11T12:00:00.000Z",
+    "updated": "2025-12-11T12:25:00.000Z",
     "summary": "Awesome Review",
     "creator": {
       "email": "alice@example.com",
@@ -1765,8 +1765,8 @@
     "id": "9a976c6e90b044539901108133",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=OWE5NzZjNmU5MGIwNDQ1Mzk5MDExMDgxMzM=",
-    "created": "2024-12-18T08:00:00.000Z",
-    "updated": "2024-12-18T08:07:00.000Z",
+    "created": "2025-12-18T08:00:00.000Z",
+    "updated": "2025-12-18T08:07:00.000Z",
     "summary": "Dynamic Meeting",
     "creator": {
       "email": "bob@mailinator.com",
@@ -1797,8 +1797,8 @@
     "id": "a2a68993982b4a2bab45364041",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YTJhNjg5OTM5ODJiNGEyYmFiNDUzNjQwNDE=",
-    "created": "2024-12-27T13:00:00.000Z",
-    "updated": "2024-12-27T14:17:00.000Z",
+    "created": "2025-12-27T13:00:00.000Z",
+    "updated": "2025-12-27T14:17:00.000Z",
     "summary": "Brilliant Review",
     "creator": {
       "email": "alice@mailinator.com",
@@ -1829,8 +1829,8 @@
     "id": "3b9ded474f4045d9af15fc461c",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=M2I5ZGVkNDc0ZjQwNDVkOWFmMTVmYzQ2MWM=",
-    "created": "2024-12-11T14:00:00.000Z",
-    "updated": "2024-12-11T15:21:00.000Z",
+    "created": "2025-12-11T14:00:00.000Z",
+    "updated": "2025-12-11T15:21:00.000Z",
     "summary": "Amazing Standup",
     "creator": {
       "email": "mallory@mailinator.com",
@@ -1861,8 +1861,8 @@
     "id": "9cef6db865464f3aba0ebe5a4e",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=OWNlZjZkYjg2NTQ2NGYzYWJhMGViZTVhNGU=",
-    "created": "2024-11-28T12:00:00.000Z",
-    "updated": "2024-11-28T13:24:00.000Z",
+    "created": "2025-11-28T12:00:00.000Z",
+    "updated": "2025-11-28T13:24:00.000Z",
     "summary": "Dynamic Standup",
     "creator": {
       "email": "alice@mailinator.com",
@@ -2117,8 +2117,8 @@
     "id": "c526d2f648f944dd88f9dc2715",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YzUyNmQyZjY0OGY5NDRkZDg4ZjlkYzI3MTU=",
-    "created": "2024-12-31T08:00:00.000Z",
-    "updated": "2024-12-31T09:20:00.000Z",
+    "created": "2025-12-31T08:00:00.000Z",
+    "updated": "2025-12-31T09:20:00.000Z",
     "summary": "Awesome Brainstorm",
     "creator": {
       "email": "trent@mailinator.com",
@@ -2149,8 +2149,8 @@
     "id": "eaed5fbcc1a3418bbd5b84c53b",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZWFlZDVmYmNjMWEzNDE4YmJkNWI4NGM1M2I=",
-    "created": "2024-11-30T08:00:00.000Z",
-    "updated": "2024-11-30T09:16:00.000Z",
+    "created": "2025-11-30T08:00:00.000Z",
+    "updated": "2025-11-30T09:16:00.000Z",
     "summary": "Exciting Sync",
     "creator": {
       "email": "bob@testmail.com",
@@ -2213,8 +2213,8 @@
     "id": "46b089378f134a4791834006a0",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NDZiMDg5Mzc4ZjEzNGE0NzkxODM0MDA2YTA=",
-    "created": "2024-12-31T10:00:00.000Z",
-    "updated": "2024-12-31T11:12:00.000Z",
+    "created": "2025-12-31T10:00:00.000Z",
+    "updated": "2025-12-31T11:12:00.000Z",
     "summary": "Awesome Sync",
     "creator": {
       "email": "eve@mailinator.com",
@@ -2309,8 +2309,8 @@
     "id": "85692f64315e438186b1b19cd9",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ODU2OTJmNjQzMTVlNDM4MTg2YjFiMTljZDk=",
-    "created": "2024-12-06T10:00:00.000Z",
-    "updated": "2024-12-06T11:20:00.000Z",
+    "created": "2025-12-06T10:00:00.000Z",
+    "updated": "2025-12-06T11:20:00.000Z",
     "summary": "Dynamic Review",
     "creator": {
       "email": "alice@mailinator.com",
@@ -2341,8 +2341,8 @@
     "id": "3682e7e2abc5407799d8cd5bd1",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MzY4MmU3ZTJhYmM1NDA3Nzk5ZDhjZDViZDE=",
-    "created": "2024-11-28T11:00:00.000Z",
-    "updated": "2024-11-28T11:55:00.000Z",
+    "created": "2025-11-28T11:00:00.000Z",
+    "updated": "2025-11-28T11:55:00.000Z",
     "summary": "Epic Workshop",
     "creator": {
       "email": "bob@mailinator.com",
@@ -2373,8 +2373,8 @@
     "id": "38cf8fccf799400d9b31c45fe6",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MzhjZjhmY2NmNzk5NDAwZDliMzFjNDVmZTY=",
-    "created": "2024-12-30T09:00:00.000Z",
-    "updated": "2024-12-30T09:28:00.000Z",
+    "created": "2025-12-30T09:00:00.000Z",
+    "updated": "2025-12-30T09:28:00.000Z",
     "summary": "Brilliant Planning",
     "creator": {
       "email": "trent@testmail.com",
@@ -2469,8 +2469,8 @@
     "id": "b56521b703444dac82727218fe",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YjU2NTIxYjcwMzQ0NGRhYzgyNzI3MjE4ZmU=",
-    "created": "2024-12-01T11:00:00.000Z",
-    "updated": "2024-12-01T12:08:00.000Z",
+    "created": "2025-12-01T11:00:00.000Z",
+    "updated": "2025-12-01T12:08:00.000Z",
     "summary": "Amazing Sync",
     "creator": {
       "email": "bob@testmail.com",
@@ -2501,8 +2501,8 @@
     "id": "ec6fc464dc7747738e3d955e96",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=ZWM2ZmM0NjRkYzc3NDc3MzhlM2Q5NTVlOTY=",
-    "created": "2024-12-03T13:00:00.000Z",
-    "updated": "2024-12-03T13:55:00.000Z",
+    "created": "2025-12-03T13:00:00.000Z",
+    "updated": "2025-12-03T13:55:00.000Z",
     "summary": "Epic Review",
     "creator": {
       "email": "mallory@example.com",
@@ -2597,8 +2597,8 @@
     "id": "b7a79d16c7694eaba9188203e7",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YjdhNzlkMTZjNzY5NGVhYmE5MTg4MjAzZTc=",
-    "created": "2024-12-30T13:00:00.000Z",
-    "updated": "2024-12-30T14:20:00.000Z",
+    "created": "2025-12-30T13:00:00.000Z",
+    "updated": "2025-12-30T14:20:00.000Z",
     "summary": "Creative Planning",
     "creator": {
       "email": "eve@mailinator.com",
@@ -2661,8 +2661,8 @@
     "id": "a317cefbc78447a1bb0f2d6818",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=YTMxN2NlZmJjNzg0NDdhMWJiMGYyZDY4MTg=",
-    "created": "2024-12-31T13:00:00.000Z",
-    "updated": "2024-12-31T13:51:00.000Z",
+    "created": "2025-12-31T13:00:00.000Z",
+    "updated": "2025-12-31T13:51:00.000Z",
     "summary": "Exciting Workshop",
     "creator": {
       "email": "mallory@mailinator.com",
@@ -2693,8 +2693,8 @@
     "id": "779b32e0afae4e6aa11e727efe",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=Nzc5YjMyZTBhZmFlNGU2YWExMWU3MjdlZmU=",
-    "created": "2024-12-28T14:00:00.000Z",
-    "updated": "2024-12-28T14:41:00.000Z",
+    "created": "2025-12-28T14:00:00.000Z",
+    "updated": "2025-12-28T14:41:00.000Z",
     "summary": "Awesome Standup",
     "creator": {
       "email": "denis@example.com",
@@ -2757,8 +2757,8 @@
     "id": "6613efffb19d4358a5673244f4",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NjYxM2VmZmZiMTlkNDM1OGE1NjczMjQ0ZjQ=",
-    "created": "2024-12-27T10:00:00.000Z",
-    "updated": "2024-12-27T11:41:00.000Z",
+    "created": "2025-12-27T10:00:00.000Z",
+    "updated": "2025-12-27T11:41:00.000Z",
     "summary": "Dynamic Standup",
     "creator": {
       "email": "trent@testmail.com",
@@ -2789,8 +2789,8 @@
     "id": "7e3b387f0d7048f9815511399f",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=N2UzYjM4N2YwZDcwNDhmOTgxNTUxMTM5OWY=",
-    "created": "2024-12-15T11:00:00.000Z",
-    "updated": "2024-12-15T12:00:00.000Z",
+    "created": "2025-12-15T11:00:00.000Z",
+    "updated": "2025-12-15T12:00:00.000Z",
     "summary": "Amazing Review",
     "creator": {
       "email": "trent@testmail.com",
@@ -2821,8 +2821,8 @@
     "id": "c84e52e1420540e882b8fb2848",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=Yzg0ZTUyZTE0MjA1NDBlODgyYjhmYjI4NDg=",
-    "created": "2024-12-22T08:00:00.000Z",
-    "updated": "2024-12-22T09:31:00.000Z",
+    "created": "2025-12-22T08:00:00.000Z",
+    "updated": "2025-12-22T09:31:00.000Z",
     "summary": "Amazing Sync",
     "creator": {
       "email": "trent@example.com",
@@ -3077,8 +3077,8 @@
     "id": "1e6b8b0220834287963745944b",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MWU2YjhiMDIyMDgzNDI4Nzk2Mzc0NTk0NGI=",
-    "created": "2024-12-27T13:00:00.000Z",
-    "updated": "2024-12-27T13:45:00.000Z",
+    "created": "2025-12-27T13:00:00.000Z",
+    "updated": "2025-12-27T13:45:00.000Z",
     "summary": "Brilliant Workshop",
     "creator": {
       "email": "alice@example.com",
@@ -3141,8 +3141,8 @@
     "id": "5ea5af9f55934a0197c1c3a781",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NWVhNWFmOWY1NTkzNGEwMTk3YzFjM2E3ODE=",
-    "created": "2024-12-23T12:00:00.000Z",
-    "updated": "2024-12-23T12:59:00.000Z",
+    "created": "2025-12-23T12:00:00.000Z",
+    "updated": "2025-12-23T12:59:00.000Z",
     "summary": "Epic Brainstorm",
     "creator": {
       "email": "mallory@mailinator.com",
@@ -3205,8 +3205,8 @@
     "id": "0ce9717399dc4a19831920e204",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MGNlOTcxNzM5OWRjNGExOTgzMTkyMGUyMDQ=",
-    "created": "2024-12-22T09:00:00.000Z",
-    "updated": "2024-12-22T09:40:00.000Z",
+    "created": "2025-12-22T09:00:00.000Z",
+    "updated": "2025-12-22T09:40:00.000Z",
     "summary": "Amazing Meeting",
     "creator": {
       "email": "charlie@testmail.com",
@@ -3333,8 +3333,8 @@
     "id": "6e978525a9bf465391aab12dc5",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NmU5Nzg1MjVhOWJmNDY1MzkxYWFiMTJkYzU=",
-    "created": "2024-12-26T09:00:00.000Z",
-    "updated": "2024-12-26T09:22:00.000Z",
+    "created": "2025-12-26T09:00:00.000Z",
+    "updated": "2025-12-26T09:22:00.000Z",
     "summary": "Brilliant Brainstorm",
     "creator": {
       "email": "eve@testmail.com",
@@ -3429,8 +3429,8 @@
     "id": "8b75e4144f084e6990a36fd4f3",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=OGI3NWU0MTQ0ZjA4NGU2OTkwYTM2ZmQ0ZjM=",
-    "created": "2024-12-25T09:00:00.000Z",
-    "updated": "2024-12-25T10:40:00.000Z",
+    "created": "2025-12-25T09:00:00.000Z",
+    "updated": "2025-12-25T10:40:00.000Z",
     "summary": "Creative Meeting",
     "creator": {
       "email": "bob@mailinator.com",
