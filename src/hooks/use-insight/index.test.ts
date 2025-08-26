@@ -181,9 +181,9 @@ describe('useInsight', () => {
       const { result } = renderHook(() => useInsight());
       const insightData = result.current!;
       
-      expect(insightData.aiPrompt).toContain('Analyze this calendar data as a productivity consultant');
+      expect(insightData.aiPrompt).toContain('Act as a productivity and time management consultant');
       expect(insightData.aiPrompt).toContain('2024 Daily Meeting Totals:');
-      expect(insightData.aiPrompt).toContain('Weekly Distribution:');
+      expect(insightData.aiPrompt).toContain('Weekly Distribution (Business Days Only):');
       expect(insightData.aiPrompt).toContain('Monthly Trends:');
       expect(insightData.aiPrompt).toContain('Meeting Spacing:');
       expect(insightData.aiPrompt).toContain('Workday Boundaries:');
@@ -253,6 +253,93 @@ describe('useInsight', () => {
 
       rerender();
       expect(result.current).toBe(firstResult);
+    });
+  });
+
+  describe('weekend activity analysis', () => {
+    it('should include weekend analysis when weekends are busy', () => {
+      // Create events with busy weekend activity
+      const weekendEvents = [
+        createMockSanitizedEvent('weekend1', '2024-01-06T10:00:00Z', '2024-01-06T11:00:00Z'), // Saturday
+        createMockSanitizedEvent('weekend2', '2024-01-06T15:00:00Z', '2024-01-06T16:00:00Z'), // Saturday
+        createMockSanitizedEvent('weekend3', '2024-01-07T10:00:00Z', '2024-01-07T11:00:00Z'), // Sunday
+      ];
+      
+      const weekendDailyEvents = new Map([
+        ['2024-01-06', [weekendEvents[0], weekendEvents[1]]], // Saturday with 2 meetings
+        ['2024-01-07', [weekendEvents[2]]], // Sunday with 1 meeting
+      ]);
+
+      mockUseCalendar.mockReturnValue(weekendEvents);
+      mockUseEvents.mockReturnValue({
+        confirmedEvents: weekendEvents,
+        dailyEvents: weekendDailyEvents,
+        sanitized: weekendEvents,
+        dailyStats: [],
+        totalEvents: weekendEvents.length,
+        weeklyStats: [],
+        monthlyStats: [],
+        getHistoryData: vi.fn(),
+        getEventsByDateRange: vi.fn(),
+        getEventsForDate: vi.fn(),
+        filterEventsByTimeframe: vi.fn(),
+        parseEventDate: vi.fn(),
+      });
+
+      const { result } = renderHook(() => useInsight());
+      const insightData = result.current!;
+
+      // Should detect busy weekend
+      expect(insightData.weeklyDistribution.weekendActivity.isBusy).toBe(true);
+      expect(insightData.weeklyDistribution.weekendActivity.saturday).toBe(2);
+      expect(insightData.weeklyDistribution.weekendActivity.sunday).toBe(1);
+      expect(insightData.weeklyDistribution.weekendActivity.total).toBe(3);
+      
+      // AI prompt should allow weekend mentions
+      expect(insightData.aiPrompt).toContain('you may also mention weekend activity');
+      expect(insightData.aiPrompt).toContain('Weekend Activity (Notable)');
+    });
+
+    it('should not include weekend analysis when weekends are light', () => {
+      // Create events with light weekend activity
+      const lightWeekendEvents = [
+        createMockSanitizedEvent('light1', '2024-01-01T10:00:00Z', '2024-01-01T11:00:00Z'), // Monday
+        createMockSanitizedEvent('light2', '2024-01-06T10:00:00Z', '2024-01-06T11:00:00Z'), // Saturday - only 1 meeting
+      ];
+      
+      const lightDailyEvents = new Map([
+        ['2024-01-01', [lightWeekendEvents[0]]], // Monday
+        ['2024-01-06', [lightWeekendEvents[1]]], // Saturday with 1 meeting
+      ]);
+
+      mockUseCalendar.mockReturnValue(lightWeekendEvents);
+      mockUseEvents.mockReturnValue({
+        confirmedEvents: lightWeekendEvents,
+        dailyEvents: lightDailyEvents,
+        sanitized: lightWeekendEvents,
+        dailyStats: [],
+        totalEvents: lightWeekendEvents.length,
+        weeklyStats: [],
+        monthlyStats: [],
+        getHistoryData: vi.fn(),
+        getEventsByDateRange: vi.fn(),
+        getEventsForDate: vi.fn(),
+        filterEventsByTimeframe: vi.fn(),
+        parseEventDate: vi.fn(),
+      });
+
+      const { result } = renderHook(() => useInsight());
+      const insightData = result.current!;
+
+      // Should not detect busy weekend
+      expect(insightData.weeklyDistribution.weekendActivity.isBusy).toBe(false);
+      expect(insightData.weeklyDistribution.weekendActivity.saturday).toBe(1);
+      expect(insightData.weeklyDistribution.weekendActivity.sunday).toBe(0);
+      expect(insightData.weeklyDistribution.weekendActivity.total).toBe(1);
+      
+      // AI prompt should exclude weekend mentions
+      expect(insightData.aiPrompt).toContain('Do NOT mention weekends, Saturday, or Sunday');
+      expect(insightData.aiPrompt).not.toContain('Weekend Activity (Notable)');
     });
   });
 });

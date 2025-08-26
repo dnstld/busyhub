@@ -20,6 +20,12 @@ export interface WeeklyDistribution {
   lightestDay: string;
   heaviestCount: number;
   lightestCount: number;
+  weekendActivity: {
+    saturday: number;
+    sunday: number;
+    total: number;
+    isBusy: boolean;
+  };
 }
 
 export interface MonthlyTrends {
@@ -180,16 +186,38 @@ export const useInsight = (): InsightData | null => {
         weekdayTotals[dayOfWeek] += day.meetingCount;
       });
 
-      const maxDay = weekdayTotals.indexOf(Math.max(...weekdayTotals));
-      const minDay = weekdayTotals.indexOf(Math.min(...weekdayTotals));
+      // Only consider weekdays (Monday-Friday) for heaviest/lightest analysis
+      // Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5
+      const weekdayOnlyTotals = weekdayTotals.slice(1, 6); // Extract Mon-Fri
+      const weekdayOnlyNames = weekdayNames.slice(1, 6); // Extract Mon-Fri names
+      
+      const maxCount = Math.max(...weekdayOnlyTotals);
+      const minCount = Math.min(...weekdayOnlyTotals);
+      
+      const maxDayIndex = weekdayOnlyTotals.indexOf(maxCount);
+      const minDayIndex = weekdayOnlyTotals.indexOf(minCount);
+
+      // Calculate weekend activity
+      const saturdayMeetings = weekdayTotals[6]; // Saturday index
+      const sundayMeetings = weekdayTotals[0]; // Sunday index
+      const totalWeekendMeetings = saturdayMeetings + sundayMeetings;
+      
+      // Consider weekends "busy" if they have 3+ meetings total or any single day has 2+ meetings
+      const isWeekendBusy = totalWeekendMeetings >= 3 || saturdayMeetings >= 2 || sundayMeetings >= 2;
 
       return {
         weekdayTotals,
         weekdayNames,
-        heaviestDay: weekdayNames[maxDay],
-        lightestDay: weekdayNames[minDay],
-        heaviestCount: weekdayTotals[maxDay],
-        lightestCount: weekdayTotals[minDay],
+        heaviestDay: weekdayOnlyNames[maxDayIndex],
+        lightestDay: weekdayOnlyNames[minDayIndex],
+        heaviestCount: maxCount,
+        lightestCount: minCount,
+        weekendActivity: {
+          saturday: saturdayMeetings,
+          sunday: sundayMeetings,
+          total: totalWeekendMeetings,
+          isBusy: isWeekendBusy,
+        },
       };
     };
 
@@ -429,7 +457,23 @@ export const useInsight = (): InsightData | null => {
     );
 
     const currentYear = new Date().getFullYear();
-    const aiPrompt = `Act as a productivity and time management consultant.Analyze this calendar data as a productivity consultant. Write a natural, flowing paragraph that's pleasant to read. Focus on key patterns like meeting density, overload streaks, and work boundaries. Give practical advice in a conversational tone. Avoid lists, bullet points, or line breaks. Keep it under 500 characters and make it enjoyable to read.
+    
+    // Generate base prompt focusing on weekdays
+    let weekendInstructions = 'Do NOT mention weekends, Saturday, or Sunday in your analysis. Only discuss Monday through Friday patterns.';
+    let weekendAnalysisSection = '';
+    
+    // Include weekend analysis only if weekends are significantly busy
+    if (weeklyDistribution.weekendActivity.isBusy) {
+      weekendInstructions = 'Focus primarily on Monday-Friday patterns, but you may also mention weekend activity since there\'s significant weekend meeting activity that could impact work-life balance.';
+      weekendAnalysisSection = `
+
+🌅 Weekend Activity (Notable):
+• Saturday: ${weeklyDistribution.weekendActivity.saturday} meetings
+• Sunday: ${weeklyDistribution.weekendActivity.sunday} meetings
+• Total weekend meetings: ${weeklyDistribution.weekendActivity.total}`;
+    }
+    
+    const aiPrompt = `Act as a productivity and time management consultant. Analyze this calendar data focusing primarily on business day patterns (Monday-Friday). Write a natural, flowing paragraph that's pleasant to read. Focus on weekday meeting density, workload distribution across business days, and work-life boundaries. ${weekendInstructions} Give practical advice in a conversational tone. Avoid lists, bullet points, or line breaks. Keep it under 500 characters and make it enjoyable to read.
 
 📊 ${currentYear} Daily Meeting Totals:
 ${dailyTotals
@@ -441,16 +485,16 @@ ${dailyTotals
 
 🔍 Deep Pattern Analysis:
 
-📅 Weekly Distribution:
-• Heaviest day: ${weeklyDistribution.heaviestDay} (${
+📅 Weekly Distribution (Business Days Only):
+• Heaviest weekday: ${weeklyDistribution.heaviestDay} (${
       weeklyDistribution.heaviestCount
     } total meetings)
-• Lightest day: ${weeklyDistribution.lightestDay} (${
+• Lightest weekday: ${weeklyDistribution.lightestDay} (${
       weeklyDistribution.lightestCount
     } total meetings)
 • Distribution: ${weeklyDistribution.weekdayNames
       .map((day, i) => `${day.slice(0, 3)}: ${weeklyDistribution.weekdayTotals[i]}`)
-      .join(', ')}
+      .join(', ')}${weekendAnalysisSection}
 
 📈 Monthly Trends:
 • 6-month trend: ${monthlyTrends.trend}
