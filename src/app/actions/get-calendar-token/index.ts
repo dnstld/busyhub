@@ -1,4 +1,5 @@
-import { auth } from '@/lib/auth';
+import { auth } from '@/auth/next';
+import { createKey } from '@/utils/create-key';
 import { cookies } from 'next/headers';
 
 export async function getCalendarAccessToken() {
@@ -10,9 +11,8 @@ export async function getCalendarAccessToken() {
     }
 
     const cookieStore = await cookies();
-    
-    const userSpecificKey = `calendar_token_${session.user.email.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    const token = cookieStore.get(userSpecificKey)?.value;
+    const { userKey } = createKey(session.user.email);
+    const token = cookieStore.get(userKey)?.value;
     
     if (!token || token.trim().length === 0) {
       console.log('No calendar access token found in cookies');

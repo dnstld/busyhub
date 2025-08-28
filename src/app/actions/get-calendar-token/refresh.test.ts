@@ -16,7 +16,7 @@ const mockFetch = vi.fn();
 global.fetch = mockFetch;
 
 const { cookies } = await import('next/headers');
-const { auth } = await import('@/lib/auth');
+const { auth } = await import('@/auth/next');
 
 describe('getCalendarAccessToken (refresh)', () => {
   const mockCookieStore = {
@@ -70,7 +70,7 @@ describe('getCalendarAccessToken (refresh)', () => {
   it('should return access token when it exists and is valid', async () => {
     const mockAccessToken = 'valid-access-token';
     mockCookieStore.get.mockImplementation((key: string) => {
-      if (key === 'calendar_token_test_example_com') {
+      if (key === 'busyhub_calendar_token_test_example_com') {
         return { value: mockAccessToken };
       }
       return undefined;
@@ -79,7 +79,7 @@ describe('getCalendarAccessToken (refresh)', () => {
     const result = await getCalendarAccessToken();
 
     expect(result).toBe(mockAccessToken);
-    expect(mockCookieStore.get).toHaveBeenCalledWith('calendar_token_test_example_com');
+    expect(mockCookieStore.get).toHaveBeenCalledWith('busyhub_calendar_token_test_example_com');
   });
 
   it('should refresh token when access token is missing but refresh token exists', async () => {
@@ -88,10 +88,10 @@ describe('getCalendarAccessToken (refresh)', () => {
     const mockNewRefreshToken = 'new-refresh-token';
 
     mockCookieStore.get.mockImplementation((key: string) => {
-      if (key === 'calendar_token_test_example_com') {
+      if (key === 'busyhub_calendar_token_test_example_com') {
         return undefined; // No access token
       }
-      if (key === 'calendar_token_test_example_com_refresh') {
+      if (key === 'busyhub_calendar_token_test_example_com_refresh') {
         return { value: mockRefreshToken }; // Has refresh token
       }
       return undefined;
@@ -154,10 +154,10 @@ describe('getCalendarAccessToken (refresh)', () => {
     const mockNewAccessToken = 'new-access-token';
 
     mockCookieStore.get.mockImplementation((key: string) => {
-      if (key === 'calendar_token_test_example_com') {
+      if (key === 'busyhub_calendar_token_test_example_com') {
         return undefined; // No access token
       }
-      if (key === 'calendar_token_test_example_com_refresh') {
+      if (key === 'busyhub_calendar_token_test_example_com_refresh') {
         return { value: mockRefreshToken }; // Has refresh token
       }
       return undefined;
@@ -202,10 +202,10 @@ describe('getCalendarAccessToken (refresh)', () => {
     const mockRefreshToken = 'invalid-refresh-token';
 
     mockCookieStore.get.mockImplementation((key: string) => {
-      if (key === 'calendar_token_test_example_com') {
+      if (key === 'busyhub_calendar_token_test_example_com') {
         return undefined; // No access token
       }
-      if (key === 'calendar_token_test_example_com_refresh') {
+      if (key === 'busyhub_calendar_token_test_example_com_refresh') {
         return { value: mockRefreshToken }; // Has refresh token
       }
       return undefined;
@@ -241,7 +241,7 @@ describe('getCalendarAccessToken (refresh)', () => {
 
   it('should return null when access token is empty', async () => {
     mockCookieStore.get.mockImplementation((key: string) => {
-      if (key === 'calendar_token_test_example_com') {
+      if (key === 'busyhub_calendar_token_test_example_com') {
         return { value: '   ' }; // Empty access token
       }
       return undefined;
@@ -265,10 +265,10 @@ describe('getCalendarAccessToken (refresh)', () => {
     const mockRefreshToken = 'valid-refresh-token';
 
     mockCookieStore.get.mockImplementation((key: string) => {
-      if (key === 'calendar_token_test_example_com') {
+      if (key === 'busyhub_calendar_token_test_example_com') {
         return undefined;
       }
-      if (key === 'calendar_token_test_example_com_refresh') {
+      if (key === 'busyhub_calendar_token_test_example_com_refresh') {
         return { value: mockRefreshToken };
       }
       return undefined;

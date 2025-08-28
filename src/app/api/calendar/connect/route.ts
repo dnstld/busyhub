@@ -1,4 +1,4 @@
-import { auth } from '@/lib/auth';
+import { auth } from '@/auth/next';
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 

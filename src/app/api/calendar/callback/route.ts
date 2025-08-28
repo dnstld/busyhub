@@ -1,4 +1,4 @@
-import { oauth2Client } from '@/lib/google';
+import { oauth2Client } from '@/auth/google';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 

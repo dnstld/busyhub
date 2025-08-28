@@ -6,7 +6,7 @@ vi.mock('@/lib/auth', () => ({
   signIn: vi.fn()
 }));
 
-const { signIn } = await import('@/lib/auth');
+const { signIn } = await import('@/auth/next');
 
 describe('login', () => {
   it('should call signIn with google provider', async () => {

@@ -1,7 +1,8 @@
 'use server';
 
+import { auth } from '@/auth/next';
 import { AUTH_CONFIG } from '@/constants/authConstants';
-import { auth } from '@/lib/auth';
+import { createKey } from '@/utils/create-key';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -13,10 +14,9 @@ export async function POST() {
     }
 
     const cookieStore = await cookies();
-    const userSpecificKey = `calendar_token_${session.user.email.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    const refreshKey = `${userSpecificKey}_refresh`;
+    const { userKey, refreshKey } = createKey(session.user.email);
     
-    const accessToken = cookieStore.get(userSpecificKey)?.value;
+    const accessToken = cookieStore.get(userKey)?.value;
     const refreshToken = cookieStore.get(refreshKey)?.value;
 
     if (!accessToken) {
@@ -26,7 +26,7 @@ export async function POST() {
     const response = NextResponse.json({ success: true });
 
     // Re-set the cookies with fresh expiration times
-    response.cookies.set(userSpecificKey, accessToken, {
+    response.cookies.set(userKey, accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       path: '/',

@@ -16,7 +16,7 @@ const mockFetch = vi.fn();
 global.fetch = mockFetch;
 
 const { cookies } = await import('next/headers');
-const { auth } = await import('@/lib/auth');
+const { auth } = await import('@/auth/next');
 
 describe('getCalendarAccessToken', () => {
   const mockCookieStore = {
@@ -69,7 +69,7 @@ describe('getCalendarAccessToken', () => {
     const result = await getCalendarAccessToken();
 
     expect(result).toBeNull();
-    expect(mockCookieStore.get).toHaveBeenCalledWith('calendar_token_test_example_com');
+    expect(mockCookieStore.get).toHaveBeenCalledWith('busyhub_calendar_token_test_example_com');
     expect(console.log).toHaveBeenCalledWith('No calendar access token found in cookies');
   });
 
@@ -151,6 +151,6 @@ describe('getCalendarAccessToken', () => {
 
     await getCalendarAccessToken();
 
-    expect(mockCookieStore.get).toHaveBeenCalledWith('calendar_token_user_test_example_domain_com');
+    expect(mockCookieStore.get).toHaveBeenCalledWith('busyhub_calendar_token_user_test_example_domain_com');
   });
 });

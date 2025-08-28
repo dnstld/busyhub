@@ -1,13 +1,15 @@
 'use server';
 
+import { auth } from '@/auth/next';
 import { AUTH_CONFIG } from '@/constants/authConstants';
-import { auth } from '@/lib/auth';
+import { createKey } from '@/utils/create-key';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function POST() {
   const session = await auth();
-  if (!session?.user) {
+  
+  if (!session?.user?.email) {
     return new NextResponse('Unauthorized', { status: 401 });
   }
 
@@ -22,9 +24,8 @@ export async function POST() {
   try {
     const response = NextResponse.json({ success: true });
 
-    const userSpecificKey = `calendar_token_${session.user.email?.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    
-    response.cookies.set(userSpecificKey, tempAccessToken, {
+    const { userKey, refreshKey } = createKey(session.user.email);
+    response.cookies.set(userKey, tempAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       path: '/',
@@ -33,7 +34,7 @@ export async function POST() {
     });
 
     if (tempRefreshToken) {
-      response.cookies.set(`${userSpecificKey}_refresh`, tempRefreshToken, {
+      response.cookies.set(refreshKey, tempRefreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         path: '/',

@@ -1,6 +1,7 @@
 'use server';
 
-import { auth } from '@/lib/auth';
+import { auth } from '@/auth/next';
+import { createKey } from '@/utils/create-key';
 import { cookies } from 'next/headers';
 
 export async function revokeCalendarAccess() {
@@ -11,10 +12,10 @@ export async function revokeCalendarAccess() {
   }
 
   const cookieStore = await cookies();
-  const userSpecificKey = `calendar_token_${session.user.email.replace(/[^a-zA-Z0-9]/g, '_')}`;
+  const { userKey, refreshKey } = createKey(session.user.email);
 
-  cookieStore.delete(userSpecificKey);
-  cookieStore.delete(`${userSpecificKey}_refresh`);
+  cookieStore.delete(userKey);
+  cookieStore.delete(refreshKey);
   
   return { success: true };
 }

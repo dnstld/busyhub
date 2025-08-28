@@ -1,4 +1,4 @@
-import { auth } from '@/lib/auth';
+import { auth } from '@/auth/next';
 import { redirect } from 'next/navigation';
 
 export const metadata = {

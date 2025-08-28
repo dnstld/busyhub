@@ -12,7 +12,7 @@ vi.mock('@/lib/auth', () => ({
 }));
 
 const { cookies } = await import('next/headers');
-const { auth } = await import('@/lib/auth');
+const { auth } = await import('@/auth/next');
 
 describe('revokeCalendarAccess', () => {
   const mockCookieStore = {
@@ -41,8 +41,8 @@ describe('revokeCalendarAccess', () => {
     const result = await revokeCalendarAccess();
 
     expect(result).toEqual({ success: true });
-    expect(mockCookieStore.delete).toHaveBeenCalledWith('calendar_token_test_example_com');
-    expect(mockCookieStore.delete).toHaveBeenCalledWith('calendar_token_test_example_com_refresh');
+    expect(mockCookieStore.delete).toHaveBeenCalledWith('busyhub_calendar_token_test_example_com');
+    expect(mockCookieStore.delete).toHaveBeenCalledWith('busyhub_calendar_token_test_example_com_refresh');
   });
 
   it('should throw error when user is not authenticated', async () => {
@@ -70,8 +70,8 @@ describe('revokeCalendarAccess', () => {
     const result = await revokeCalendarAccess();
 
     expect(result).toEqual({ success: true });
-    expect(mockCookieStore.delete).toHaveBeenCalledWith('calendar_token_user_test_example_domain_com');
-    expect(mockCookieStore.delete).toHaveBeenCalledWith('calendar_token_user_test_example_domain_com_refresh');
+    expect(mockCookieStore.delete).toHaveBeenCalledWith('busyhub_calendar_token_user_test_example_domain_com');
+    expect(mockCookieStore.delete).toHaveBeenCalledWith('busyhub_calendar_token_user_test_example_domain_com_refresh');
   });
 
   it('should handle auth errors gracefully', async () => {

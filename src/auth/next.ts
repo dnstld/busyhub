@@ -19,7 +19,6 @@ declare module 'next-auth/jwt' {
   }
 }
 
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Google({
@@ -53,14 +52,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
 
       if (!isTokenExpired(token.accessTokenExpires)) {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Token is still valid, no refresh needed');
-        }
         return token;
-      }
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Token expired or expiring soon, attempting refresh');
       }
       
       try {

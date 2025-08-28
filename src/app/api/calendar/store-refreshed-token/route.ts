@@ -1,7 +1,8 @@
 'use server';
 
+import { auth } from '@/auth/next';
 import { AUTH_CONFIG } from '@/constants/authConstants';
-import { auth } from '@/lib/auth';
+import { createKey } from '@/utils/create-key';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -18,11 +19,10 @@ export async function POST(request: NextRequest) {
     }
 
     const response = NextResponse.json({ success: true });
-    const userSpecificKey = `calendar_token_${userEmail.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    const refreshKey = `${userSpecificKey}_refresh`;
+    const { userKey, refreshKey } = createKey(userEmail);
 
     // Store the new access token
-    response.cookies.set(userSpecificKey, accessToken, {
+    response.cookies.set(userKey, accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       path: '/',

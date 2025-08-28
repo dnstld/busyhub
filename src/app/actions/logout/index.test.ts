@@ -6,7 +6,7 @@ vi.mock('@/lib/auth', () => ({
   signOut: vi.fn()
 }));
 
-const { signOut } = await import('@/lib/auth');
+const { signOut } = await import('@/auth/next');
 
 describe('logout', () => {
   it('should call signOut', async () => {

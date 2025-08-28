@@ -1,5 +1,5 @@
+import { auth } from '@/auth/next';
 import { analysisCache } from '@/lib/analysis-cache';
-import { auth } from '@/lib/auth';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 

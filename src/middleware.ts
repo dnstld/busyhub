@@ -1,5 +1,6 @@
+import { auth } from '@/auth/next';
 import { AUTH_CONFIG } from '@/constants/authConstants';
-import { auth } from '@/lib/auth';
+import { createKey } from '@/utils/create-key';
 import { NextResponse } from 'next/server';
 
 export const config = {
@@ -13,27 +14,23 @@ export default auth((req) => {
   const isEvents = pathname.startsWith('/events');
   const isHome = pathname === '/';
 
-  if (isHome) {
-    if (isLoggedIn) {
-      return NextResponse.redirect(new URL('/events', req.url));
-    }
+  if (isHome && isLoggedIn) {
+    return NextResponse.redirect(new URL('/events', req.url));
   }
 
   if (isEvents && !isLoggedIn) {
     return NextResponse.redirect(new URL('/', req.url));
   }
 
-  // If user is accessing /events and is logged in, refresh calendar cookies
   if (isEvents && isLoggedIn && req.auth?.user?.email) {
     const response = NextResponse.next();
-    const userSpecificKey = `calendar_token_${req.auth.user.email.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    const refreshKey = `${userSpecificKey}_refresh`;
+    const { userKey, refreshKey } = createKey(req.auth.user.email);
     
-    const accessToken = req.cookies.get(userSpecificKey)?.value;
+    const accessToken = req.cookies.get(userKey)?.value;
     const refreshToken = req.cookies.get(refreshKey)?.value;
-    
+
     if (accessToken) {
-      response.cookies.set(userSpecificKey, accessToken, {
+      response.cookies.set(userKey, accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         path: '/',

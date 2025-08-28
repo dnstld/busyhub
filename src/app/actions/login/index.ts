@@ -1,6 +1,6 @@
 'use server';
 
-import { signIn } from '@/lib/auth';
+import { signIn } from '@/auth/next';
 
 export const login = async () => {
   await signIn('google');

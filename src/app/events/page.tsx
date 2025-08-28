@@ -1,7 +1,7 @@
 import { getCalendarAccessToken } from '@/app/actions/get-calendar-token';
 import { CalendarEvent, getEvents } from '@/app/actions/get-events';
+import { auth } from '@/auth/next';
 import Events from '@/components/containers/events';
-import { auth } from '@/lib/auth';
 import { EventsProvider, SharingProvider, UserProvider } from '@/providers';
 import SessionProvider from '@/providers/session-provider';
 
