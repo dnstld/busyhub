@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@/auth/next';
-import { AUTH_CONFIG } from '@/constants/authConstants';
+import { AUTH_CONFIG } from '@/constants/auth-constants';
 import { createKey } from '@/utils/create-key';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';

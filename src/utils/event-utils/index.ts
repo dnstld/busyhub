@@ -1,7 +1,7 @@
 import { CalendarEvent } from '@/app/actions/get-events';
 import { SanitizedEvent } from '@/hooks/use-events/useEventsSanitization';
+import { EVENT_STATUS, FILTER_TYPES } from '../../constants/events-constants';
 import { parseEventDate } from '../date-utils';
-import { EVENT_STATUS, FILTER_TYPES } from '../event-constants';
 import { isNonEmptyString, isValidDate } from '../type-guards';
 
 export type FilterType = typeof FILTER_TYPES[keyof typeof FILTER_TYPES];

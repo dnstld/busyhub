@@ -1,10 +1,10 @@
 import { CalendarEvent } from '@/app/actions/get-events';
 import { describe, expect, it } from 'vitest';
-import { EVENT_STATUS } from '../event-constants';
+import { EVENT_STATUS } from '../../constants/events-constants';
 import {
-    hasValidDate,
-    isConfirmedEvent,
-    isValidConfirmedEvent
+  hasValidDate,
+  isConfirmedEvent,
+  isValidConfirmedEvent
 } from './index';
 
 describe('eventUtils', () => {
