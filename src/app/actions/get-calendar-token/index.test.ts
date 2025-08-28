@@ -6,9 +6,14 @@ vi.mock('next/headers', () => ({
   cookies: vi.fn()
 }));
 
-// Mock auth
-vi.mock('@/lib/auth', () => ({
+// Mock auth - use the correct import path
+vi.mock('@/auth/next', () => ({
   auth: vi.fn()
+}));
+
+// Mock the create-key utility
+vi.mock('@/utils/create-key', () => ({
+  createKey: vi.fn()
 }));
 
 // Mock fetch globally
@@ -17,6 +22,7 @@ global.fetch = mockFetch;
 
 const { cookies } = await import('next/headers');
 const { auth } = await import('@/auth/next');
+const { createKey } = await import('@/utils/create-key');
 
 describe('getCalendarAccessToken', () => {
   const mockCookieStore = {
@@ -39,6 +45,10 @@ describe('getCalendarAccessToken', () => {
     vi.clearAllMocks();
     vi.mocked(cookies).mockResolvedValue(mockCookieStore as never);
     vi.mocked(auth).mockResolvedValue(mockSession as never);
+    vi.mocked(createKey).mockReturnValue({
+      userKey: 'busyhub_calendar_token_test_example_com',
+      refreshKey: 'busyhub_calendar_token_test_example_com_refresh'
+    });
     console.log = vi.fn();
     console.error = vi.fn();
   });
@@ -151,6 +161,6 @@ describe('getCalendarAccessToken', () => {
 
     await getCalendarAccessToken();
 
-    expect(mockCookieStore.get).toHaveBeenCalledWith('busyhub_calendar_token_user_test_example_domain_com');
+    expect(mockCookieStore.get).toHaveBeenCalledWith('busyhub_calendar_token_test_example_com');
   });
 });

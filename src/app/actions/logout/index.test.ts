@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { logout } from './index';
 
-// Mock auth
-vi.mock('@/lib/auth', () => ({
+// Mock auth - use the correct import path
+vi.mock('@/auth/next', () => ({
   signOut: vi.fn()
 }));
 
