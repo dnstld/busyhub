@@ -22,7 +22,6 @@ Open http://localhost:3000
 - **Calendar Analytics**: Connects to Google Calendar and generates productivity insights
 - **Visual Heatmaps**: GitHub-style activity visualization
 - **Achievement System**: Gamified tracking with streak counters
-- **Data Export**: Share calendar insights as images
 
 ## 🛠️ Tech Stack
 

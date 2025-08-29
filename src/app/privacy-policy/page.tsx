@@ -131,15 +131,7 @@ export default function PrivacyPolicyPage() {
         </li>
       </ul>
 
-      <h2 className="text-xl font-semibold mt-8 mb-2">
-        6. Sharing Your Timeline
-      </h2>
-      <p className="mb-4">
-        Your timeline is only visible to you. There are no public links, and no
-        one else can access your calendar heatmap.
-      </p>
-
-      <h2 className="text-xl font-semibold mt-8 mb-2">7. Your Rights</h2>
+      <h2 className="text-xl font-semibold mt-8 mb-2">6. Your Rights</h2>
       <ul className="list-disc list-inside mb-4">
         <li>
           <strong>Revoke Access:</strong> You can revoke BusyHub's access to
@@ -161,7 +153,7 @@ export default function PrivacyPolicyPage() {
         </li>
       </ul>
 
-      <h2 className="text-xl font-semibold mt-8 mb-2">8. Data Retention</h2>
+      <h2 className="text-xl font-semibold mt-8 mb-2">7. Data Retention</h2>
       <p className="mb-4">
         <strong>Calendar Data:</strong> We do not retain your raw calendar data.
         It's processed in real-time and discarded after each session.
@@ -176,7 +168,7 @@ export default function PrivacyPolicyPage() {
         inactivity.
       </p>
 
-      <h2 className="text-xl font-semibold mt-8 mb-2">9. Cookies & Tracking</h2>
+      <h2 className="text-xl font-semibold mt-8 mb-2">8. Cookies & Tracking</h2>
       <p className="mb-4">We use minimal cookies and tracking:</p>
       <ul className="list-disc list-inside mb-4">
         <li>
@@ -190,14 +182,14 @@ export default function PrivacyPolicyPage() {
       </ul>
 
       <h2 className="text-xl font-semibold mt-8 mb-2">
-        10. Changes to This Policy
+        9. Changes to This Policy
       </h2>
       <p className="mb-4">
         We may occasionally update this Privacy Policy. Changes will be
         reflected by the "Last Update" date.
       </p>
 
-      <h2 className="text-xl font-semibold mt-8 mb-2">11. Contact</h2>
+      <h2 className="text-xl font-semibold mt-8 mb-2">10. Contact</h2>
       <p>
         For questions or concerns, email us at
         <a

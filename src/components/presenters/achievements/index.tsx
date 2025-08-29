@@ -8,7 +8,6 @@ import {
 import { useAchievements } from '@/hooks/use-achievements';
 import { useDate } from '@/hooks/use-date';
 import { useEvents } from '@/hooks/use-events';
-import { useSharing, useUser } from '@/providers';
 import { useCalendar } from '@/providers/events-provider';
 import Image from 'next/image';
 
@@ -43,8 +42,6 @@ const Achievements = () => {
   const events = useCalendar();
   const { dailyEvents, totalEvents } = useEvents(events);
   const { totalWeekdays } = useDate();
-  const { isSharing } = useSharing();
-  const user = useUser();
 
   const achievements = useAchievements({
     dailyEvents,
@@ -52,19 +49,13 @@ const Achievements = () => {
     totalWeekdays,
   });
 
-  const badgeTitle =
-    isSharing && user?.name ? `${user.name} Badges` : 'Your Badges';
-
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-lg font-semibold">{badgeTitle}</h2>
+      <h2 className="text-lg font-semibold">Your Badges</h2>
 
       <div className="flex gap-2">
         {badgeData.map(({ id, src, title, description }) => {
           const isEarned = achievements[id as keyof typeof achievements];
-          const tooltipContent = isSharing
-            ? `${title}: ${description}`
-            : description;
 
           return (
             <Tooltip key={id}>
@@ -78,7 +69,7 @@ const Achievements = () => {
                   className={`w-12 h-12 ${!isEarned ? 'opacity-15' : ''}`}
                 />
               </TooltipTrigger>
-              <TooltipContent>{tooltipContent}</TooltipContent>
+              <TooltipContent>{description}</TooltipContent>
             </Tooltip>
           );
         })}

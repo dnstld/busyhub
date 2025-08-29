@@ -1,13 +1,12 @@
 'use client';
 
 import { logout } from '@/app/actions/logout';
-import { useSharing, useUser } from '@/providers';
+import { useUser } from '@/providers';
 import { LogOutIcon } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Profile() {
   const user = useUser();
-  const { isSharing } = useSharing();
 
   return (
     <section
@@ -28,23 +27,21 @@ export default function Profile() {
       <div className="flex flex-col gap-4">
         <div>
           <p className="text-2xl font-bold">{user?.name}</p>
-          {!isSharing && <p className="text-xs text-zinc-400">{user?.email}</p>}
+          <p className="text-xs text-zinc-400">{user?.email}</p>
         </div>
-        {!isSharing && (
-          <form action={logout}>
-            <button
-              type="submit"
-              className="group flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
-            >
-              <LogOutIcon
-                size={16}
-                aria-hidden="true"
-                className="group-hover:translate-x-1 transition-transform"
-              />
-              Sign out
-            </button>
-          </form>
-        )}
+        <form action={logout}>
+          <button
+            type="submit"
+            className="group flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+          >
+            <LogOutIcon
+              size={16}
+              aria-hidden="true"
+              className="group-hover:translate-x-1 transition-transform"
+            />
+            Sign out
+          </button>
+        </form>
       </div>
     </section>
   );
