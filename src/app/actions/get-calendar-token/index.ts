@@ -15,7 +15,6 @@ export async function getCalendarAccessToken() {
     const token = cookieStore.get(userKey)?.value;
     
     if (!token || token.trim().length === 0) {
-      console.log('No calendar access token found in cookies');
       return null;
     }
     
@@ -28,11 +27,9 @@ export async function getCalendarAccessToken() {
       });
       
       if (!testResponse.ok) {
-        console.log('Calendar token appears to be invalid or expired');
         return null;
       }
       
-      console.log('Calendar token is valid');
       return token;
     } catch (error) {
       console.error('Error validating calendar token:', error);

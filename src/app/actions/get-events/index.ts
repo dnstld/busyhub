@@ -8,32 +8,38 @@ export async function getEvents(
   accessToken: string,
   userEmail: string
 ): Promise<CalendarEvent[]> {
-  const year = new Date().getFullYear();
-  const timeMin = new Date(Date.UTC(year, 0, 1, 0, 0, 0)).toISOString();
-  const timeMax = new Date(Date.UTC(year + 1, 0, 1, 0, 0, 0)).toISOString();
-  const url = new URL(
-    `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(userEmail)}/events`
-  );
+  try {
+    const year = new Date().getFullYear();
+    const timeMin = new Date(Date.UTC(year, 0, 1, 0, 0, 0)).toISOString();
+    const timeMax = new Date(Date.UTC(year + 1, 0, 1, 0, 0, 0)).toISOString();
+    const url = new URL(
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(userEmail)}/events`
+    );
 
-  url.searchParams.set('singleEvents', 'true');
-  url.searchParams.set('orderBy', 'startTime');
-  url.searchParams.set('timeMin', timeMin);
-  url.searchParams.set('timeMax', timeMax);
-  url.searchParams.set('maxResults', '2500');
+    url.searchParams.set('singleEvents', 'true');
+    url.searchParams.set('orderBy', 'startTime');
+    url.searchParams.set('timeMin', timeMin);
+    url.searchParams.set('timeMax', timeMax);
+    url.searchParams.set('maxResults', '2500');
 
-  const res = await fetch(url.toString(), {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
+    const res = await fetch(url.toString(), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err?.error?.message ?? `HTTP ${res.status}`);
+    if (!res.ok) {
+      const err = await res.json();
+      console.error('Failed to fetch calendar events:', err?.error?.message ?? `HTTP ${res.status}`);
+      return [];
+    }
+
+    const data: { items: CalendarEvent[] } = await res.json();
+
+    return data.items ?? [];
+  } catch (error) {
+    console.error('Failed to fetch calendar events:', error);
+    return [];
   }
-
-  const data: { items: CalendarEvent[] } = await res.json();
-
-  return data.items ?? [];
 }
