@@ -2,7 +2,9 @@ import { auth } from '@/auth/next';
 import { createKey } from '@/utils/create-key';
 import { cookies } from 'next/headers';
 
-export async function getCalendarAccessToken() {
+export type CalendarToken = string | null;
+
+export async function getCalendarAccessToken(): Promise<CalendarToken> {
   try {
     const session = await auth();
     

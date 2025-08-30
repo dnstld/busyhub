@@ -1,5 +1,6 @@
 'use client';
 
+import type { CalendarToken } from '@/app/actions/get-calendar-token';
 import { InsightData } from '@/hooks/use-insight';
 import { AlertCircle, Brain } from 'lucide-react';
 import { useEffect } from 'react';
@@ -10,7 +11,7 @@ interface CalendarIntelligenceProps {
   isLoading: boolean;
   error: string | null;
   onGenerateAnalysis: () => void;
-  hasCalendarToken: boolean;
+  calendarToken: CalendarToken;
 }
 
 const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
@@ -19,10 +20,10 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
   isLoading,
   error,
   onGenerateAnalysis,
-  hasCalendarToken,
+  calendarToken,
 }) => {
   useEffect(() => {
-    if (hasCalendarToken && !analysis && !isLoading && !error) {
+    if (calendarToken && !analysis && !isLoading && !error) {
       if (!insightData) {
         // Calendar connected but no events - generate analysis for empty calendar
         onGenerateAnalysis();
@@ -32,7 +33,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
       }
     }
   }, [
-    hasCalendarToken,
+    calendarToken,
     insightData,
     analysis,
     isLoading,
@@ -40,7 +41,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
     onGenerateAnalysis,
   ]);
 
-  if (!hasCalendarToken) {
+  if (!calendarToken) {
     return (
       <section className="flex flex-col gap-4 p-6 bg-zinc-900/50 rounded-lg border border-zinc-800">
         <div className="flex items-center gap-3">
@@ -62,7 +63,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
         <h2 className="text-lg font-semibold">Calendar Intelligence</h2>
       </div>
 
-      {error && hasCalendarToken && (
+      {error && calendarToken && (
         <div className="p-3 bg-red-900/20 border border-red-700/50 rounded-lg">
           <div className="flex items-center gap-2 text-red-400">
             <AlertCircle
@@ -81,7 +82,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
         </div>
       )}
 
-      {isLoading && !analysis && !error && hasCalendarToken && (
+      {isLoading && !analysis && !error && calendarToken && (
         <div role="status" className="animate-pulse">
           <div className="h-2 bg-zinc-700 rounded-full w-[95%] mb-2.5"></div>
           <div className="h-2 bg-zinc-700 rounded-full w-full mb-2.5"></div>
@@ -92,7 +93,7 @@ const CalendarIntelligence: React.FC<CalendarIntelligenceProps> = ({
         </div>
       )}
 
-      {analysis && hasCalendarToken && (
+      {analysis && calendarToken && (
         <p className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line break-words max-w-full overflow-hidden">
           {analysis}
         </p>

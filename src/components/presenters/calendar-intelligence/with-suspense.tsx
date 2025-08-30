@@ -1,5 +1,6 @@
 'use client';
 
+import type { CalendarToken } from '@/app/actions/get-calendar-token';
 import { useAIAnalysis, useInsight } from '@/hooks';
 import { Brain, Loader2 } from 'lucide-react';
 import { Suspense } from 'react';
@@ -21,9 +22,9 @@ const CalendarIntelligenceFallback = () => (
 
 // Container component that handles the AI analysis logic
 const CalendarIntelligenceContainer = ({
-  hasCalendarToken,
+  calendarToken,
 }: {
-  hasCalendarToken: boolean;
+  calendarToken: CalendarToken;
 }) => {
   const insightData = useInsight();
   const { analysis, isLoading, error, generateAnalysis } = useAIAnalysis();
@@ -32,7 +33,7 @@ const CalendarIntelligenceContainer = ({
     if (insightData?.aiPrompt) {
       // Normal case: user has events, use the generated AI prompt
       generateAnalysis(insightData.aiPrompt);
-    } else if (hasCalendarToken && !insightData) {
+    } else if (calendarToken && !insightData) {
       // Special case: user has calendar connected but no events
       const emptyCalendarPrompt =
         'Act as a productivity and time management consultant. The user has successfully connected their calendar but currently has no scheduled events or meetings for this time period. Write a natural, encouraging paragraph that acknowledges their fresh start and provides practical guidance. Focus on the opportunity for intentional planning, time blocking for deep work, and building sustainable scheduling habits. Suggest starting with personal time blocks, gradual meeting scheduling, and protecting focused work periods. Avoid lists or bullet points. Keep it conversational, under 500 characters, and inspiring for someone beginning their organized calendar journey.';
@@ -47,19 +48,19 @@ const CalendarIntelligenceContainer = ({
       isLoading={isLoading}
       error={error}
       onGenerateAnalysis={handleGenerateAnalysis}
-      hasCalendarToken={hasCalendarToken}
+      calendarToken={calendarToken}
     />
   );
 };
 
 // Main export with Suspense wrapper
 const CalendarIntelligenceWithSuspense = ({
-  hasCalendarToken,
+  calendarToken,
 }: {
-  hasCalendarToken: boolean;
+  calendarToken: CalendarToken;
 }) => (
   <Suspense fallback={<CalendarIntelligenceFallback />}>
-    <CalendarIntelligenceContainer hasCalendarToken={hasCalendarToken} />
+    <CalendarIntelligenceContainer calendarToken={calendarToken} />
   </Suspense>
 );
 

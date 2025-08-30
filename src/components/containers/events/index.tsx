@@ -11,14 +11,12 @@ import Heatmap from '@/components/presenters/heatmap';
 import History from '@/components/presenters/history';
 import Profile from '@/components/presenters/profile';
 import LastUpdate from '@/components/ui/last-update';
+import { useCalendarToken } from '@/providers';
 import { TerminalIcon } from 'lucide-react';
 import Image from 'next/image';
 
-interface Props {
-  hasCalendarToken: boolean;
-}
-
-export default function Events({ hasCalendarToken }: Props) {
+export default function Events() {
+  const calendarToken = useCalendarToken();
   return (
     <main className="grid grid-cols-1 lg:grid-cols-9 xl:grid-cols-9 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-8">
       <Image
@@ -43,19 +41,17 @@ export default function Events({ hasCalendarToken }: Props) {
           className="hidden lg:block"
         />
 
-        {!hasCalendarToken && <ConnectStepper />}
+        {!calendarToken && <ConnectStepper />}
 
         <div
           className={`flex flex-col gap-8 ${
-            !hasCalendarToken ? 'opacity-50' : ''
+            !calendarToken ? 'opacity-50' : ''
           }`}
-          aria-hidden={!hasCalendarToken}
+          aria-hidden={!calendarToken}
         >
           <Heatmap />
 
-          <CalendarIntelligenceWithSuspense
-            hasCalendarToken={hasCalendarToken}
-          />
+          <CalendarIntelligenceWithSuspense calendarToken={calendarToken} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <WeeklyEventsChart />

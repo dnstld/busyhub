@@ -2,7 +2,11 @@ import { getCalendarAccessToken } from '@/app/actions/get-calendar-token';
 import { CalendarEvent, getEvents } from '@/app/actions/get-events';
 import { auth } from '@/auth/next';
 import Events from '@/components/containers/events';
-import { EventsProvider, UserProvider } from '@/providers';
+import {
+  CalendarTokenProvider,
+  EventsProvider,
+  UserProvider,
+} from '@/providers';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -25,9 +29,11 @@ export default async function EventsPage() {
         image: session?.user?.image || undefined,
       }}
     >
-      <EventsProvider events={events}>
-        <Events hasCalendarToken={!!calendarToken} />
-      </EventsProvider>
+      <CalendarTokenProvider calendarToken={calendarToken}>
+        <EventsProvider events={events}>
+          <Events />
+        </EventsProvider>
+      </CalendarTokenProvider>
     </UserProvider>
   );
 }
