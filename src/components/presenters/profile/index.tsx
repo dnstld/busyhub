@@ -11,9 +11,9 @@ export default function Profile() {
   return (
     <section
       className="flex items-center lg:flex-col lg:items-start gap-4"
-      aria-labelledby="your-profile"
+      aria-labelledby="user-profile"
     >
-      <h2 id="your-profile" className="sr-only">
+      <h2 id="user-profile" className="sr-only">
         Your profile
       </h2>
       <Image

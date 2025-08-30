@@ -17,6 +17,7 @@ import Image from 'next/image';
 
 export default function Events() {
   const calendarToken = useCalendarToken();
+
   return (
     <main className="grid grid-cols-1 lg:grid-cols-9 xl:grid-cols-9 w-full max-w-7xl lg:mx-auto p-4 lg:p-8 gap-8">
       <Image
