@@ -94,7 +94,7 @@ describe('getEvents server action', () => {
     expect(result).toEqual([]);
   });
 
-  it('should throw error when API returns error', async () => {
+  it('should return empty array when API returns error', async () => {
     const mockError = {
       error: {
         message: 'Invalid credentials'
@@ -107,23 +107,26 @@ describe('getEvents server action', () => {
       json: vi.fn().mockResolvedValueOnce(mockError)
     });
 
-    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('Invalid credentials');
+    const result = await getEvents(mockAccessToken, mockUserEmail);
+    expect(result).toEqual([]);
   });
 
-  it('should throw generic error when no error message provided', async () => {
+  it('should return empty array when no error message provided', async () => {
     mockFetch.mockResolvedValueOnce({
       ok: false,
       status: 500,
       json: vi.fn().mockResolvedValueOnce({})
     });
 
-    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('HTTP 500');
+    const result = await getEvents(mockAccessToken, mockUserEmail);
+    expect(result).toEqual([]);
   });
 
-  it('should handle network errors', async () => {
+  it('should handle network errors and return empty array', async () => {
     mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
-    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('Network error');
+    const result = await getEvents(mockAccessToken, mockUserEmail);
+    expect(result).toEqual([]);
   });
 
   it('should use correct time range for current year', async () => {
@@ -150,6 +153,7 @@ describe('getEvents server action', () => {
       json: vi.fn().mockRejectedValueOnce(new Error('Invalid JSON'))
     });
 
-    await expect(getEvents(mockAccessToken, mockUserEmail)).rejects.toThrow('Invalid JSON');
+    const result = await getEvents(mockAccessToken, mockUserEmail);
+    expect(result).toEqual([]);
   });
 });

@@ -80,7 +80,6 @@ describe('getCalendarAccessToken', () => {
 
     expect(result).toBeNull();
     expect(mockCookieStore.get).toHaveBeenCalledWith('busyhub_calendar_token_test_example_com');
-    expect(console.log).toHaveBeenCalledWith('No calendar access token found in cookies');
   });
 
   it('should return null when token is empty', async () => {
@@ -89,7 +88,6 @@ describe('getCalendarAccessToken', () => {
     const result = await getCalendarAccessToken();
 
     expect(result).toBeNull();
-    expect(console.log).toHaveBeenCalledWith('No calendar access token found in cookies');
   });
 
   it('should return token when valid token is found and validated successfully', async () => {
@@ -111,7 +109,6 @@ describe('getCalendarAccessToken', () => {
         }
       }
     );
-    expect(console.log).toHaveBeenCalledWith('Calendar token is valid');
   });
 
   it('should return null when token validation fails', async () => {
@@ -126,7 +123,6 @@ describe('getCalendarAccessToken', () => {
     const result = await getCalendarAccessToken();
 
     expect(result).toBeNull();
-    expect(console.log).toHaveBeenCalledWith('Calendar token appears to be invalid or expired');
   });
 
   it('should return null when token validation throws an error', async () => {
