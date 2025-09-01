@@ -5,6 +5,7 @@ import { ChartHeader } from '@/components/presenters/charts/chart-components/cha
 import { MonthEvents } from '@/components/presenters/history/month-events';
 import { TimelineBar } from '@/components/presenters/history/timeline-bar';
 import { Modal } from '@/components/ui/modal';
+import { useDate } from '@/hooks/use-date';
 import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import { History as HistoryIcon } from 'lucide-react';
@@ -14,6 +15,7 @@ const History = () => {
   const events = useCalendar();
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const { getHistoryData } = useEvents(events);
+  const { formatMonthYear } = useDate();
 
   const { sortedMonths, monthlyEvents } = getHistoryData('all');
 
@@ -23,22 +25,6 @@ const History = () => {
 
   const handleCloseModal = () => {
     setSelectedMonth(null);
-  };
-
-  const getModalTitle = (month: string) => {
-    // month is in format "January 2024" from getMonthDisplayKey
-    // Just return it as is since it's already in the desired format
-    try {
-      const date = new Date(month);
-      if (isNaN(date.getTime())) return month; // Return original if parsing fails
-
-      return date.toLocaleDateString('en-US', {
-        month: 'long',
-        year: 'numeric',
-      });
-    } catch {
-      return month; // Return original if any error occurs
-    }
   };
 
   return (
@@ -60,7 +46,7 @@ const History = () => {
       <Modal
         isOpen={selectedMonth !== null}
         onClose={handleCloseModal}
-        title={selectedMonth ? getModalTitle(selectedMonth) : ''}
+        title={selectedMonth ? formatMonthYear(selectedMonth) : ''}
       >
         {selectedMonth && (
           <MonthEvents

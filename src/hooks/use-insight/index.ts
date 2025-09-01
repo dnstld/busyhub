@@ -78,9 +78,12 @@ export interface InsightData {
   aiPrompt: string;
 }
 
-export const useInsight = (): InsightData | null => {
+export const useInsight = () => {
   const events = useCalendar();
-  const { confirmedEvents, dailyEvents } = useEvents(events);
+  const { dailyEvents, confirmedEvents } = useEvents(events);
+
+  // Get current year - this doesn't change during the session
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return useMemo(() => {
     if (confirmedEvents.length === 0) {
@@ -456,8 +459,6 @@ export const useInsight = (): InsightData | null => {
         day.meetingCount >= 5 || day.totalHours >= 6 || day.workdayLength >= 12
     );
 
-    const currentYear = new Date().getFullYear();
-    
     // Generate base prompt focusing on weekdays
     let weekendInstructions = 'Do NOT mention weekends, Saturday, or Sunday in your analysis. Only discuss Monday through Friday patterns.';
     let weekendAnalysisSection = '';
@@ -559,5 +560,5 @@ ${dailyTotals
       heavyDays,
       aiPrompt,
     };
-  }, [confirmedEvents, dailyEvents]);
+  }, [confirmedEvents, dailyEvents, currentYear]);
 };

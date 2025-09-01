@@ -7,6 +7,7 @@ import {
   ChartSummaryStats,
   ChartTooltip,
 } from '@/components/presenters/charts/chart-components';
+import { useDate } from '@/hooks/use-date';
 import { FilterType, useEvents } from '@/hooks/use-events';
 import { useWeekdayStats } from '@/hooks/use-weekday-stats';
 import { useCalendar } from '@/providers/events-provider';
@@ -25,18 +26,18 @@ import {
 const WeeklyEventsChart = () => {
   const events = useCalendar();
   const { confirmedEvents } = useEvents(events);
+  const { getCurrentDate, isCurrentYear } = useDate();
   const [filter, setFilter] = useState<FilterType>('all');
 
   // Get events based on filter
   const getFilteredEvents = () => {
-    const now = new Date();
-    const currentYear = now.getFullYear();
+    const now = getCurrentDate();
 
     return confirmedEvents.filter((event) => {
       const eventDate = new Date(event.start.dateTime || '');
 
       // Always filter to current year
-      if (eventDate.getFullYear() !== currentYear) return false;
+      if (!isCurrentYear(eventDate)) return false;
 
       switch (filter) {
         case 'past':

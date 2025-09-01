@@ -16,37 +16,35 @@ export interface GridCell {
  * @param dailyEvents Map keyed by "YYYY-MM-DD" → array of events
  * @param year        Target calendar year (local time)
  */
-export const useEventsGrid = (
-  dailyEvents: Map<string, SanitizedEvent[]>,
-  year: number,
-) => {
+export const useEventsGrid = (dailyEvents: Map<string, SanitizedEvent[]>, year: number) => {
   return useMemo(() => {
-    const startDate = new Date(year, 0, 1);
-    const endDate = new Date(year, 11, 31);
+    // Inline getDateKey function to ensure memoization stability
+    const getDateKey = (date: Date): string => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
 
-    // Grid must start on Sunday and end on Saturday.
-    const firstSunday = new Date(startDate);
-    firstSunday.setDate(startDate.getDate() - startDate.getDay());
-
-    const lastSaturday = new Date(endDate);
-    lastSaturday.setDate(endDate.getDate() + (6 - endDate.getDay()));
+    // Get the first day of the year (can be any weekday)
+    const firstOfYear = new Date(year, 0, 1);
+    
+    // Find the first Sunday on or before the first day of the year
+    const firstSunday = new Date(firstOfYear);
+    firstSunday.setDate(firstOfYear.getDate() - firstOfYear.getDay());
 
     const weeks: GridCell[][] = [];
     const cursor = new Date(firstSunday);
 
-    const getDateKey = (d: Date): string => {
-      const y  = d.getFullYear();
-      const m  = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      return `${y}-${m}-${dd}`;
-    };
-
-    while (cursor <= lastSaturday) {
+    // Keep adding weeks until we've covered the entire year plus any extra days
+    // to fill the last week
+    while (weeks.length === 0 || (weeks.length < 53 && 
+           (cursor.getFullYear() === year || weeks[weeks.length - 1].some(cell => cell.isCurrentYear)))) {
       const week: GridCell[] = [];
-
-      for (let i = 0; i < 7; i++) {
+      
+      for (let day = 0; day < 7; day++) {
         const dateCopy = new Date(cursor);
-        const key      = getDateKey(dateCopy);
+        const key = getDateKey(dateCopy);
         const events   = dailyEvents.get(key) ?? [];
 
         week.push({
@@ -54,7 +52,7 @@ export const useEventsGrid = (
           dateKey: key,
           events,
           eventCount: events.length,
-          isCurrentYear: dateCopy.getFullYear() === year,
+          isCurrentYear: dateCopy.getFullYear() === year, // Use the target year parameter
         });
 
         cursor.setDate(cursor.getDate() + 1);

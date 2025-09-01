@@ -1,5 +1,6 @@
 'use client';
 
+import { useDate } from '@/hooks/use-date';
 import { FilterType, MonthData } from '@/hooks/use-events';
 import { ArrowDown, CalendarDays } from 'lucide-react';
 
@@ -18,9 +19,11 @@ export function TimelineBar({
   selectedMonth,
   onMonthClick,
 }: TimelineBarProps) {
+  const { getCurrentMonthKey, getMonthDisplayName } = useDate();
+
   if (sortedMonths.length === 0) {
     return (
-      <div className="flex items-center justify-center h-24 border border-zinc-800 rounded-lg">
+      <div className="flex items-center justify-center border border-zinc-800 rounded-lg">
         <div className="text-center">
           <CalendarDays className="w-8 h-8 text-zinc-500 mx-auto mb-2" />
           <div className="text-zinc-500 text-sm">No events found</div>
@@ -36,36 +39,15 @@ export function TimelineBar({
     );
   }
 
-  // Get current month key for highlighting (using same format as getMonthDisplayKey)
-  const currentDate = new Date();
-  const currentMonthKey = currentDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-  });
-
-  const getMonthDisplayName = (monthKey: string) => {
-    // monthKey is in format "January 2024" from getMonthDisplayKey
-    // Extract just the month name without the year
-    try {
-      const date = new Date(monthKey);
-      if (isNaN(date.getTime())) return monthKey; // Return original if parsing fails
-
-      return date.toLocaleDateString('en-US', {
-        month: 'long',
-      });
-    } catch {
-      return monthKey; // Return original if any error occurs
-    }
-  };
+  // Get current month key for highlighting
+  const currentMonthKey = getCurrentMonthKey();
 
   return (
     <div className="overflow-x-auto">
-      <div className="p-4 pt-16 min-w-[800px]">
+      <div className="p-4 pt-12 min-w-[800px]">
         <div className="relative">
-          {/* Timeline line - centered to dots */}
           <div className="absolute top-4 left-0 right-0 h-px bg-zinc-700 transform"></div>
 
-          {/* Month dots with event counts - 12 column grid */}
           <div className="grid grid-cols-12 gap-0 relative z-10">
             {sortedMonths.map((month) => {
               const eventCount = monthlyEvents[month].events.length;
@@ -77,7 +59,6 @@ export function TimelineBar({
                   key={month}
                   className="flex flex-col items-center relative"
                 >
-                  {/* "You are here" indicator for current month - positioned absolutely */}
                   {isCurrentMonth && (
                     <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 z-10">
                       <p className="text-center  whitespace-nowrap text-xs font-medium">
@@ -101,7 +82,6 @@ export function TimelineBar({
                       isCurrentMonth ? ' (Current Month)' : ''
                     }`}
                   >
-                    {/* Timeline dot with event count inside */}
                     <div
                       className={`relative w-8 h-8 rounded-full border-2 border-zinc-900 transition-all duration-200 flex items-center justify-center ${
                         eventCount > 0
@@ -128,7 +108,6 @@ export function TimelineBar({
                       </span>
                     </div>
 
-                    {/* Month label */}
                     <div
                       className={`mt-2 text-sm transition-colors duration-200 text-center ${
                         isSelected

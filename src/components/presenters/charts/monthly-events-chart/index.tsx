@@ -7,6 +7,7 @@ import {
   ChartSummaryStats,
   ChartTooltip,
 } from '@/components/presenters/charts/chart-components';
+import { useDate } from '@/hooks/use-date';
 import { FilterType, useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import { BarChart3 } from 'lucide-react';
@@ -24,20 +25,20 @@ import {
 const MonthlyEventsChart = () => {
   const events = useCalendar();
   const { confirmedEvents } = useEvents(events);
+  const { getCurrentYear, getCurrentMonth, isCurrentYear } = useDate();
   const [filter, setFilter] = useState<FilterType>('all');
 
   // Get events based on filter and current year
   const getFilteredMonthlyStats = () => {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth();
+    const currentYear = getCurrentYear();
+    const currentMonth = getCurrentMonth();
 
     // Filter events by time and current year
     const filteredEvents = confirmedEvents.filter((event) => {
       const eventDate = new Date(event.start.dateTime || '');
 
       // Always filter to current year
-      if (eventDate.getFullYear() !== currentYear) return false;
+      if (!isCurrentYear(eventDate)) return false;
 
       switch (filter) {
         case 'past':

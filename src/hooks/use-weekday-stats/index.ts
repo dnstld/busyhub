@@ -1,3 +1,4 @@
+import { useDate } from '@/hooks/use-date';
 import { SanitizedEvent } from '@/hooks/use-events/useEventsSanitization';
 import { createSafeDate, isNonEmptyString, isValidDate } from '@/utils';
 import { useMemo } from 'react';
@@ -14,8 +15,9 @@ export interface WeekdayStats {
  * Filters events to current year only
  */
 export const useWeekdayStats = (confirmedEvents: SanitizedEvent[]) => {
+  const { isCurrentYear } = useDate();
+
   return useMemo(() => {
-    const currentYear = new Date().getFullYear();
     const weekdayMap = new Map<number, SanitizedEvent[]>();
     
     // Initialize all weekdays
@@ -32,7 +34,7 @@ export const useWeekdayStats = (confirmedEvents: SanitizedEvent[]) => {
       if (!isValidDate(date)) return;
       
       // Filter to current year only
-      if (date.getFullYear() !== currentYear) return;
+      if (!isCurrentYear(date)) return;
       
       const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, etc.
       const events = weekdayMap.get(dayOfWeek);
@@ -57,5 +59,5 @@ export const useWeekdayStats = (confirmedEvents: SanitizedEvent[]) => {
         const bSort = b.dayIndex === 0 ? 7 : b.dayIndex;
         return aSort - bSort;
       });
-  }, [confirmedEvents]);
+  }, [confirmedEvents, isCurrentYear]);
 };
