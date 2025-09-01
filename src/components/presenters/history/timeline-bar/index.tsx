@@ -2,7 +2,7 @@
 
 import { useDate } from '@/hooks/use-date';
 import { FilterType, MonthData } from '@/hooks/use-events';
-import { ArrowDown, CalendarDays } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
 
 interface TimelineBarProps {
   sortedMonths: string[];
@@ -44,7 +44,7 @@ export function TimelineBar({
 
   return (
     <div className="overflow-x-auto">
-      <div className="p-4 pt-12 min-w-[800px]">
+      <div className="p-4 min-w-[800px]">
         <div className="relative">
           <div className="absolute top-4 left-0 right-0 h-px bg-zinc-700 transform"></div>
 
@@ -55,22 +55,7 @@ export function TimelineBar({
               const isCurrentMonth = month === currentMonthKey;
 
               return (
-                <div
-                  key={month}
-                  className="flex flex-col items-center relative"
-                >
-                  {isCurrentMonth && (
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 z-10">
-                      <p className="text-center  whitespace-nowrap text-xs font-medium">
-                        You are here
-                      </p>
-                      <ArrowDown
-                        className="w-4 h-4 text-white"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  )}
-
+                <div key={month} className="flex flex-col items-center">
                   <button
                     onClick={() => onMonthClick(month)}
                     className={`group flex flex-col items-center transition-all duration-200 hover:scale-105 w-full cursor-pointer ${
@@ -83,7 +68,7 @@ export function TimelineBar({
                     }`}
                   >
                     <div
-                      className={`relative w-8 h-8 rounded-full border-2 border-zinc-900 transition-all duration-200 flex items-center justify-center ${
+                      className={`w-8 h-8 rounded-full border-2 border-zinc-900 transition-all duration-200 flex items-center justify-center ${
                         eventCount > 0
                           ? isSelected
                             ? 'bg-lime-400'

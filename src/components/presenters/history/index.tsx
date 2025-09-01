@@ -31,7 +31,7 @@ const History = () => {
     <ChartContainer>
       <ChartHeader
         icon={<HistoryIcon className="text-lime-400" size={20} />}
-        title="Monthly History"
+        title="12-Month Timeline"
       />
 
       <TimelineBar
