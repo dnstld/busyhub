@@ -1,55 +1,74 @@
 'use client';
 
 import { ChartContainer } from '@/components/presenters/charts/chart-components';
-import { ChartFilter } from '@/components/presenters/charts/chart-components/chart-filter';
 import { ChartHeader } from '@/components/presenters/charts/chart-components/chart-header';
-import { HistoryItem } from '@/components/presenters/history/history-item';
-import { FilterType, useEvents } from '@/hooks/use-events';
+import { MonthEvents } from '@/components/presenters/history/month-events';
+import { TimelineBar } from '@/components/presenters/history/timeline-bar';
+import { Modal } from '@/components/ui/modal';
+import { useEvents } from '@/hooks/use-events';
 import { useCalendar } from '@/providers/events-provider';
 import { History as HistoryIcon } from 'lucide-react';
 import { useState } from 'react';
 
 const History = () => {
   const events = useCalendar();
-  const [filter, setFilter] = useState<FilterType>('all');
+  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const { getHistoryData } = useEvents(events);
 
-  const { sortedMonths, monthlyEvents } = getHistoryData(filter);
+  const { sortedMonths, monthlyEvents } = getHistoryData('all');
+
+  const handleMonthClick = (month: string) => {
+    setSelectedMonth(month);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMonth(null);
+  };
+
+  const getModalTitle = (month: string) => {
+    // month is in format "January 2024" from getMonthDisplayKey
+    // Just return it as is since it's already in the desired format
+    try {
+      const date = new Date(month);
+      if (isNaN(date.getTime())) return month; // Return original if parsing fails
+
+      return date.toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric',
+      });
+    } catch {
+      return month; // Return original if any error occurs
+    }
+  };
 
   return (
     <ChartContainer>
       <ChartHeader
         icon={<HistoryIcon className="text-lime-400" size={20} />}
         title="Monthly History"
-      >
-        <ChartFilter filter={filter} onFilterChange={setFilter} />
-      </ChartHeader>
+      />
 
-      <div className="p-4 pt-0">
-        {sortedMonths.length === 0 ? (
-          <div className="flex items-center justify-center h-32">
-            <div className="text-center">
-              <div className="text-zinc-500 text-sm mb-1">No events found</div>
-              <div className="text-zinc-600 text-xs">
-                {filter === 'past'
-                  ? 'No past events to display'
-                  : filter === 'upcoming'
-                  ? 'No upcoming events to display'
-                  : 'No events available in your history'}
-              </div>
-            </div>
-          </div>
-        ) : (
-          sortedMonths.map((month) => (
-            <HistoryItem
-              key={month}
-              month={month}
-              monthData={monthlyEvents[month]}
-              filter={filter}
-            />
-          ))
+      <TimelineBar
+        sortedMonths={sortedMonths}
+        monthlyEvents={monthlyEvents}
+        filter={'all'}
+        selectedMonth={selectedMonth}
+        onMonthClick={handleMonthClick}
+      />
+
+      {/* Modal for showing month events */}
+      <Modal
+        isOpen={selectedMonth !== null}
+        onClose={handleCloseModal}
+        title={selectedMonth ? getModalTitle(selectedMonth) : ''}
+      >
+        {selectedMonth && (
+          <MonthEvents
+            monthData={monthlyEvents[selectedMonth]}
+            filter={'all'}
+          />
         )}
-      </div>
+      </Modal>
     </ChartContainer>
   );
 };
